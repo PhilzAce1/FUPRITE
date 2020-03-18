@@ -18,10 +18,11 @@ npm install
 ```
 npm install 
 ```
+create a 'dev.js' file and input your Mongo.URI  
+or manually connect your mongoose to your local mongoDB 
 
 ### Prerequisites
   Install the following to run and test the Code
-* [NodeJs](https://nodejs.org/en/) - The Haadless Browser controller
 
 ## Built With
 
