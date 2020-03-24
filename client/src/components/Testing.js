@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Auth from '../hoc/auth';
 import { Col, Row } from 'antd';
-
-// pages for this product
-import LandingPage from './views/LandingPage/LandingPage.js';
+import './testing.css';
+import Navbar from '../Testing/NavBar/NavBar';
+import Auth from '../hoc/auth';
+import { Route, Switch } from 'react-router-dom';
+import LandingPage from './views/LandingPage/LandingPage';
 import LoginPage from './views/LoginPage/LoginPage.js';
 import RegisterPage from './views/RegisterPage/RegisterPage.js';
 import NavBar from './views/NavBar/NavBar';
@@ -13,12 +13,12 @@ import PostPage from './views/PostPage/PostPage';
 import BlogPage from './views/BlogPage/BlogPage';
 import CreateBlogPage from './views/BlogPage/Section.js/CreatePage';
 
-function App() {
+function Testing() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Row>
         <Col md={0} sm={0} lg={6} className="col">
-          <NavBar />
+          <Navbar />
         </Col>
         <Col
           lg={12}
@@ -29,6 +29,7 @@ function App() {
         >
           <Switch>
             <Route exact path="/" component={Auth(LandingPage, null)} />
+            <Route exact path="/testing" component={Auth(Testing, null)} />
 
             <Route exact path="/login" component={Auth(LoginPage, false)} />
             <Route
@@ -63,4 +64,4 @@ function App() {
   );
 }
 
-export default App;
+export default Testing;

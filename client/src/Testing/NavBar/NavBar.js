@@ -3,7 +3,7 @@ import LeftMenu from './Sections/LeftMenu';
 import RightMenu from './Sections/RightMenu';
 import { Drawer, Button, Icon } from 'antd';
 import { useSelector } from 'react-redux';
-import { USER_SERVER } from '../../Config';
+import { USER_SERVER } from '../../components/Config';
 import axios from 'axios';
 import './Sections/Navbar.css';
 import '../NavBar/Sections/testNav.css';
