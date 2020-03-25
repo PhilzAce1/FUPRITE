@@ -5,7 +5,7 @@
   display: flex;
   flex-flow: column;
   height: 100vh;
-  /* background: black; */
+  max-height: 100vh;
   justify-items: center;
   align-items: center;
   box-shadow: 0 0 30px #f3f1f1;

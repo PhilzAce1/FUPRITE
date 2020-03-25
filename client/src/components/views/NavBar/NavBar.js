@@ -106,10 +106,10 @@ function NavBar(props) {
             </Link>
           </div>
           <div className="menu__content">
-            <Link onClick={logoutHandler}>
+            <a onClick={logoutHandler}>
               <LogoutOutlined />
               Logout
-            </Link>
+            </a>
           </div>
         </div>{' '}
         <div className="menu__content">

@@ -21,7 +21,7 @@ function BlogPage() {
 
   const renderCards = blogs.map((blog, index) => {
     return (
-      <Col key={index} lg={6} md={12} xs={6}>
+      <Col key={index} lg={32} md={32} xs={32}>
         <Card
           hoverable
           style={{ width: 300, marginTop: 16 }}
@@ -39,7 +39,7 @@ function BlogPage() {
             title={blog.writer.name}
             description="This is the description"
           />
-          <div style={{ height: 150, overflowY: 'scroll', marginTop: 10 }}>
+          <div style={{ height: 150, overflowY: 'hidden', marginTop: 10 }}>
             <div dangerouslySetInnerHTML={{ __html: blog.content }} />
           </div>
         </Card>
@@ -56,7 +56,7 @@ function BlogPage() {
         // height: '520'
       }}
     >
-      <Title level={1}> Blog Lists </Title>
+      <Title level={4}> Blog Lists </Title>
       <Row lg={6} md={12} xs={6} gutter={[32, 16]}>
         {renderCards}
       </Row>
