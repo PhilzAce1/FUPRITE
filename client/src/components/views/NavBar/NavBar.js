@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import LeftMenu from './Sections/LeftMenu';
-import RightMenu from './Sections/RightMenu';
-import { Drawer, Button, Icon } from 'antd';
+import { Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { USER_SERVER } from '../../Config';
 import axios from 'axios';
@@ -28,6 +26,7 @@ function NavBar(props) {
     axios.get(`${USER_SERVER}/logout`).then(response => {
       if (response.status === 200) {
         // props.history.push('/');
+        localStorage.clear();
         window.location.reload();
       } else {
         alert('Log Out Failed');
@@ -42,7 +41,7 @@ function NavBar(props) {
     setVisible(false);
   };
   console.log(localStorage.getItem('userId'));
-  if (!localStorage.getItem('userId')) {
+  if (!user) {
     return (
       <nav className="menu" style={{ zIndex: 1 }}>
         <div className="menu__logo">

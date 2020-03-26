@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Drawer from '../RFC/Drawer/Drawer';
 import initialContent, { renderCards } from '../RFC/Content/initialContent';
 import axios from 'axios';
 import './landing.css';

@@ -56,6 +56,7 @@ function CreatePage(props) {
         placeholder={'Start Posting Something'}
         onEditorChange={onEditorChange}
         onFilesChange={onFilesChange}
+        style={{ backgroundColor: 'red' }}
       />
 
       <Form onSubmit={onSubmit}>

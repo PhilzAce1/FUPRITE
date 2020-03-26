@@ -18,7 +18,14 @@ function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Row>
-        <Col xs={0} sm={0} md={8} lg={6} className="col">
+        <Col
+          xs={0}
+          sm={0}
+          md={8}
+          lg={6}
+          className="col"
+          style={{ maxHeight: '100vh', overflow: 'auto' }}
+        >
           <NavBar />
         </Col>
         <Col
@@ -27,7 +34,7 @@ function App() {
           md={16}
           sm={24}
           className="col"
-          // style={{ background: 'black' }}
+          style={{ maxHeight: '100vh', overflow: 'auto' }}
         >
           <Drawer />
           <Switch>
