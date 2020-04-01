@@ -33,14 +33,6 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
-.app {
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
-
 input.error {
   border-color: red;
 }
@@ -62,4 +54,15 @@ input.error {
 
 .postPage iframe {
   min-height: 400px;
+}
+
+.menu__mobile-button {
+  z-index: 1000;
+  position: absolute;
+  float: right;
+  height: 32px;
+  padding: 6px;
+  margin-top: 8px;
+  display: none !important; /* use of important to overwrite ant-btn */
+  background: #3e91f7;
 }
