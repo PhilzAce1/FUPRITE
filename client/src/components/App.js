@@ -13,6 +13,8 @@ import PostPage from './views/PostPage/PostPage';
 import BlogPage from './views/BlogPage/BlogPage';
 import CreateBlogPage from './views/BlogPage/Section.js/CreatePage';
 import Drawer from './views/RFC/Drawer/Drawer';
+import FollowingPage from './views/Following/Following';
+import ProfilePage from './views/ProfilePage/ProfilePage';
 
 function App() {
   return (
@@ -38,7 +40,12 @@ function App() {
         >
           <Drawer />
           <Switch>
-            <Route exact path="/" component={Auth(LandingPage, null)} />
+            <Route exact path="/" component={Auth(LandingPage, false)} />
+            <Route
+              exact
+              path="/followingsBlog"
+              component={Auth(FollowingPage, null)}
+            />
 
             <Route exact path="/login" component={Auth(LoginPage, false)} />
             <Route
@@ -56,6 +63,11 @@ function App() {
               exact
               path="/blog/post/:postId"
               component={Auth(PostPage, null)}
+            />
+            <Route
+              exact
+              path="/profilepage/:userId"
+              component={Auth(ProfilePage, null)}
             />
           </Switch>
           {/* <Footer /> */}

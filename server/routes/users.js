@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/User');
-
 const { auth } = require('../middleware/auth');
-
+const { Follower } = require('../models/Follower');
 //=================================
 //             User
 //=================================
@@ -57,6 +56,33 @@ router.post('/login', (req, res) => {
       });
     });
   });
+});
+router.post('/profile', async (req, res) => {
+  // return res.send('i am working');
+  try {
+    const user = await User.find({ _id: req.body.userId }).select({
+      _id: 1,
+      email: 1,
+      username: 1,
+      createdAt: 1
+    });
+    const followerNumber = await Follower.find({
+      userFrom: req.body.userId
+    }).count();
+    const followings = await Follower.find({
+      userTo: req.body.userId
+    }).count();
+    res.status(200).json({
+      user,
+      followerNumber,
+      followings
+    });
+  } catch (err) {
+    res
+      .status(400)
+      .json({ success: false })
+      .send(err);
+  }
 });
 
 router.get('/logout', auth, (req, res) => {

@@ -1,10 +1,14 @@
 const router = require('express').Router();
 const { Follower } = require('../models/Follower');
+router.get('/', (req, res) => {
+  res.send('I am working');
+});
 
 router.post('/followersNumber', (req, res) => {
-  Follower.find({ userTo: req.body.userTo }).exec((err, subscribe) => {
+  // return res.send('i am orkgin');
+  Follower.find({ userTo: req.body.userTo }).exec((err, follow) => {
     if (err) return res.status(400).send(err);
-    res.status(200).json({ success: true, subscribeNumber: subscribe.length });
+    res.status(200).json({ success: true, followNumber: follow.length });
   });
 });
 

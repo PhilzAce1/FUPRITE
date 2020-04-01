@@ -4,8 +4,6 @@ import NavBar from '../../NavBar/NavBar';
 import { Drawer, Button, Icon } from 'antd';
 function Drawers(props) {
   const [visible, setVisible] = useState(false);
-  const user = useSelector(state => state.user);
-  console.log(user.userData);
 
   const showDrawer = () => {
     setVisible(true);

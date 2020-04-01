@@ -16,7 +16,9 @@
 }
 .component_content {
   color: black;
-  height: 80vh;
+  background-color: white;
+  /* background-color: #1f1a1a; */
+  height: 90vh;
   overflow: auto;
 }
 .cards {
@@ -49,4 +51,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #1f1a1a;
   display: block;
+}
+
+@media (max-width: 767px) {
+  .component_content {
+    color: black;
+    height: 85vh;
+    overflow: auto;
+  }
 }

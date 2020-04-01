@@ -11,6 +11,9 @@ import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
+
+//testing sectioon during developmen
+import ProfilePage from './components/views/ProfilePage/ProfilePage';
 const history = createBrowserHistory();
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,
@@ -26,7 +29,8 @@ ReactDOM.render(
     )}
   >
     <BrowserRouter history={history}>
-      <App />/
+      <App />
+      {/* <ProfilePage /> */}
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

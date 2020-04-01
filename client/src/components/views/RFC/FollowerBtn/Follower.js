@@ -6,13 +6,16 @@ function FollowBtn(props) {
   const userFrom = props.userFrom;
   const [followerNumber, setFollowerNumber] = useState(0);
   const [following, setFollowing] = useState(false);
+  console.log(userTo, userFrom);
   const onFollow = e => {
+    if (userTo === userFrom) return alert('you can not follow yourself');
+
     e.preventDefault();
     let followVariable = {
       userTo: userTo,
       userFrom: userFrom
     };
-
+    console.log(followVariable);
     if (following) {
       //when we are already following
       axios.post('/api/follow/unFollow', followVariable).then(response => {
@@ -40,9 +43,11 @@ function FollowBtn(props) {
   useEffect(() => {
     const followNumberVariables = { userTo: userTo, userFrom: userFrom };
     axios
-      .post('/api/follow/followersNumber', followNumberVariables)
+      .post('/api/follow/followersNumber', followNumberVariables.userTo)
       .then(response => {
         if (response.data.success) {
+          console.log(followNumberVariables.userTo);
+          console.log(response.data.followNumber);
           setFollowerNumber(response.data.followNumber);
         } else {
           alert('Failed to get followr Number');
@@ -59,7 +64,10 @@ function FollowBtn(props) {
         }
       });
   }, []);
-  return (
+
+  return userTo == userFrom ? (
+    <span>{''}</span>
+  ) : (
     <div>
       <Button
         onClick={onFollow}
@@ -73,6 +81,7 @@ function FollowBtn(props) {
           outline: 'none'
           // textTransform: 'uppercase'
         }}
+        // disabled={userTo === userFrom}
       >
         {followerNumber} {following ? 'following' : 'follow'}
       </Button>

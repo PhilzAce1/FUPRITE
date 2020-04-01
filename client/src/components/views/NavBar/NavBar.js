@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { USER_SERVER } from '../../Config';
 import axios from 'axios';
 import './Sections/Navbar.css';
@@ -16,32 +16,27 @@ import {
   EditOutlined
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { logoutUser } from '../../../_actions/user_actions';
 
 import Logo from './Sections/Logo.png';
 function NavBar(props) {
-  const [visible, setVisible] = useState(false);
-  const user = useSelector(state => state.user);
+  const user = useSelector(state => state.user.userData);
+  const dispatch = useDispatch();
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
       if (response.status === 200) {
+        dispatch(logoutUser());
         // props.history.push('/');
         localStorage.clear();
-        window.location.reload();
+        window.location.pathname = '/login';
+        // window.location.reload();
       } else {
         alert('Log Out Failed');
       }
     });
   };
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
-  console.log(localStorage.getItem('userId'));
-  if (!user) {
+  if (!{ ...user }._id) {
     return (
       <nav className="menu" style={{ zIndex: 1 }}>
         <div className="menu__logo">
@@ -88,7 +83,7 @@ function NavBar(props) {
             </Link>
           </div>
           <div className="menu__content">
-            <Link to="/">
+            <Link to="/followingsblog">
               {' '}
               <TeamOutlined />
               Following
