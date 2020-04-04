@@ -16,11 +16,11 @@ let storage = multer.diskStorage({
   },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    if (ext !== '.jpg' && ext !== '.png' && ext !== '.mp4') {
+    if (ext !== '.jpg' && ext !== '.png' && ext !== '.mp4' && ext !== '.pdf') {
       return cb(res.status(400).end('only jpg, png, mp4 is allowed'), false);
     }
     cb(null, true);
-  }
+  },
 });
 
 const upload = multer({ storage: storage }).single('file');
@@ -39,14 +39,14 @@ const upload = multer({ storage: storage }).single('file');
 // size: 24031
 
 router.post('/uploadfiles', (req, res) => {
-  upload(req, res, err => {
+  upload(req, res, (err) => {
     if (err) {
       return res.json({ success: false, err });
     }
     return res.json({
       success: true,
       url: res.req.file.path,
-      fileName: res.req.file.filename
+      fileName: res.req.file.filename,
     });
   });
 });
@@ -108,7 +108,7 @@ router.post('/getFollowingPosts', (req, res) => {
 router.post('delete', async (req, res) => {
   const yourBlog = await Blog.find({
     _id: req.body._id,
-    writer: req.body.userId
+    writer: req.body.userId,
   }).count();
   if (!yourBlog)
     return res

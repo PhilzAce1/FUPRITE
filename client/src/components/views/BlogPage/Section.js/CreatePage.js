@@ -8,21 +8,21 @@ import { useSelector } from 'react-redux';
 const { Title } = Typography;
 
 function CreatePage(props) {
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
 
   const [content, setContent] = useState('');
-  const [setFiles] = useState([]);
+  const [files,   setFiles] = useState([]);
   //   files,
-  const onEditorChange = value => {
+  const onEditorChange = (value) => {
     setContent(value);
     console.log(content);
   };
 
-  const onFilesChange = files => {
+  const onFilesChange = (files) => {
     setFiles(files);
   };
 
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
 
     setContent('');
@@ -33,10 +33,10 @@ function CreatePage(props) {
 
     const variables = {
       content: content,
-      userID: user.userData._id
+      userID: user.userData._id,
     };
 
-    axios.post('/api/blog/createPost', variables).then(response => {
+    axios.post('/api/blog/createPost', variables).then((response) => {
       if (response) {
         message.success('Post Created!');
 

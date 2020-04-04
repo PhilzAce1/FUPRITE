@@ -4,6 +4,7 @@ import Auth from '../hoc/auth';
 import { Col, Row } from 'antd';
 
 // pages for this product
+import SearchPage from './views/SearchPage/SearchPage';
 import LandingPage from './views/LandingPage/LandingPage.js';
 import LoginPage from './views/LoginPage/LoginPage.js';
 import RegisterPage from './views/RegisterPage/RegisterPage.js';
@@ -69,18 +70,19 @@ function App() {
               path="/profilepage/:userId"
               component={Auth(ProfilePage, null)}
             />
+            <Route
+              exact
+              path="/searchpage"
+              component={Auth(SearchPage, null)}
+            />
           </Switch>
           {/* <Footer /> */}
         </Col>
-        <Col
-          xs={0}
-          md={0}
-          sm={0}
-          className="col"
-          lg={8}
-          // style={{ background: 'green' }}
-        >
-          3 col-order-2
+        <Col xs={0} md={0} sm={0} className="col" lg={8}>
+          <Switch>
+            <Route exact path="/" component={Auth(SearchPage, null)} />
+          </Switch>
+          {/* <SearchPage /> */}
         </Col>
       </Row>
     </Suspense>
