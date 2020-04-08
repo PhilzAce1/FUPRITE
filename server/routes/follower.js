@@ -4,18 +4,26 @@ router.get('/', (req, res) => {
   res.send('I am working');
 });
 
-router.post('/followersNumber', (req, res) => {
+router.post('/followersNumber', async (req, res) => {
   // return res.send('i am orkgin');
-  Follower.find({ userTo: req.body.userTo }).exec((err, follow) => {
-    if (err) return res.status(400).send(err);
-    res.status(200).json({ success: true, followNumber: follow.length });
-  });
+  // Follower.find({ userTo: req.body.userTo }).exec((err, follow) => {
+  //   if (err) return res.status(400).send(err);
+  //   res.status(200).json({ success: true, followNumber: follow.length });
+  // });
+  try {
+    const followersNumber = await Follower.find({
+      userTo: req.body.userTo,
+    }).count();
+    res.status(200).json({ success: true, followNumber: followersNumber });
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 router.post('/following', (req, res) => {
   Follower.find({
     userTo: req.body.userTo,
-    userFrom: req.body.userFrom
+    userFrom: req.body.userFrom,
   }).exec((err, follow) => {
     if (err) return res.status(400).send(err);
 
@@ -40,7 +48,7 @@ router.post('/unFollow', (req, res) => {
   console.log(req.body);
   Follower.findOneAndDelete({
     userTo: req.body.userTo,
-    userFrom: req.body.userFrom
+    userFrom: req.body.userFrom,
   }).exec((err, doc) => {
     if (err) return res.status(400).json({ success: false, err });
     res.status(200).json({ success: true, doc });

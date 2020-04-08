@@ -79,10 +79,7 @@ function App() {
           {/* <Footer /> */}
         </Col>
         <Col xs={0} md={0} sm={0} className="col" lg={8}>
-          <Switch>
-            <Route exact path="/" component={Auth(SearchPage, null)} />
-          </Switch>
-          {/* <SearchPage /> */}
+          <Route exact path="*" component={Auth(SearchPage, null)} />
         </Col>
       </Row>
     </Suspense>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import QuillEditor from '../../../editor/QuillEditor';
 import { Typography, Button, Form, message } from 'antd';
@@ -11,8 +11,8 @@ function CreatePage(props) {
   const user = useSelector((state) => state.user);
 
   const [content, setContent] = useState('');
-  const [files,   setFiles] = useState([]);
-  //   files,
+  const [files, setFiles] = useState([]);
+
   const onEditorChange = (value) => {
     setContent(value);
     console.log(content);
@@ -56,7 +56,6 @@ function CreatePage(props) {
         placeholder={'Start Posting Something'}
         onEditorChange={onEditorChange}
         onFilesChange={onFilesChange}
-        style={{ backgroundColor: 'red' }}
       />
 
       <Form onSubmit={onSubmit}>

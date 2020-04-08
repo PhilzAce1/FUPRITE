@@ -11,8 +11,31 @@
   box-shadow: 0 0 30px #f3f1f1;
   color: black !important;
 }
+.image {
+  height: 8vh;
+  margin: 0 0 0 -23px;
+  width: 15vh;
+  /* border: 1px solid green;  */
+  border-radius: 50%;
+}
+.image:hover {
+  background-color: #2ba6f32d;
+  color: #2ba7f3;
+}
 a {
   color: black;
+}
+.link {
+  padding: 10px 20px;
+  font-size: 1.5rem;
+}
+.link:hover {
+  background-color: #2ba6f32d;
+  color: #2ba7f3;
+  border-radius: 30px;
+}
+.icon {
+  margin-right: 30px;
 }
 
 .menu__content {
@@ -24,22 +47,22 @@ a {
   font-size: 20px;
 }
 .menu_items {
-  height: 50vh;
+  height: 60vh;
   display: flex;
   flex-flow: column;
   justify-content: space-around;
 }
 .create_btn {
-  padding: 25px 90px 25px 90px !important;
+  padding: 15px 90px !important;
   display: flex;
   background-color: #1890ff;
   color: white;
   font-weight: bold;
   font-size: large;
-  display: flex;
-  flex-wrap: column nowrap;
-  align-items: center;
-  justify-content: center;
-  border-radius: 25px;
-  margin-top: 20px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  margin-left: 3vw;
+  margin-top: 10px;
+  /* margin-top: 20px; */
 }

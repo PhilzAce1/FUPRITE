@@ -24,20 +24,9 @@ let storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }).single('file');
-
 //=================================
 //             Blog
 //=================================
-
-// fieldname: 'file',
-// originalname: 'React.png',
-// encoding: '7bit',
-// mimetype: 'image/png',
-// destination: 'uploads/',
-// filename: '1573656172282_React.png',
-// path: 'uploads/1573656172282_React.png',
-// size: 24031
-
 router.post('/uploadfiles', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
@@ -50,7 +39,6 @@ router.post('/uploadfiles', (req, res) => {
     });
   });
 });
-
 router.post('/createPost', (req, res) => {
   let blog = new Blog({ content: req.body.content, writer: req.body.userID });
 

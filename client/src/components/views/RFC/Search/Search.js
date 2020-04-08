@@ -26,8 +26,6 @@ function Search(props) {
     }).then((response) => {
       if (response.data.success) {
         if (response.data.users.length > 0) {
-          console.clear();
-          console.log('something');
           setModal(true);
           setSearchResult(response.data.users);
         } else {
@@ -55,7 +53,6 @@ function Search(props) {
             fontSize: '1em',
             display: 'flex',
             flexFlow: 'row nowrap',
-
             textTransform: 'capitalize',
           }}
         >
@@ -73,6 +70,7 @@ function Search(props) {
         className="search_input"
         placeholder="Search FuprePeeps"
         onChange={handleChange}
+        // onBlur={handleBlur}
       />
 
       {modal && <div className="modal">{complete}</div>}

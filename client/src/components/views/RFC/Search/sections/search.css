@@ -21,18 +21,17 @@
 }
 
 .modal {
-  position: relative;
+  position: absolute;
   z-index: 10;
   font-size: 1rem;
   color: black;
   font-weight: 300;
-  /* background-color: black; */
   display: flex;
   flex-flow: column;
   max-height: 60vh;
   width: 80%;
   overflow: auto;
-  box-shadow: 0 0 30px #f3f1f1;
+  /* box-shadow: 0 0 30px #f3f1f1; */
 }
 .user_details {
   margin: 0px 10px;
@@ -40,7 +39,7 @@
 .user {
   height: 10vh;
   width: 100%;
-  border: 1px solid rgba(128, 128, 128, 0.404);
+  border-bottom: 2px solid rgba(128, 128, 128, 0.048);
   border-left: 0px;
   border-right: 0px;
   display: flex;

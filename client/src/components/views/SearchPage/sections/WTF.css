@@ -1,0 +1,74 @@
+* {
+  padding: 0;
+  margin: 0em;
+  box-sizing: border-box;
+}
+body,
+.container,
+.search_content,
+.search_content_body,
+.content_body {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.header,
+.content_body {
+  border-bottom: 2px solid rgba(128, 128, 128, 0.048);
+}
+
+.search_content {
+  height: 55%;
+  width: 80%;
+  background-color: #f5f8fa;
+  border-radius: 20px;
+  padding: 10px;
+}
+.header {
+  height: 12%;
+  width: 100%;
+  font-size: 25px;
+  font-weight: bolder;
+  padding: 10px;
+}
+.search_content_body {
+  height: 85%;
+  width: 100%;
+  overflow: auto;
+}
+.content_body {
+  flex-flow: row nowrap;
+  height: 10vh;
+  padding: 10px;
+  justify-content: space-around;
+}
+
+.content_body > img {
+  height: 7.5vh;
+  width: 7.5vh;
+  margin: 0 -10px;
+  border-radius: 50%;
+}
+.userq {
+  background: transparent;
+  display: flex;
+  flex-direction: column !important;
+  justify-content: space-around;
+  width: 47%;
+  flex-wrap: column nowrap !important;
+}
+.full_namee {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.follow_btn > button {
+  outline: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #1da1f2;
+  font-size: 17px;
+  font-weight: bolder;
+  border: 1px solid #1da1f2;
+  align-self: center;
+  margin-top: 3px;
+}
