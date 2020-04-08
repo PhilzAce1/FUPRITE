@@ -13,18 +13,18 @@ import {
   MoreOutlined,
   TeamOutlined,
   LogoutOutlined,
-  EditOutlined
+  EditOutlined,
 } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { logoutUser } from '../../../_actions/user_actions';
 
 import Logo from './Sections/Logo.png';
 function NavBar(props) {
-  const user = useSelector(state => state.user.userData);
+  const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    axios.get(`${USER_SERVER}/logout`).then(response => {
+    axios.get(`${USER_SERVER}/logout`).then((response) => {
       if (response.status === 200) {
         dispatch(logoutUser());
         // props.history.push('/');
@@ -44,13 +44,43 @@ function NavBar(props) {
         </div>
         <div className="menu_items">
           <div className="menu__content">
-            <Link to="/">Home</Link>
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/ "
+            >
+              Home
+            </NavLink>
           </div>
           <div className="menu__content">
-            <Link to="/login">Login</Link>
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/login"
+            >
+              Login
+            </NavLink>
           </div>
           <div className="menu__content">
-            <Link to="/register">Register</Link>
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/register"
+            >
+              Register
+            </NavLink>
           </div>
         </div>{' '}
       </nav>
@@ -59,60 +89,118 @@ function NavBar(props) {
     return (
       <nav className="menu" style={{ zIndex: 1 }}>
         <div className="menu__logo">
-          <Link to="/">
-            <img src={Logo} />
-          </Link>
+          <NavLink to="/">
+            <img src={Logo} className="image" />
+          </NavLink>
         </div>
         <div className="menu_items">
           <div className="menu__content">
-            <Link to="/">
-              <HomeOutlined /> Home
-            </Link>
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/"
+            >
+              <HomeOutlined className="icon" />
+              Home
+            </NavLink>
           </div>
           <div className="menu__content">
-            <Link to="/">
-              <BellOutlined />
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/notification"
+            >
+              <BellOutlined className="icon" />
               Notification
-            </Link>
+            </NavLink>
           </div>
           <div className="menu__content">
-            <Link to="/blog">
-              {' '}
-              <MessageOutlined />
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/blog"
+            >
+              <MessageOutlined className="icon" />
               Blogs
-            </Link>
+            </NavLink>
           </div>
           <div className="menu__content">
-            <Link to="/followingsblog">
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/followingsblog"
+            >
               {' '}
-              <TeamOutlined />
+              <TeamOutlined className="icon" />
               Following
-            </Link>
+            </NavLink>
           </div>
           <div className="menu__content">
-            <UserOutlined />
-            <Link to="/"> Profile</Link>
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/profilepage/:id"
+            >
+              <UserOutlined className="icon" />
+              Profile
+            </NavLink>
           </div>
           <div className="menu__content">
-            <Link to="/">
-              <MoreOutlined />
+            <NavLink
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              to="/more"
+            >
+              <MoreOutlined className="icon" />
               More
-            </Link>
+            </NavLink>
           </div>
           <div className="menu__content">
-            <a onClick={logoutHandler}>
-              <LogoutOutlined />
+            <a
+              activeStyle={{
+                backgroundColor: '#2ba6f32d',
+                color: '#2ba7f3',
+                borderRadius: '30px',
+              }}
+              className="link"
+              onClick={logoutHandler}
+            >
+              <LogoutOutlined className="icon" />
               Logout
             </a>
           </div>
         </div>{' '}
         <div className="menu__content">
-          <Link to="/blog/create">
-            <Button className="create_btn">
+          <NavLink to="/blog/create">
+            <button className="create_btn">
               <EditOutlined />
               Create
-            </Button>
-          </Link>
+            </button>
+          </NavLink>
         </div>
       </nav>
     );

@@ -21,9 +21,8 @@
   height: 90vh;
   overflow: auto;
 }
-.cards {
-  background: red;
-  /* padding-left: 10vw; */
+.cards:hover {
+  background-color: rgba(65, 105, 225, 0.055);
 }
 /* width */
 ::-webkit-scrollbar {

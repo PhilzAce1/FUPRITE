@@ -22,7 +22,6 @@ const initialContent = (
   </Col>
 );
 export function renderCards(blogs) {
-  const user = localStorage.getItem('userid');
   if (!Array.isArray(blogs)) return alert(typeof blogs);
   if (blogs.length <= 0) {
     return <div>No blog to display</div>;
@@ -40,25 +39,40 @@ export function renderCards(blogs) {
               comment
               commentId={blog._id}
               userId={localStorage.getItem('userId')}
-            />
+            />,
           ]}
         >
+          {console.log(localStorage.getItem('userId'))}
           <Meta
-            avatar={<Avatar src={blog.writer.image} />}
+            style={{
+              padding: ' 0 20px',
+            }}
+            avatar={<Avatar src={blog.writer.image} size={50} />}
             title={blog.writer.name}
-            description={<Follower userTo={blog.writer._id} userFrom={user} />}
-            // extra={<Follower />}
+            // description={
+            //   <Follower
+            //     userTo={blog.writer._id}
+            //     userFrom={localStorage.getItem('userId')}
+            //   />
+            // }
+            description={`@ ${
+              blog.writer.username ? blog.writer.username : 'username'
+            }`}
+            // // extra={<Follower />}
           />
           <Link to={`/blog/post/${blog._id}`}>
             <div
               style={{
-                height: ' 30vh',
-                marginLeft: '5vw',
-                overflowY: 'hidden',
+                height: ' 45vh',
+                marginLeft: '2vw',
+                marginRight: '2vw',
+                overflowY: 'auto',
                 marginTop: 10,
                 border: '2px solid #E6ECF0',
-                borderRadius: '20px'
+                borderRadius: '20px',
+                padding: '20px',
               }}
+              className="cards"
             >
               <div dangerouslySetInnerHTML={{ __html: blog.content }} />
             </div>

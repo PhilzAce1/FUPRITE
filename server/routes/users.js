@@ -16,7 +16,7 @@ router.get('/auth', auth, (req, res) => {
     name: req.user.name,
     lastname: req.user.lastname,
     role: req.user.role,
-    image: req.user.image
+    image: req.user.image,
   });
 });
 
@@ -27,7 +27,7 @@ router.post('/register', (req, res) => {
     if (err) return res.json({ success: false, err });
     // sendEmail(doc.email, doc.name, null, "welcome");
     return res.status(200).json({
-      success: true
+      success: true,
     });
   });
 });
@@ -37,7 +37,7 @@ router.post('/login', (req, res) => {
     if (!user)
       return res.json({
         loginSuccess: false,
-        message: 'Auth failed, email not found'
+        message: 'Auth failed, email not found',
       });
 
     user.comparePassword(req.body.password, (err, isMatch) => {
@@ -47,12 +47,9 @@ router.post('/login', (req, res) => {
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         res.cookie('w_authExp', user.tokenExp);
-        res
-          .cookie('w_auth', user.token)
-          .status(200)
-          .json({
-            loginSuccess: true
-          });
+        res.cookie('w_auth', user.token).status(200).json({
+          loginSuccess: true,
+        });
       });
     });
   });
@@ -64,24 +61,21 @@ router.post('/profile', async (req, res) => {
       _id: 1,
       email: 1,
       username: 1,
-      createdAt: 1
+      createdAt: 1,
     });
     const followerNumber = await Follower.find({
-      userFrom: req.body.userId
+      userFrom: req.body.userId,
     }).count();
     const followings = await Follower.find({
-      userTo: req.body.userId
+      userTo: req.body.userId,
     }).count();
     res.status(200).json({
       user,
       followerNumber,
-      followings
+      followings,
     });
   } catch (err) {
-    res
-      .status(400)
-      .json({ success: false })
-      .send(err);
+    res.status(400).json({ success: false }).send(err);
   }
 });
 
@@ -92,10 +86,29 @@ router.get('/logout', auth, (req, res) => {
     (err, doc) => {
       if (err) return res.json({ success: false, err });
       return res.status(200).send({
-        success: true
+        success: true,
       });
     }
   );
 });
-
+router.get('/search', async (req, res) => {
+  let { search } = req.query;
+  if (search.match(/[^a-zA-Z0-9]+/g)) {
+    return res.json({ success: true, users: [] });
+  }
+  const regex = new RegExp(`^${search}`, 'gi');
+  User.find({ $or: [{ username: regex }, { name: regex }] })
+    .limit(7)
+    .select({ password: 0, token: 0 })
+    .exec(function (err, user) {
+      if (err) {
+        res.status(400).json({ success: false });
+      } else {
+        if (user.length < 1) {
+          user = [];
+        }
+        res.json({ success: true, users: user });
+      }
+    });
+});
 module.exports = router;

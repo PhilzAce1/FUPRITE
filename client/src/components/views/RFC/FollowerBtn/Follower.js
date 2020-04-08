@@ -7,18 +7,17 @@ function FollowBtn(props) {
   const [followerNumber, setFollowerNumber] = useState(0);
   const [following, setFollowing] = useState(false);
   console.log(userTo, userFrom);
-  const onFollow = e => {
+  const onFollow = (e) => {
     if (userTo === userFrom) return alert('you can not follow yourself');
-
     e.preventDefault();
     let followVariable = {
       userTo: userTo,
-      userFrom: userFrom
+      userFrom: userFrom,
     };
     console.log(followVariable);
     if (following) {
       //when we are already following
-      axios.post('/api/follow/unFollow', followVariable).then(response => {
+      axios.post('/api/follow/unFollow', followVariable).then((response) => {
         if (response.data.success) {
           setFollowerNumber(followerNumber - 1);
           setFollowing(!following);
@@ -29,7 +28,7 @@ function FollowBtn(props) {
     } else {
       // when we are not following yet
 
-      axios.post('/api/follow/follow', followVariable).then(response => {
+      axios.post('/api/follow/follow', followVariable).then((response) => {
         if (response.data.success) {
           setFollowerNumber(followerNumber + 1);
           setFollowing(!following);
@@ -44,7 +43,7 @@ function FollowBtn(props) {
     const followNumberVariables = { userTo: userTo, userFrom: userFrom };
     axios
       .post('/api/follow/followersNumber', followNumberVariables.userTo)
-      .then(response => {
+      .then((response) => {
         if (response.data.success) {
           console.log(followNumberVariables.userTo);
           console.log(response.data.followNumber);
@@ -56,7 +55,7 @@ function FollowBtn(props) {
 
     axios
       .post('/api/follow/following', followNumberVariables)
-      .then(response => {
+      .then((response) => {
         if (response.data.success) {
           setFollowing(response.data.subcribed);
         } else {
@@ -78,11 +77,12 @@ function FollowBtn(props) {
           padding: '5px 16px',
           fontWeight: '100',
           fontSize: '1rem',
-          outline: 'none'
+          outline: 'none',
           // textTransform: 'uppercase'
         }}
         // disabled={userTo === userFrom}
       >
+        {console.log(followerNumber, following)}
         {followerNumber} {following ? 'following' : 'follow'}
       </Button>
     </div>

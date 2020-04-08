@@ -10,7 +10,14 @@ function ProfilePage(props) {
   console.log(props);
   return (
     <div className="body">
-      <div className="component_header">Profile</div>
+      <div
+        Style={{
+          width: '100%',
+        }}
+        className="component_header"
+      >
+        Profile
+      </div>
       <div className="component_content">
         <Row>
           <Col xs={24} lg={24} md={24} sm={24} className="background_image">
