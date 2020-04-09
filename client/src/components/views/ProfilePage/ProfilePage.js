@@ -4,14 +4,17 @@ import './sections/profile.css';
 import '../LandingPage/landing.css';
 import img from './sections/pg.jpg';
 import DetailSection from './sections/detailSection';
+import Tab from './sections/TabSection';
 // import '../sections/profilepage.css';
 function ProfilePage(props) {
   console.clear();
-  console.log(props);
+  console.log(props.match.params);
+  const { userId } = props.match.params;
+  console.log(userId);
   return (
     <div className="body">
       <div
-        Style={{
+        style={{
           width: '100%',
         }}
         className="component_header"
@@ -26,7 +29,9 @@ function ProfilePage(props) {
           <Col xs={24} lg={24} md={24} sm={24}>
             <DetailSection />
           </Col>
-          <Col xs={24} lg={24} md={24} sm={24} className="more_options"></Col>
+          <Col xs={24} lg={24} md={24} sm={24} className="more_options">
+            <Tab />
+          </Col>
         </Row>
       </div>
       {/* <div className="component_content">{content}</div> */}

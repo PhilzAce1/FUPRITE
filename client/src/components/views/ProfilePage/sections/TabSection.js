@@ -1,50 +1,28 @@
-import { Tabs, Radio } from 'antd';
-
+import React from 'react';
+import 'antd/dist/antd.css';
+import { Tabs } from 'antd';
 const { TabPane } = Tabs;
-
-class Tab extends React.Component {
-  state = { size: 'small' };
-
-  onChange = (e) => {
-    this.setState({ size: e.target.value });
-  };
-
-  render() {
-    const { size } = this.state;
-    return (
-      <div>
-        <Radio.Group
-          value={size}
-          onChange={this.onChange}
-          style={{ marginBottom: 16 }}
-        >
-          <Radio.Button value="small">Small</Radio.Button>
-          <Radio.Button value="default">Default</Radio.Button>
-          <Radio.Button value="large">Large</Radio.Button>
-        </Radio.Group>
-        <Tabs defaultActiveKey="1" size={size} style={{ marginBottom: 32 }}>
-          <TabPane tab="Tab 1" key="1">
-            Content of tab 1
-          </TabPane>
-          <TabPane tab="Tab 2" key="2">
-            Content of tab 2
-          </TabPane>
-          <TabPane tab="Tab 3" key="3">
-            Content of tab 3
-          </TabPane>
-        </Tabs>
-        <Tabs defaultActiveKey="1" type="card" size={size}>
-          <TabPane tab="Card Tab 1" key="1">
-            Content of card tab 1
-          </TabPane>
-          <TabPane tab="Card Tab 2" key="2">
-            Content of card tab 2
-          </TabPane>
-          <TabPane tab="Card Tab 3" key="3">
-            Content of card tab 3
-          </TabPane>
-        </Tabs>
-      </div>
-    );
-  }
+function Tab(props) {
+  // console.clear();
+  console.log(props);
+  return (
+    <div>
+      <Tabs
+        defaultActiveKey="1"
+        // tabBarStyle={{ width: '100%', fontSize: '3rem' }}
+        size={'large'}
+      >
+        <TabPane tab="Posts" key="1">
+          Somehitng
+        </TabPane>
+        <TabPane tab="Likes & comments" key="2">
+          Content of tab 2
+        </TabPane>
+        <TabPane tab="Contact Form" key="3">
+          Content of tab 3
+        </TabPane>
+      </Tabs>
+    </div>
+  );
 }
+export default Tab;

@@ -28,7 +28,7 @@
   outline: none;
 }
 .detail_section {
-  height: 40vh;
+  height: 35vh !important;
   width: inherit;
   display: flex;
   flex-flow: column nowrap;
@@ -98,16 +98,12 @@
   width: 70%;
   color: gray;
 }
-.detail_section {
-  height: 50vh;
-  /* overflow: auto; */
-}
 .following_info {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
-@media (max-width: 767px) {
+@media (max-width: 800px) {
   .body {
     width: 100vw;
     max-width: 100vw;
@@ -145,5 +141,9 @@
     height: 15vh;
     top: 5vh;
     left: 10px;
+  }
+  .detail_section {
+    height: 50vh !important;
+    /* background: grey; */
   }
 }

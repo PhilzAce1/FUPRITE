@@ -12,19 +12,19 @@ function PostPage(props) {
   const [CommentLists, setCommentLists] = useState([]);
 
   const videoVariable = {
-    videoId: postId
+    videoId: postId,
   };
 
   useEffect(() => {
     const variable = { postId: postId };
-    axios.post('/api/blog/getPost', variable).then(response => {
+    axios.post('/api/blog/getPost', variable).then((response) => {
       if (response.data.success) {
         setPost(response.data.post);
       } else {
         alert('Couldnt get post');
       }
     });
-    axios.post('/api/comment/getComments', videoVariable).then(response => {
+    axios.post('/api/comment/getComments', videoVariable).then((response) => {
       if (response.data.success) {
         console.log('response.data.comments', response.data.comments);
         setCommentLists(response.data.comments);
@@ -33,7 +33,7 @@ function PostPage(props) {
       }
     });
   }, []);
-  const updateComment = newComment => {
+  const updateComment = (newComment) => {
     setCommentLists(CommentLists.concat(newComment));
   };
 
