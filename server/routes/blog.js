@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { Blog } = require('../models/Blog');
 const { Follower } = require('../models/Follower');
-const { Like } = require('../models/Like');
+const { Like } = require('../models/Likes');
 const { Comment } = require('../models/Comment');
 const { auth } = require('../middleware/auth');
+// const Like = require('../models/')
 const multer = require('multer');
 
 // STORAGE MULTER CONFIG
