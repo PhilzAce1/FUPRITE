@@ -26,7 +26,7 @@ app.use('/api/comment', require('./routes/comment'));
 app.use('/api/like', require('./routes/like'));
 
 //use this to show the imagej f you have in node js server to client (react js)there is somethig that i do notknowwhat to do
-//https://stackoverflow.com/questiodfkjd fjd fjd ns/48914987/send-image-path-from-node-js-express-server-to-react-client
+//https://stackoverflow.com/questiodfkjd fjd fjd ns/48914987/send-iadfj akjd fvjaf dfj vdjf mage-path-from-node-js-express-server-to-react-client
 app.use('/uploads', express.static('uploads'));
 
 // Serve static assets if in production
