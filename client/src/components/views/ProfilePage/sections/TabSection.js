@@ -33,7 +33,7 @@ function Tab(props) {
     <div>
       <Tabs
         defaultActiveKey="1"
-        // tabBarStyle={{ width: '100%', fontSize: '3rem' }}
+        // tabBarStyle={{ widthdhjh: '100%', fontSize: '3rem' }}
         size={'large'}
       >
         <TabPane tab="Posts" key="1">
