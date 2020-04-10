@@ -111,4 +111,14 @@ router.get('/search', async (req, res) => {
       }
     });
 });
+router.post('/userdetails', async (req, res) => {
+  User.find({ _id: req.body.userId })
+    .select({
+      password: 0,
+    })
+    .exec((err, userDetails) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, user: userDetails });
+    });
+});
 module.exports = router;

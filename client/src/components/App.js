@@ -42,6 +42,7 @@ function App() {
           <Drawer />
           <Switch>
             <Route exact path="/" component={Auth(LandingPage, false)} />
+            <Route exact path="/home" component={Auth(LandingPage, null)} />
             <Route
               exact
               path="/followingsBlog"

@@ -9,20 +9,20 @@ function LikeDislikes(props) {
   const [DislikeAction, setDislikeAction] = useState(null);
   let variable = {};
 
-  if (props.video) {
+  if (props.videoId) {
     variable = { videoId: props.videoId, userId: props.userId };
   } else {
     variable = { commentId: props.commentId, userId: props.userId };
   }
 
   useEffect(() => {
-    Axios.post('/api/like/getLikes', variable).then(response => {
+    Axios.post('/api/like/getLikes', variable).then((response) => {
       if (response.data.success) {
         //How many likes does this video or comment have
         setLikes(response.data.likes.length);
 
         //if I already click this like button or not
-        response.data.likes.map(like => {
+        response.data.likes.map((like) => {
           if (like.userId === props.userId) {
             setLikeAction('liked');
           }
@@ -32,13 +32,13 @@ function LikeDislikes(props) {
       }
     });
 
-    Axios.post('/api/like/getDislikes', variable).then(response => {
+    Axios.post('/api/like/getDislikes', variable).then((response) => {
       if (response.data.success) {
         //How many likes does this video or comment have
         setDislikes(response.data.dislikes.length);
 
         //if I already click this like button or not
-        response.data.dislikes.map(dislike => {
+        response.data.dislikes.map((dislike) => {
           if (dislike.userId === props.userId) {
             setDislikeAction('disliked');
           }
@@ -51,7 +51,7 @@ function LikeDislikes(props) {
 
   const onLike = () => {
     if (LikeAction === null) {
-      Axios.post('/api/like/upLike', variable).then(response => {
+      Axios.post('/api/like/upLike', variable).then((response) => {
         if (response.data.success) {
           setLikes(Likes + 1);
           setLikeAction('liked');
@@ -67,7 +67,7 @@ function LikeDislikes(props) {
         }
       });
     } else {
-      Axios.post('/api/like/unLike', variable).then(response => {
+      Axios.post('/api/like/unLike', variable).then((response) => {
         if (response.data.success) {
           setLikes(Likes - 1);
           setLikeAction(null);
@@ -80,7 +80,7 @@ function LikeDislikes(props) {
 
   const onDisLike = () => {
     if (DislikeAction !== null) {
-      Axios.post('/api/like/unDisLike', variable).then(response => {
+      Axios.post('/api/like/unDisLike', variable).then((response) => {
         if (response.data.success) {
           setDislikes(Dislikes - 1);
           setDislikeAction(null);
@@ -89,7 +89,7 @@ function LikeDislikes(props) {
         }
       });
     } else {
-      Axios.post('/api/like/upDisLike', variable).then(response => {
+      Axios.post('/api/like/upDisLike', variable).then((response) => {
         if (response.data.success) {
           setDislikes(Dislikes + 1);
           setDislikeAction('disliked');

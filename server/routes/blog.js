@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { Blog } = require('../models/Blog');
 const { Follower } = require('../models/Follower');
+const { Like } = require('../models/Like');
+const { Comment } = require('../models/Comment');
 
 const { auth } = require('../middleware/auth');
 const multer = require('multer');
@@ -93,6 +95,15 @@ router.post('/getFollowingPosts', (req, res) => {
     // res.send(followedUser);
   });
 });
+router.post('/userpost', (req, res) => {
+  Blog.find({ writer: req.body.userId })
+    .populate('writer')
+    // .countDocuments()
+    .exec((err, blogs) => {
+      if (err) return res.status(400).send(err);
+      res.json({ success: true, blogs });
+    });
+});
 router.post('delete', async (req, res) => {
   const yourBlog = await Blog.find({
     _id: req.body._id,
@@ -108,6 +119,40 @@ router.post('delete', async (req, res) => {
       res.status(200).json({ success: true });
     }
   );
+});
+router.post('/getlikesandcomment', async (req, res) => {
+  try {
+    const post = [];
+
+    const likedComment = await Like.find({ userId: req.body.userId }).select({
+      videoId: 1,
+      _id: 0,
+    });
+    let LC = [...likedComment].filter((x) => JSON.stringify(x) !== '{}');
+    LC.map((x) => post.push(x.videoId));
+    const commentedPost = await Comment.find({
+      writer: req.body.userId,
+    }).select({ postId: 1, _id: 0 });
+    const blogIdArray = [];
+
+    const posts = [...commentedPost].filter((x) => JSON.stringify(x) !== '{}');
+    posts.map((x) => post.push(x.videoId));
+    console.log(post);
+    Blog.find({ _id: { $in: post } })
+      .populate('writer')
+      .exec((err, blogs) => {
+        if (err) return res.status(400).send(err);
+        // console.log(blogs);
+        // res.send(blogs);
+        res.status(200).json({ success: true, blogs });
+      });
+    // res.send(post);
+    // res.status(200).json({ success: true, blogs: posts });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(err);
+    // json({ success: false, err: error });
+  }
 });
 
 module.exports = router;

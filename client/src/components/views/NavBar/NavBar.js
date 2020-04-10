@@ -46,12 +46,12 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
               className="link"
-              to="/ "
+              to="/"
             >
               Home
             </NavLink>
@@ -59,7 +59,7 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
@@ -72,7 +72,7 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
@@ -97,12 +97,12 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
               className="link"
-              to="/"
+              to="/home"
             >
               <HomeOutlined className="icon" />
               Home
@@ -111,7 +111,7 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
@@ -125,7 +125,7 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
@@ -139,7 +139,7 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
@@ -154,12 +154,12 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
               className="link"
-              to="/profilepage/:id"
+              to="/profilepage/:user"
             >
               <UserOutlined className="icon" />
               Profile
@@ -168,7 +168,7 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
@@ -182,7 +182,7 @@ function NavBar(props) {
           <div className="menu__content">
             <a
               activeStyle={{
-                backgroundColor: '#2ba6f32d',
+                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}

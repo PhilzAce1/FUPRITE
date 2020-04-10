@@ -14,7 +14,16 @@ router.post('/followersNumber', async (req, res) => {
     const followersNumber = await Follower.find({
       userTo: req.body.userTo,
     }).count();
-    res.status(200).json({ success: true, followNumber: followersNumber });
+    const followingsNumber = await Follower.find({
+      userFrom: req.body.userTo,
+    }).count();
+    res
+      .status(200)
+      .json({
+        success: true,
+        followNumber: followersNumber,
+        followingsNumber: followingsNumber,
+      });
   } catch (error) {
     res.status(400).send(error);
   }

@@ -22,11 +22,15 @@ const initialContent = (
   </Col>
 );
 export function renderCards(blogs) {
+  // console.clear();
+  const userId = localStorage.getItem('userid');
   if (!Array.isArray(blogs)) return alert(typeof blogs);
   if (blogs.length <= 0) {
     return <div>No blog to display</div>;
   }
   return blogs.map((blog, index) => {
+    // console.log(localStorage.userId);
+
     return (
       <Col key={index} lg={24} md={24} xs={24} className="cards">
         <Card
@@ -36,13 +40,13 @@ export function renderCards(blogs) {
             // <Icon type="edit" key="edit" />,
             <Icon type="ellipsis" key="ellipsis" />,
             <LikeDislikes
-              comment
-              commentId={blog._id}
-              userId={localStorage.getItem('userId')}
+              // comment
+              videoId={blog._id}
+              userId={userId}
             />,
           ]}
         >
-          {console.log(localStorage.getItem('userId'))}
+          {console.log(userId)}
           <Meta
             style={{
               padding: ' 0 20px',
@@ -50,10 +54,7 @@ export function renderCards(blogs) {
             avatar={<Avatar src={blog.writer.image} size={50} />}
             title={blog.writer.name}
             // description={
-            //   <Follower
-            //     userTo={blog.writer._id}
-            //     userFrom={localStorage.getItem('userId')}
-            //   />
+
             // }
             description={`@ ${
               blog.writer.username ? blog.writer.username : 'username'
