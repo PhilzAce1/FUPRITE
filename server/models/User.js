@@ -36,6 +36,10 @@ const userSchema = mongoose.Schema({
     type: String,
     default: 'http://gravatar.com/avatar/1585222530?d=identicon',
   },
+  imagename: {
+    type: String,
+    default: 'null',
+  },
   backgroundimage: String,
   other: {
     type: Array,
