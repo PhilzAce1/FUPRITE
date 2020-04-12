@@ -40,7 +40,8 @@ function ProfilePage(props) {
     });
   }, []);
   const user = { ...userDetail[0] };
-
+  console.clear();
+  console.log(user.image);
   return (
     <div className="body">
       <div
@@ -64,7 +65,7 @@ function ProfilePage(props) {
             className="background_image"
           >
             <img
-              src={user.image || img}
+              src="http://gravatar.com/avatar/1585222530?d=identicon"
               alt="Image here"
               className="profile_picture"
             />

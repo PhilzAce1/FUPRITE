@@ -49,18 +49,6 @@ router.post('/createPost', (req, res) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({ success: true, postInfo });
   });
-
-  //생각 해보니  세이브 할떄 populate 할필요가 없다.   가져올떄 하면 되니깐...
-  // blog.save((err, response) => {
-  //     if (err) return res.json({ success: false, err });
-  //     Blog.find({ _id: response._id })
-  //         .populate('writer')
-  //         .exec((err, result) => {
-  //             let postInfo = result[0]
-  //             if (err) return res.json({ success: false, err });
-  //             return res.status(200).json({ success: true,  postInfo });
-  //         })
-  // });
 });
 
 router.get('/getBlogs', (req, res) => {
@@ -93,7 +81,6 @@ router.post('/getFollowingPosts', (req, res) => {
         if (err) return res.status(400).send(err);
         res.status(200).json({ success: true, blogs });
       });
-    // res.send(followedUser);
   });
 });
 router.post('/userpost', (req, res) => {
@@ -121,7 +108,7 @@ router.post('delete', async (req, res) => {
     }
   );
 });
-router.post('/getlikesandcomment', async (req, res) => {
+router.post('/getlikedpost', async (req, res) => {
   try {
     const post = [];
 
@@ -131,29 +118,39 @@ router.post('/getlikesandcomment', async (req, res) => {
     });
     let LC = [...likedComment].filter((x) => JSON.stringify(x) !== '{}');
     LC.map((x) => post.push(x.videoId));
-    const commentedPost = await Comment.find({
-      writer: req.body.userId,
-    }).select({ postId: 1, _id: 0 });
-    const blogIdArray = [];
 
-    const posts = [...commentedPost].filter((x) => JSON.stringify(x) !== '{}');
-    posts.map((x) => post.push(x.videoId));
-    console.log(post);
+    // const posts = [...commentedPost].filter((x) => JSON.stringify(x) !== '{}');
+    // posts.map((x) => post.push(x.videoId));
     Blog.find({ _id: { $in: post } })
       .populate('writer')
       .exec((err, blogs) => {
         if (err) return res.status(400).send(err);
-        // console.log(blogs);
-        // res.send(blogs);
         res.status(200).json({ success: true, blogs });
       });
-    // res.send(post);
-    // res.status(200).json({ success: true, blogs: posts });
   } catch (error) {
     console.log(error);
     res.status(400).send(err);
-    // json({ success: false, err: error });
   }
 });
+router.post('/getusercomments', async (req, res) => {
+  try {
+    const post = [];
 
+    const commentedPost = await Comment.find({
+      writer: req.body.userId,
+    }).select({ postId: 1, _id: 0 });
+
+    const posts = [...commentedPost].filter((x) => JSON.stringify(x) !== '{}');
+    posts.map((x) => post.push(x.videoId));
+    Blog.find({ _id: { $in: post } })
+      .populate('writer')
+      .exec((err, blogs) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).json({ success: true, blogs });
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(err);
+  }
+});
 module.exports = router;
