@@ -35,7 +35,7 @@ function ProfilePage(props) {
         // console.clear();
         console.log(response.data.user);
 
-        setImage(response.data.user[0].image);
+        setUploadedFile(response.data.user[0].image);
 
         setUserDetail(response.data.user);
       } else {
@@ -46,7 +46,7 @@ function ProfilePage(props) {
 
   const user = { ...userDetail[0] };
   // console.clear();
-
+  console.log(uploadedFile);
   return (
     <div className="body">
       <div
@@ -71,7 +71,7 @@ function ProfilePage(props) {
           >
             <div
               style={{
-                background: `url(${image})`,
+                background: `url(${uploadedFile})`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyItems: 'center',
@@ -79,7 +79,7 @@ function ProfilePage(props) {
               alt="Image here"
               className="profile_picture"
             >
-              <UploadBtn setUploadedFile={setUploadedFile} />
+              <UploadBtn setUploadedFile={setUploadedFile} userId={userId} />
             </div>
           </Col>
           <Col xs={24} lg={24} md={24} sm={24}>

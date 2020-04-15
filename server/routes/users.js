@@ -130,16 +130,30 @@ router.post('/uploadProfilePic', (req, res) => {
       msg: 'no file was submitted please check again',
     });
   }
+  const { userId } = req.files;
   const file = req.files.file;
   file.mv(
-    `${path.resolve(__dirname, '../..')}/uploads/${Date.now()}_${file.name}`,
+    `${path.resolve(__dirname, '../..')}/uploads/${file.md5}_${file.name}`,
     (err) => {
       if (err) {
         console.error(err);
         return res.status(500).send(err);
       }
-
-      res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+      User.updateOne(
+        { _id: userId },
+        {
+          $set: {
+            image: `/uploads/${file.md5}_${file.name}`,
+          },
+        }
+      ).exec((err, data) => {
+        if (err)
+          return res
+            .status(500)
+            .json({ success: false, msg: 'something went wrong' });
+        // console.log(data);
+      });
+      res.json({ filePath: `/uploads/${file.md5}_${file.name}` });
     }
   );
 });

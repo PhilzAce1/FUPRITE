@@ -11,6 +11,7 @@ function UploadBtn(props) {
   const onSubmit = async (e) => {
     const formData = new FormData();
     formData.append('file', e.target.files[0]);
+    formData.append('userId', props.userId);
     console.log(formData);
     try {
       const res = await axios.post('/api/users/uploadProfilePic', formData, {
@@ -19,6 +20,10 @@ function UploadBtn(props) {
         },
       });
       const { filePath } = res.data;
+      console.clear();
+      // alert(filePath);
+      setUploadedFile(`/${filePath}`);
+      console.log(filePath);
     } catch (error) {
       if (error.response.status === 500) {
         setMessage('Internal server error');
