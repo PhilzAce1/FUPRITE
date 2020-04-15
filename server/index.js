@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const config = require('./config/key');
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload');
 const connect = mongoose
   .connect(config.mongoURI, {
     useNewUrlParser: true,
@@ -18,6 +19,7 @@ app.use(morgon('tiny'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(fileUpload());
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/blog', require('./routes/blog'));

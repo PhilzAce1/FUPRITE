@@ -16,7 +16,7 @@ import CreateBlogPage from './views/BlogPage/Section.js/CreatePage';
 import Drawer from './views/RFC/Drawer/Drawer';
 import FollowingPage from './views/Following/Following';
 import ProfilePage from './views/ProfilePage/ProfilePage';
-
+import EditProfile from './views/ProfilePage/sections/EditProfile';
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -76,6 +76,7 @@ function App() {
               path="/searchpage"
               component={Auth(SearchPage, null)}
             />
+            <Route exact path="/epage" component={Auth(EditProfile, null)} />
           </Switch>
           {/* <Footer /> */}
         </Col>

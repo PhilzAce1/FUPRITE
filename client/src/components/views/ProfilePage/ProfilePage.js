@@ -6,15 +6,15 @@ import '../LandingPage/landing.css';
 import img from './sections/pg.jpg';
 import DetailSection from './sections/detailSection';
 import Tab from './sections/TabSection';
+import UploadBtn from './sections/UploadBtn';
 function ProfilePage(props) {
   const [blog, setBlog] = useState([]);
   const [userDetail, setUserDetail] = useState([]);
-  const [image, setImage] = useState(
-    // 'http://gravatar.com/avatar/1585222530?d=identicon'
-    img
-  );
+  const [image, setImage] = useState(img);
+  const [uploadedFile, setUploadedFile] = useState({});
+
   let { userId } = props.match.params;
-  if (userId == ':user') {
+  if (userId === ':user') {
     userId = localStorage.getItem('userid');
   }
   const variables = {
@@ -22,13 +22,13 @@ function ProfilePage(props) {
   };
   console.log(userId);
   useEffect(() => {
-    axios.post('/api/blog/userpost', variables).then((response) => {
-      if (response.data.success) {
-        setBlog(response.data.blogs);
-      } else {
-        alert('Couldnt get blog`s lists');
-      }
-    });
+    //   axios.post('/api/blog/userpost', variables).then((response) => {
+    //     if (response.data.success) {
+    //       setBlog(response.data.blogs);
+    //     } else {
+    //       alert('Couldnt get blog`s lists');
+    //     }
+    //   });
 
     axios.post('/api/users/userdetails', variables).then((response) => {
       if (response.data.success) {
@@ -43,29 +43,6 @@ function ProfilePage(props) {
       }
     });
   }, []);
-  const upload = (e) => {
-    console.clear();
-    console.log(e.target.files[0]);
-    let imageFormObj = new FormData();
-    imageFormObj.append('imageName', 'multer-image-' + Date.now());
-    imageFormObj.append('image', e.target.files[0]);
-    // console.clear();
-    // console.log(imageFormObj.values);
-    setImage(URL.createObjectURL(e.target.files[0]));
-
-    axios
-      .post('/api/blog/uploaddp', imageFormObj)
-      .then((res) => {
-        if (res.data.success) {
-          alert('Profile Picture success fully updated');
-          setImage(res.data.image);
-        } else {
-          alert('Profile Picture Upload error');
-          setImage(img);
-        }
-      })
-      .catch((err) => console.error(err));
-  };
 
   const user = { ...userDetail[0] };
   // console.clear();
@@ -102,10 +79,7 @@ function ProfilePage(props) {
               alt="Image here"
               className="profile_picture"
             >
-              <label class="custom-file-upload">
-                <input type="file" accept="image/*" onChange={upload} />
-                Upload
-              </label>
+              <UploadBtn setUploadedFile={setUploadedFile} />
             </div>
           </Col>
           <Col xs={24} lg={24} md={24} sm={24}>

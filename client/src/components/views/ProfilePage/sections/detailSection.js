@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Follower from '../../RFC/FollowerBtn/Follower';
+import EditProfile from '../sections/EditProfile';
+import { Modal, Button } from 'antd';
+
 function DetailSection(props) {
   const rUser = useSelector((state) => state.user.userData);
   const [followerNumber, setFollowerNumber] = useState(0);
   const [followings, setFollowings] = useState(0);
   const [userInfo, setUserInfo] = useState('');
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const followNumberVariables = { userTo: props.userId };
@@ -34,16 +38,35 @@ function DetailSection(props) {
       }
     });
   }, []);
+  const showModal = () => {
+    setVisible(true);
+  };
+  const handleCancel = (e) => {
+    console.log(e);
+    setVisible(false);
+  };
   const user = { ...userInfo[0] };
-  console.log(user.name);
+  console.clear();
+  console.log(props.userId == { ...rUser }._id);
   return (
     <div className="detail_section">
+      <Modal
+        title="Edit Profile"
+        visible={visible}
+        // onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <EditProfile />
+      </Modal>
       <div className="button_section">
-        {props.userId == { ...rUser }._id ? (
-          <button className="edit_profile">Edit Profile</button>
-        ) : (
-          <Follower userTo={props.userId} userFrom={{ ...rUser }._id} />
-        )}
+        {/* {props.userId == { ...rUser }._id ? ( */}
+        <button onClick={showModal} className="edit_profile">
+          Edit Profile
+        </button>
+        {/* ) : ( */}
+        {/* <Follower userTo={props.userId} userFrom={{ ...rUser }._id} /> */}
+        {/* )} */}
       </div>
       <div className="more_content">
         <div className="name">{user.name}</div>

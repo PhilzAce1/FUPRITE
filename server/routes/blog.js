@@ -42,31 +42,7 @@ router.post('/uploadfiles', (req, res) => {
     });
   });
 });
-router.route('/uploaddp').post(upload, async (req, res) => {
-  // upload(req, res, async (err) => {
-  console.log(req.body);
-  // if (err) return console.log(err);
-  // res.status(404).json({ success: false, err });
-  try {
-    const result = await User.update(
-      { _id: req.body._id },
-      {
-        $set: {
-          image: req.file.path,
-          imagename: req.body.imageName,
-        },
-      }
-    );
-    console.log(result);
-    res.status(200).json({
-      success: true,
-      doc: result,
-    });
-  } catch (error) {
-    res.status(500).json({ success: false, errer });
-  }
-  // });
-});
+
 router.post('/createPost', (req, res) => {
   let blog = new Blog({ content: req.body.content, writer: req.body.userID });
 

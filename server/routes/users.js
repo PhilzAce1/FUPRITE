@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 const { Follower } = require('../models/Follower');
+const path = require('path');
 //=================================
 //             User
 //=================================
@@ -120,5 +121,26 @@ router.post('/userdetails', async (req, res) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, user: userDetails });
     });
+});
+router.post('/uploadProfilePic', (req, res) => {
+  console.log(req.files);
+  if (req.files === null) {
+    return res.status(400).json({
+      success: false,
+      msg: 'no file was submitted please check again',
+    });
+  }
+  const file = req.files.file;
+  file.mv(
+    `${path.resolve(__dirname, '../..')}/uploads/${Date.now()}_${file.name}`,
+    (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+      }
+
+      res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    }
+  );
 });
 module.exports = router;

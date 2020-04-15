@@ -8,7 +8,6 @@ const { Title } = Typography;
 function PostPage(props) {
   const [post, setPost] = useState([]);
   const postId = props.match.params.postId;
-  const [Video, setVideo] = useState([]);
   const [CommentLists, setCommentLists] = useState([]);
 
   const videoVariable = {
