@@ -14,8 +14,11 @@ import {
 } from 'antd';
 
 const EditProfile = () => {
-  const [componentSize, setComponentSize] = useState('small');
-
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [level, setLevel] = useState('');
+  const [college, setCollege] = useState('');
+  const [date, setDate] = useState('');
   return (
     <Fragment>
       {/* <div className='component_header'> </div> */}
@@ -32,25 +35,58 @@ const EditProfile = () => {
             size: 24,
           }}
           size={24}
+          onSubmit={() => {
+            alert('Hey i am PhIlemon');
+          }}
         >
           <Form.Item label="Fullname">
-            <Input />
+            <Input onChange={(e) => setName(e.target.value)} value={name} />
           </Form.Item>
-          <Form.Item name={['user', 'introduction']} label="Introduction">
+          <Form.Item name={['user', 'introduction']} label="Description">
             <Input.TextArea maxLength={150} />
           </Form.Item>
           <Form.Item label="Level">
-            <Select>
-              <Select.Option value="100">100</Select.Option>
-              <Select.Option value="200">200</Select.Option>
-              <Select.Option value="300">300</Select.Option>
-              <Select.Option value="400">400</Select.Option>
-              <Select.Option value="500">500</Select.Option>
+            <Select name="level">
+              <Select.Option
+                onChange={(e) => setLevel(e.target.value)}
+                value="100"
+              >
+                100
+              </Select.Option>
+              <Select.Option
+                onChange={(e) => setLevel(e.target.value)}
+                value="200"
+              >
+                200
+              </Select.Option>
+              <Select.Option
+                onChange={(e) => setLevel(e.target.value)}
+                value="300"
+              >
+                300
+              </Select.Option>
+              <Select.Option
+                onChange={(e) => setLevel(e.target.value)}
+                value="400"
+              >
+                400
+              </Select.Option>
+              <Select.Option
+                onChange={(e) => setLevel(e.target.value)}
+                value="500"
+              >
+                500
+              </Select.Option>
             </Select>
           </Form.Item>
 
-          <Form.Item label="College">
+          <Form.Item
+            label="College"
+            onChange={(e) => setCollege(e.target.value)}
+            value={college}
+          >
             <TreeSelect
+              value={college}
               treeData={[
                 {
                   title: 'Engineering',
@@ -109,14 +145,14 @@ const EditProfile = () => {
           </Form.Item>
 
           <Form.Item label="DatePicker">
-            <DatePicker />
+            <DatePicker
+              onChange={(e) => setDate(e.target.value)}
+              value={date}
+            />
           </Form.Item>
 
-          <Form.Item label="Switch">
-            <Switch />
-          </Form.Item>
-          <Form.Item label="Button">
-            <Button>Button</Button>
+          <Form.Item>
+            <Button onClick={() => alert(name, level, college)}>Submit</Button>
           </Form.Item>
         </Form>
       </div>

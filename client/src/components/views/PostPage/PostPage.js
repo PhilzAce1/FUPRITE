@@ -3,13 +3,16 @@ import axios from 'axios';
 import Comments from './sections/Comments';
 import { Typography } from 'antd';
 import initialContent from '../RFC/Content/initialContent';
+import moment from 'moment';
+import { Avatar } from 'antd';
+
 const { Title } = Typography;
 
 function PostPage(props) {
   const [post, setPost] = useState([]);
   const postId = props.match.params.postId;
   const [CommentLists, setCommentLists] = useState([]);
-
+  const [time, setTime] = useState('');
   const videoVariable = {
     videoId: postId,
   };
@@ -19,6 +22,8 @@ function PostPage(props) {
     axios.post('/api/blog/getPost', variable).then((response) => {
       if (response.data.success) {
         setPost(response.data.post);
+        // moment("2010-10-20 4:30",       "YYYY-MM-DD HH:mm")
+        // setTime(moment(`${response.data.createdAt}`).format('Do MMM YYYY  LT'));
       } else {
         alert('Couldnt get post');
       }
@@ -37,29 +42,42 @@ function PostPage(props) {
   };
 
   if (post.writer) {
+    // console.log(time);
     return (
-      <div className="postPage" style={{ width: '80%', margin: '3rem auto' }}>
-        <Title level={2}>{post.writer.name}`s Post</Title>
-        <br />
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Title level={4}>{post.createdAt}</Title>
+      <div>
+        <div className="component_header">PostPage</div>
+        <div
+          style={{
+            padding: '40px',
+          }}
+        >
+          <div>
+            <Avatar src={post.writer.image} size={50} />
+            <Title level={3}> {post.writer.name}`s Post</Title>
+            {moment(post.createdAt).format('Do MMM YYYY  LT')}
+          </div>
+          <br />
+          {/* <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              fontSize: '0,5rem',
+            }}
+          >
+            <Title level={6}>
+            </Title>
+          </div> */}
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <Comments
+            CommentLists={CommentLists}
+            postId={post._id}
+            refreshFunction={updateComment}
+          />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        <Comments
-          CommentLists={CommentLists}
-          postId={post._id}
-          refreshFunction={updateComment}
-        />
       </div>
     );
   } else {
-    return (
-      <div
-      // style={{ width: '80%', margin: '3rem auto' }}
-      >
-        {initialContent}
-      </div>
-    );
+    return <div>{initialContent}</div>;
   }
 }
 
