@@ -89,13 +89,21 @@ function RegisterPage(props) {
           // handleReset,
         } = props;
         return (
-          <div className="app">
-            <h2>Sign up</h2>
+          <div
+            className="app"
+            style={{
+              // alighItems: 'center',
+              paddingTop: '10vh',
+            }}
+          >
             <Form
-              style={{ minWidth: '375px' }}
+              style={{ minWidth: '375px', padding: '20px' }}
+              className="signup-form"
               {...formItemLayout}
               onSubmit={handleSubmit}
             >
+              <h2>Sign up</h2>
+
               <Form.Item required label="Name">
                 <Input
                   id="name"

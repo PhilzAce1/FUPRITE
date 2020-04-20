@@ -30,7 +30,7 @@ function LoginPage(props) {
     <Formik
       initialValues={{
         email: initialEmail,
-        password: ''
+        password: '',
       }}
       validationSchema={Yup.object().shape({
         email: Yup.string()
@@ -38,17 +38,17 @@ function LoginPage(props) {
           .required('Email is required'),
         password: Yup.string()
           .min(6, 'Password must be at least 6 characters')
-          .required('Password is required')
+          .required('Password is required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           let dataToSubmit = {
             email: values.email,
-            password: values.password
+            password: values.password,
           };
 
           dispatch(loginUser(dataToSubmit))
-            .then(response => {
+            .then((response) => {
               if (response.payload.loginSuccess) {
                 if (rememberMe === true) {
                   window.localStorage.setItem('rememberMe', values.id);
@@ -60,7 +60,7 @@ function LoginPage(props) {
                 setFormErrorMessage('Check out your Account or Password again');
               }
             })
-            .catch(err => {
+            .catch((err) => {
               setFormErrorMessage('Check out your Account or Password again');
               setTimeout(() => {
                 setFormErrorMessage('');
@@ -70,7 +70,7 @@ function LoginPage(props) {
         }, 500);
       }}
     >
-      {props => {
+      {(props) => {
         const {
           values,
           touched,
@@ -79,11 +79,20 @@ function LoginPage(props) {
           isSubmitting,
           handleChange,
           handleBlur,
-          handleSubmit
+          handleSubmit,
           // handleReset
         } = props;
         return (
-          <div className="app">
+          <div
+            className="app"
+            style={{
+              display: 'flex',
+              flexFlow: 'column nowrap',
+              justifyContent: 'center',
+              alighItems: 'center',
+              padding: '100px',
+            }}
+          >
             <Title level={2}>Log In</Title>
             <form onSubmit={handleSubmit} style={{ width: '350px' }}>
               <Form.Item required>
@@ -138,7 +147,7 @@ function LoginPage(props) {
                       fontSize: '0.7rem',
                       border: '1px solid',
                       padding: '1rem',
-                      borderRadius: '10px'
+                      borderRadius: '10px',
                     }}
                   >
                     {formErrorMessage}
