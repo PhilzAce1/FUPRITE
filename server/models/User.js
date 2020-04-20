@@ -50,6 +50,9 @@ const userSchema = mongoose.Schema({
   tokenExp: {
     type: Number,
   },
+  date: {
+    type: String,
+  },
 });
 
 userSchema.pre('save', function (next) {

@@ -30,7 +30,6 @@ function PostPage(props) {
     });
     axios.post('/api/comment/getComments', videoVariable).then((response) => {
       if (response.data.success) {
-        console.log('response.data.comments', response.data.comments);
         setCommentLists(response.data.comments);
       } else {
         alert('Failed to get video Info');
@@ -42,7 +41,6 @@ function PostPage(props) {
   };
 
   if (post.writer) {
-    // console.log(time);
     return (
       <div>
         <div className="component_header">PostPage</div>

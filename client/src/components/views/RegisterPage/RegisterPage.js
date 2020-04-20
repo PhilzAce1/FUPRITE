@@ -10,24 +10,24 @@ import { Form, Input, Button } from 'antd';
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
-    sm: { span: 8 }
+    sm: { span: 8 },
   },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 16 }
-  }
+    sm: { span: 16 },
+  },
 };
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
       span: 24,
-      offset: 0
+      offset: 0,
     },
     sm: {
       span: 16,
-      offset: 8
-    }
-  }
+      offset: 8,
+    },
+  },
 };
 
 function RegisterPage(props) {
@@ -39,7 +39,7 @@ function RegisterPage(props) {
         username: '',
         name: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
       }}
       validationSchema={Yup.object().shape({
         name: Yup.string().required('Name is required'),
@@ -52,7 +52,7 @@ function RegisterPage(props) {
           .required('Password is required'),
         confirmPassword: Yup.string()
           .oneOf([Yup.ref('password'), null], 'Passwords must match')
-          .required('Confirm Password is required')
+          .required('Confirm Password is required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -61,10 +61,10 @@ function RegisterPage(props) {
             password: values.password,
             name: values.name,
             username: values.username,
-            image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
+            image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
           };
 
-          dispatch(registerUser(dataToSubmit)).then(response => {
+          dispatch(registerUser(dataToSubmit)).then((response) => {
             if (response.payload.success) {
               props.history.push('/login');
             } else {
@@ -76,7 +76,7 @@ function RegisterPage(props) {
         }, 500);
       }}
     >
-      {props => {
+      {(props) => {
         const {
           values,
           touched,
@@ -85,7 +85,7 @@ function RegisterPage(props) {
           isSubmitting,
           handleChange,
           handleBlur,
-          handleSubmit
+          handleSubmit,
           // handleReset,
         } = props;
         return (

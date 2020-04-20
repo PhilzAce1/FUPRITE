@@ -36,12 +36,10 @@ function Search(props) {
         alert('could not search for a user');
       }
     });
-    console.log(value);
   };
 
   const handleBlur = (e) => {
-    setModal(false);
-    return console.log('i am working');
+    return setModal(false);
   };
   const complete = searchResult.map((user) => (
     <div className="user" key={user._id}>

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Follower from '../../RFC/FollowerBtn/Follower';
 import EditProfile from '../sections/EditProfile';
 import { Modal, Button } from 'antd';
+import moment from 'moment';
 
 function DetailSection(props) {
   const rUser = useSelector((state) => state.user.userData);
@@ -30,8 +31,6 @@ function DetailSection(props) {
     };
     axios.post('/api/users/userdetails', variables).then((response) => {
       if (response.data.success) {
-        console.clear();
-        console.log(response.data.user);
         setUserInfo(response.data.user);
       } else {
         alert('Couldnt get blog`s lists');
@@ -41,13 +40,10 @@ function DetailSection(props) {
   const showModal = () => {
     setVisible(true);
   };
-  const handleCancel = (e) => {
-    console.log(e);
+  const handleCancel = (s) => {
     setVisible(false);
   };
   const user = { ...userInfo[0] };
-  console.clear();
-  console.log(props.userId == { ...rUser }._id);
   return (
     <div className="detail_section">
       <Modal
@@ -57,7 +53,7 @@ function DetailSection(props) {
         onCancel={handleCancel}
         footer={null}
       >
-        <EditProfile />
+        <EditProfile user={userInfo} handleCancel={handleCancel} />
       </Modal>
       <div className="button_section">
         {/* {props.userId == { ...rUser }._id ? ( */}
@@ -78,9 +74,11 @@ function DetailSection(props) {
         </div>
         <div className="user_info">
           <div className="userinfo">
-            <div id="location">{user.level || '100 Level'}</div>
-            <div id="data_of_birth">{user.course || 'Course'}</div>
-            <div id="time_joined">{user.department || 'Department'}</div>
+            <div id="location">Level : {user.level || '100'} </div>
+            <div id="data_of_birth">Dept : {user.department || 'Course'} </div>
+            <div id="time_joined">
+              BDay : {moment(user.date).format('Do MMM') || 'None'}
+            </div>
           </div>
         </div>
         <div className="following_info">

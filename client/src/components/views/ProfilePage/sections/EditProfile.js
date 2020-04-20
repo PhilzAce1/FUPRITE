@@ -1,162 +1,249 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import 'antd/dist/antd.css';
 import {
   Form,
   Input,
   Button,
-  Radio,
   Select,
-  Cascader,
   DatePicker,
-  InputNumber,
   TreeSelect,
-  Switch,
+  message,
 } from 'antd';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-const EditProfile = () => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [level, setLevel] = useState('');
-  const [college, setCollege] = useState('');
-  const [date, setDate] = useState('');
+const EditProfile = (props) => {
+  console.log(props.user[0]);
+  const { userData } = useSelector((state) => state.user);
+  const userId = { ...userData }._id;
+  const newUser = props.user[0];
   return (
     <Fragment>
       {/* <div className='component_header'> </div> */}
-      <div style={{ padding: '20px' }}>
-        <Form
-          labelCol={{
-            span: 24,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          layout="horizontal"
-          initialValues={{
-            size: 24,
-          }}
-          size={24}
-          onSubmit={() => {
-            alert('Hey i am PhIlemon');
-          }}
-        >
-          <Form.Item label="Fullname">
-            <Input onChange={(e) => setName(e.target.value)} value={name} />
-          </Form.Item>
-          <Form.Item name={['user', 'introduction']} label="Description">
-            <Input.TextArea maxLength={150} />
-          </Form.Item>
-          <Form.Item label="Level">
-            <Select name="level">
-              <Select.Option
-                onChange={(e) => setLevel(e.target.value)}
-                value="100"
+      <Formik
+        initialValues={{
+          name: newUser.name,
+          description: newUser.description,
+          level: newUser.level,
+          department: newUser.department,
+          date: '',
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            let dataToSubmit = {
+              name: values.name,
+              description: values.description,
+              level: values.level,
+              department: values.department,
+              date: values.date,
+            };
+            // return alert(dataToSubmit.date);
+            axios
+              .patch('/api/users/updateprofile', {
+                dataToSubmit,
+                userId,
+              })
+              .then((res) => {
+                if (res.data.success === true) {
+                  message.success('Edited Successfully');
+                  props.handleCancel();
+                } else {
+                  message.error('There was an Error');
+                }
+              })
+              .catch((e) => message.error('Server Error'));
+            setSubmitting(false);
+          }, 500);
+        }}
+      >
+        {(props) => {
+          const {
+            values,
+            touched,
+            errors,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setFieldValue,
+            setFieldTouched,
+          } = props;
+          return (
+            <div style={{ padding: '0' }}>
+              <Form
+                labelCol={{
+                  span: 24,
+                }}
+                wrapperCol={{
+                  span: 16,
+                }}
+                layout="horizontal"
+                initialValues={{
+                  size: 24,
+                }}
+                size={24}
+                onSubmit={handleSubmit}
               >
-                100
-              </Select.Option>
-              <Select.Option
-                onChange={(e) => setLevel(e.target.value)}
-                value="200"
-              >
-                200
-              </Select.Option>
-              <Select.Option
-                onChange={(e) => setLevel(e.target.value)}
-                value="300"
-              >
-                300
-              </Select.Option>
-              <Select.Option
-                onChange={(e) => setLevel(e.target.value)}
-                value="400"
-              >
-                400
-              </Select.Option>
-              <Select.Option
-                onChange={(e) => setLevel(e.target.value)}
-                value="500"
-              >
-                500
-              </Select.Option>
-            </Select>
-          </Form.Item>
+                <Form.Item label="Fullname">
+                  <Input
+                    onChange={handleChange}
+                    value={values.name}
+                    id="name"
+                    name="name"
+                    onBlur={handleBlur}
+                  />
+                </Form.Item>
+                <Form.Item name={['user', 'introduction']} label="Description">
+                  <Input.TextArea
+                    maxLength={150}
+                    name="description"
+                    value={values.description}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </Form.Item>
 
-          <Form.Item
-            label="College"
-            onChange={(e) => setCollege(e.target.value)}
-            value={college}
-          >
-            <TreeSelect
-              value={college}
-              treeData={[
-                {
-                  title: 'Engineering',
-                  value: 'engineering',
-                  children: [
-                    {
-                      title: 'Electrical Engineering',
-                      value: 'elect',
-                    },
-                    {
-                      title: 'Marine Engineering',
-                      value: 'marine',
-                    },
-                    {
-                      title: 'Chemical Engineering',
-                      value: 'chem',
-                    },
-                    {
-                      title: 'Mechanical Engineering',
-                      value: 'mech',
-                    },
-                    {
-                      title: 'Petroleum Engineering',
-                      value: 'pet',
-                    },
-                  ],
-                },
-                {
-                  title: 'Science',
-                  value: 'science',
-                  children: [
-                    {
-                      title: 'Computer Science',
-                      value: 'comp',
-                    },
-                    {
-                      title: 'Earth Science',
-                      value: 'es',
-                    },
-                    {
-                      title: 'Mathematics',
-                      value: 'maths',
-                    },
-                    {
-                      title: 'Physics',
-                      value: 'physics',
-                    },
-                    {
-                      title: 'Others',
-                      value: 'Others',
-                    },
-                  ],
-                },
-              ]}
-            />
-          </Form.Item>
+                <Form.Item label="Level">
+                  <MySelect value={values.level} onChange={setFieldValue} />
+                </Form.Item>
+                <Form.Item label="department  ">
+                  <MyTreeSelect
+                    value={values.department}
+                    onChange={setFieldValue}
+                  />
+                </Form.Item>
 
-          <Form.Item label="DatePicker">
-            <DatePicker
-              onChange={(e) => setDate(e.target.value)}
-              value={date}
-            />
-          </Form.Item>
+                <Form.Item label="DatePicker">
+                  <MyDate value={values.date} onChange={setFieldValue} />
+                </Form.Item>
 
-          <Form.Item>
-            <Button onClick={() => alert(name, level, college)}>Submit</Button>
-          </Form.Item>
-        </Form>
-      </div>
+                <Form.Item>
+                  <Button onClick={handleSubmit}>Submit</Button>
+                </Form.Item>
+              </Form>
+            </div>
+          );
+        }}
+      </Formik>
     </Fragment>
   );
 };
+
+class MyDate extends React.Component {
+  handleChange = (value) => {
+    // this is going to call setFieldValue and manually update values.topcis
+    this.props.onChange('date', value);
+  };
+  render() {
+    return (
+      <Fragment>
+        <DatePicker
+          onChange={this.handleChange}
+          value={this.props.value}
+          name="date"
+          id="date"
+        />
+      </Fragment>
+    );
+  }
+}
+class MySelect extends React.Component {
+  handleChange = (value) => {
+    // this is going to call setFieldValue and manually update values.topcis
+    this.props.onChange('level', value);
+  };
+  render() {
+    return (
+      <Fragment>
+        <Select
+          name="level"
+          onChange={this.handleChange}
+          value={this.props.value}
+        >
+          <Select.Option value="100">100</Select.Option>
+          <Select.Option value="200">200</Select.Option>
+          <Select.Option value="300">300</Select.Option>
+          <Select.Option value="400">400</Select.Option>
+          <Select.Option value="500">500</Select.Option>
+        </Select>
+      </Fragment>
+    );
+  }
+}
+
+class MyTreeSelect extends React.Component {
+  handleChange = (value) => {
+    // this is going to call setFieldValue and manually update values.topcis
+    this.props.onChange('department', value);
+  };
+  render() {
+    return (
+      <Fragment>
+        <TreeSelect
+          name="department"
+          onChange={this.handleChange}
+          value={this.props.value}
+          id="department"
+          treeData={[
+            {
+              title: 'Engineering',
+              value: 'engineering',
+              children: [
+                {
+                  title: 'Electrical Engineering',
+                  value: 'elect',
+                },
+                {
+                  title: 'Marine Engineering',
+                  value: 'marine',
+                },
+                {
+                  title: 'Chemical Engineering',
+                  value: 'chem',
+                },
+                {
+                  title: 'Mechanical Engineering',
+                  value: 'mech',
+                },
+                {
+                  title: 'Petroleum Engineering',
+                  value: 'pet',
+                },
+              ],
+            },
+            {
+              title: 'Science',
+              value: 'science',
+              children: [
+                {
+                  title: 'Computer Science',
+                  value: 'comp',
+                },
+                {
+                  title: 'Earth Science',
+                  value: 'es',
+                },
+                {
+                  title: 'Mathematics',
+                  value: 'maths',
+                },
+                {
+                  title: 'Physics',
+                  value: 'physics',
+                },
+                {
+                  title: 'Others',
+                  value: 'Others',
+                },
+              ],
+            },
+          ]}
+        />
+      </Fragment>
+    );
+  }
+}
+
 export default EditProfile;

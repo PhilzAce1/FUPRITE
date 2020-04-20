@@ -13,7 +13,11 @@ function Drawers(props) {
     setVisible(false);
   };
   return (
-    <div>
+    <div
+      style={{
+        alignSelf: 'flex-end',
+      }}
+    >
       <Button
         className="menu__mobile-button"
         type="primary"
@@ -25,7 +29,7 @@ function Drawers(props) {
         // title="Basic Drawer"
         placement="left"
         className="menu_drawer"
-        closable={false}
+        closable={true}
         onClose={onClose}
         visible={visible}
       >

@@ -44,7 +44,12 @@ router.post('/uploadfiles', (req, res) => {
 });
 
 router.post('/createPost', (req, res) => {
-  let blog = new Blog({ content: req.body.content, writer: req.body.userID });
+  console.log(req.body);
+  let blog = new Blog({
+    content: req.body.content,
+    writer: req.body.userID,
+    title: req.body.title,
+  });
 
   blog.save((err, postInfo) => {
     if (err) return res.json({ success: false, err });

@@ -10,7 +10,6 @@ function ProfilePage(props) {
   const [userDetail, setUserDetail] = useState([]);
   const [message, setMessage] = useState(img);
   const [uploadedFile, setUploadedFile] = useState({});
-
   let { userId } = props.match.params;
   if (userId === ':user') {
     userId = localStorage.getItem('userid');
@@ -41,19 +40,16 @@ function ProfilePage(props) {
         },
       });
       const { filePath } = res.data;
-      console.clear();
       setUploadedFile(filePath);
-      console.log(filePath);
     } catch (error) {
       if (error.response.status === 500) {
         setMessage('Internal server error');
       }
       setMessage('Unable to Upload please try again');
     }
-    console.log(uploadedFile);
   };
+
   const user = { ...userDetail[0] };
-  console.log(uploadedFile);
   return (
     <div className="body">
       <div

@@ -123,7 +123,6 @@ router.post('/userdetails', async (req, res) => {
     });
 });
 router.post('/uploadProfilePic', (req, res) => {
-  console.log(req.files);
   if (req.files === null) {
     return res.status(400).json({
       success: false,
@@ -156,5 +155,22 @@ router.post('/uploadProfilePic', (req, res) => {
       res.json({ filePath: `/uploads/${file.md5}_${file.name}` });
     }
   );
+});
+router.patch('/updateprofile', async (req, res) => {
+  const { name, description, level, department, date } = req.body.dataToSubmit;
+  try {
+    const updated = await User.findByIdAndUpdate(req.body.userId, {
+      $set: {
+        name,
+        description,
+        level,
+        department,
+        date,
+      },
+    });
+    console.log(updated);
+  } catch (error) {
+    res.status(402).json({ success: false, msg: error });
+  }
 });
 module.exports = router;

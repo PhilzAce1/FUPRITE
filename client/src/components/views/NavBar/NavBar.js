@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { USER_SERVER } from '../../Config';
 import axios from 'axios';
@@ -17,12 +16,69 @@ import {
 } from '@ant-design/icons';
 import { Link, NavLink } from 'react-router-dom';
 import { logoutUser } from '../../../_actions/user_actions';
-
+import { Modal, Button, Input, message, Form } from 'antd';
 import Logo from './Sections/Logo.png';
+
+function CreatePost(props) {
+  const user = useSelector((state) => state.user);
+
+  const [title, setTitle] = useState('');
+  const onTitleChange = (value) => {
+    setTitle(value.target.value);
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    if (user.userData && !user.userData.isAuth) {
+      return alert('Please Log in first');
+    }
+
+    const variables = {
+      userID: user.userData._id,
+      title: title,
+    };
+
+    axios.post('/api/blog/createPost', variables).then((response) => {
+      if (response) {
+        message.success('Post Created!');
+        setTitle('');
+        props.handleCancle();
+        // setTimeout(() => {
+        // }, 2000);
+      }
+    });
+  };
+  return (
+    <div>
+      <Input.TextArea
+        placeholder="Title Here"
+        maxLength={60}
+        size={'middle'}
+        onChange={onTitleChange}
+      />
+      <Form onSubmit={onSubmit}>
+        <div style={{ textAlign: 'center', margin: '2rem' }}>
+          <Button
+            size="large"
+            htmlType="submit"
+            className=""
+            onSubmit={onSubmit}
+          >
+            Submit
+          </Button>
+        </div>
+      </Form>
+    </div>
+  );
+}
+
 function NavBar(props) {
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
 
+  const [visible, setVisible] = useState(false);
+  const [postVisible, setPostVisible] = useState(false);
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then((response) => {
       if (response.status === 200) {
@@ -35,6 +91,16 @@ function NavBar(props) {
         alert('Log Out Failed');
       }
     });
+  };
+  const showModal = () => {
+    setVisible(true);
+  };
+  const handleCancle = () => {
+    setPostVisible(false);
+    setVisible(false);
+  };
+  const handlePostVisible = () => {
+    setPostVisible(true);
   };
   if (!{ ...user }._id) {
     return (
@@ -195,12 +261,45 @@ function NavBar(props) {
           </div>
         </div>{' '}
         <div className="menu__content">
-          <NavLink to="/blog/create">
-            <button className="create_btn">
-              <EditOutlined />
-              Create
-            </button>
-          </NavLink>
+          <button className="create_btn" onClick={showModal}>
+            <EditOutlined />
+            Create
+          </button>
+
+          <Modal
+            visible={visible}
+            title="What do you want to write"
+            onCancel={handleCancle}
+            footer={null}
+          >
+            <div
+              style={{
+                display: 'flex',
+                flexFlow: 'column nowrap',
+                height: '20vh',
+                justifyContent: 'space-between',
+              }}
+            >
+              <NavLink to="/blog/create">
+                <Button type="primary" block={false} onClick={handleCancle}>
+                  Create Article
+                </Button>
+              </NavLink>
+
+              <Button type="primary" block={false} onClick={handlePostVisible}>
+                ShortPOst
+              </Button>
+            </div>
+          </Modal>
+
+          <Modal
+            visible={postVisible}
+            title="Write Something"
+            onCancel={handleCancle}
+            footer={null}
+          >
+            <CreatePost handleCancle={handleCancle} />
+          </Modal>
         </div>
       </nav>
     );

@@ -37,9 +37,20 @@ function App() {
           md={16}
           sm={24}
           className="col"
-          style={{ maxHeight: '100vh', overflow: 'auto' }}
+          style={{
+            maxHeight: '100vh',
+            overflow: 'auto',
+            // display: 'flex',
+            // flexDirection: 'row',
+          }}
         >
-          <Drawer />
+          <Drawer
+            style={{
+              position: 'absolute',
+              float: 'right',
+              marginRight: '20px',
+            }}
+          />
           <Switch>
             <Route exact path="/" component={Auth(LandingPage, false)} />
             <Route exact path="/home" component={Auth(LandingPage, null)} />

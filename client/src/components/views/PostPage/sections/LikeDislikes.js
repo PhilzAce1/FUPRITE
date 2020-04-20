@@ -118,7 +118,7 @@ function LikeDislikes(props) {
         </Tooltip>
         <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Likes}</span>
       </span>
-      &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+      {/* &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; */}
       <span key="comment-basic-dislike">
         <Tooltip title="Dislike">
           <Icon

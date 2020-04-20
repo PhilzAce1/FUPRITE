@@ -7,9 +7,6 @@ import initialContent, { renderCards } from '../RFC/Content/initialContent';
 function BlogPage() {
   const [content, setContent] = useState(initialContent);
   const user = useSelector((state) => state.user.userData);
-
-  console.clear();
-  // console.log({ ...user }._id);
   const variables = {
     userId: { ...user }._id,
   };

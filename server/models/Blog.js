@@ -4,12 +4,15 @@ const Schema = mongoose.Schema;
 const blogSchema = mongoose.Schema(
   {
     content: {
-      type: String
+      type: String,
+    },
+    title: {
+      type: String,
     },
     writer: {
       type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
+      ref: 'User',
+    },
   },
   { timestamps: true }
 );

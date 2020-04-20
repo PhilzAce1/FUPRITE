@@ -9,7 +9,7 @@
 .component_header {
   color: black;
   position: sticky;
-  padding: 10px;
+  padding: 10px 60px;
   font-size: 1.5rem;
   font-weight: 1000;
   border: 1px solid #e6ecf0;
@@ -20,6 +20,23 @@
   /* background-color: #1f1a1a; */
   height: 90vh;
   overflow: auto;
+}
+.showimg * {
+  display: none;
+}
+.actions {
+  margin: 20px 1vw 0 15%;
+  max-width: 70%;
+  display: flex;
+  flex-wrap: row nowrap;
+  justify-content: space-between;
+}
+.showimg img:nth-of-type(1) {
+  display: block;
+  max-height: '30vh';
+  max-width: '80%';
+  /* border: '2px solid #E6ECF0'; */
+  border-radius: 20px;
 }
 .cards:hover {
   background-color: rgba(65, 105, 225, 0.055);
