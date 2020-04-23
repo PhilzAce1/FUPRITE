@@ -17,7 +17,12 @@ import Drawer from './views/RFC/Drawer/Drawer';
 import FollowingPage from './views/Following/Following';
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import EditProfile from './views/ProfilePage/sections/EditProfile';
+import Welcome from './views/Welcome/index';
+import Left from './views/Welcome/left';
+
 function App() {
+  // const { toggleTheme, themeName } = React.useContext(ThemeSelectorContext);
+  // React.useEffect(() => toggleTheme('white'));
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Row>
@@ -29,7 +34,29 @@ function App() {
           className="col"
           style={{ maxHeight: '100vh', overflow: 'auto' }}
         >
-          <NavBar />
+          <Switch>
+            {/* <Route exact path="/" component={Auth(Left, null)} /> */}
+
+            <Route exact path="/home" component={Auth(NavBar, null)} />
+            <Route
+              exact
+              path="/followingsBlog"
+              component={Auth(NavBar, null)}
+            />
+            <Route exact path="/blog" component={Auth(NavBar, null)} />
+            <Route exact path="/blog/create" component={Auth(NavBar, null)} />
+            <Route
+              exact
+              path="/blog/post/:postId"
+              component={Auth(NavBar, null)}
+            />
+            <Route
+              exact
+              path="/profilepage/:userId"
+              component={Auth(NavBar, null)}
+            />
+            <Route exact path="/searchpage" component={Auth(NavBar, null)} />
+          </Switch>
         </Col>
         <Col
           xs={24}
@@ -40,6 +67,7 @@ function App() {
           style={{
             maxHeight: '100vh',
             overflow: 'auto',
+            position: 'static',
             // display: 'flex',
             // flexDirection: 'row',
           }}
@@ -52,7 +80,8 @@ function App() {
             }}
           />
           <Switch>
-            <Route exact path="/" component={Auth(LandingPage, false)} />
+            <Route exact path="/" component={Auth(Welcome, false)} />
+
             <Route exact path="/home" component={Auth(LandingPage, null)} />
             <Route
               exact
@@ -92,7 +121,23 @@ function App() {
           {/* <Footer /> */}
         </Col>
         <Col xs={0} md={0} sm={0} className="col" lg={8}>
-          <Route exact path="*" component={Auth(SearchPage, null)} />
+          <Route exact path="/home" component={Auth(SearchPage, null)} />
+          <Route
+            exact
+            path="/followingsBlog"
+            component={Auth(SearchPage, null)}
+          />
+          <Route exact path="/blog/create" component={Auth(SearchPage, null)} />
+          <Route
+            exact
+            path="/blog/post/:postId"
+            component={Auth(SearchPage, null)}
+          />
+          <Route
+            exact
+            path="/profilepage/:userId"
+            component={Auth(SearchPage, null)}
+          />
         </Col>
       </Row>
     </Suspense>

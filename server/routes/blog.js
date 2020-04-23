@@ -6,6 +6,7 @@ const { Like } = require('../models/Likes');
 const { User } = require('../models/User');
 const { Comment } = require('../models/Comment');
 const { auth } = require('../middleware/auth');
+const pushNotification = require('../util/pushNotification');
 // const Like = require('../models/')
 const multer = require('multer');
 
@@ -44,7 +45,6 @@ router.post('/uploadfiles', (req, res) => {
 });
 
 router.post('/createPost', (req, res) => {
-  console.log(req.body);
   let blog = new Blog({
     content: req.body.content,
     writer: req.body.userID,
@@ -53,7 +53,8 @@ router.post('/createPost', (req, res) => {
 
   blog.save((err, postInfo) => {
     if (err) return res.json({ success: false, err });
-    return res.status(200).json({ success: true, postInfo });
+    pushNotification(req.body.userID, 'created a new post', blog._id);
+    res.status(200).json({ success: true, postInfo });
   });
 });
 

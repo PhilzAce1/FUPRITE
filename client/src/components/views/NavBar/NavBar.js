@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { USER_SERVER } from '../../Config';
 import axios from 'axios';
-import './Sections/Navbar.css';
-import '../NavBar/Sections/testNav.css';
 import {
   UserOutlined,
   BellOutlined,
@@ -14,9 +12,10 @@ import {
   LogoutOutlined,
   EditOutlined,
 } from '@ant-design/icons';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { logoutUser } from '../../../_actions/user_actions';
 import { Modal, Button, Input, message, Form } from 'antd';
+import More from '../More/More';
 import Logo from './Sections/Logo.png';
 
 function CreatePost(props) {
@@ -79,6 +78,8 @@ function NavBar(props) {
 
   const [visible, setVisible] = useState(false);
   const [postVisible, setPostVisible] = useState(false);
+  const [moreVisible, setMoreVisible] = useState(false);
+
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then((response) => {
       if (response.status === 200) {
@@ -98,6 +99,10 @@ function NavBar(props) {
   const handleCancle = () => {
     setPostVisible(false);
     setVisible(false);
+    setMoreVisible(false);
+  };
+  const handleMoreModal = () => {
+    setMoreVisible(true);
   };
   const handlePostVisible = () => {
     setPostVisible(true);
@@ -106,7 +111,9 @@ function NavBar(props) {
     return (
       <nav className="menu" style={{ zIndex: 1 }}>
         <div className="menu__logo">
-          <Link to="/">PHILZ</Link>
+          <NavLink to="/">
+            <img src={Logo} className="image" />
+          </NavLink>
         </div>
         <div className="menu_items">
           <div className="menu__content">
@@ -232,18 +239,16 @@ function NavBar(props) {
             </NavLink>
           </div>
           <div className="menu__content">
-            <NavLink
-              activeStyle={{
-                // backgroundColor: '#2ba6f32d',
-                color: '#2ba7f3',
-                borderRadius: '30px',
+            <button
+              style={{
+                background: 'transparent',
               }}
               className="link"
-              to="/more"
+              onClick={handleMoreModal}
             >
               <MoreOutlined className="icon" />
               More
-            </NavLink>
+            </button>
           </div>
           <div className="menu__content">
             <a
@@ -261,7 +266,13 @@ function NavBar(props) {
           </div>
         </div>{' '}
         <div className="menu__content">
-          <button className="create_btn" onClick={showModal}>
+          <button
+            style={{
+              marginTop: '-10px',
+            }}
+            className="create_btn"
+            onClick={showModal}
+          >
             <EditOutlined />
             Create
           </button>
@@ -299,6 +310,19 @@ function NavBar(props) {
             footer={null}
           >
             <CreatePost handleCancle={handleCancle} />
+          </Modal>
+          <Modal
+            visible={moreVisible}
+            title={
+              <span style={{ fontSize: '2rem', fontWeight: 'bolder' }}>
+                MORE
+              </span>
+            }
+            onCancel={handleCancle}
+            footer={null}
+            mask={true}
+          >
+            <More handleCancle={handleCancle} />
           </Modal>
         </div>
       </nav>

@@ -56,13 +56,13 @@ function DetailSection(props) {
         <EditProfile user={userInfo} handleCancel={handleCancel} />
       </Modal>
       <div className="button_section">
-        {/* {props.userId == { ...rUser }._id ? ( */}
-        <button onClick={showModal} className="edit_profile">
-          Edit Profile
-        </button>
-        {/* ) : ( */}
-        {/* <Follower userTo={props.userId} userFrom={{ ...rUser }._id} /> */}
-        {/* )} */}
+        {props.userId == { ...rUser }._id ? (
+          <button onClick={showModal} className="edit_profile">
+            Edit Profile
+          </button>
+        ) : (
+          <Follower userTo={props.userId} userFrom={{ ...rUser }._id} />
+        )}
       </div>
       <div className="more_content">
         <div className="name">{user.name}</div>

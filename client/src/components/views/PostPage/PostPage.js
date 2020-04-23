@@ -48,6 +48,7 @@ function PostPage(props) {
           style={{
             padding: '40px',
           }}
+          className="post_content"
         >
           <div>
             <Avatar src={post.writer.image} size={50} />

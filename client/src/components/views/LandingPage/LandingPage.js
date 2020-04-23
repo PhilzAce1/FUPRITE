@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import initialContent, { renderCards } from '../RFC/Content/initialContent';
 import axios from 'axios';
-import './landing.css';
 
 function LandingPage() {
   const user = useSelector((state) => state.user.userData);

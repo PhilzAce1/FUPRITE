@@ -1,5 +1,4 @@
 import React from 'react';
-import './WTF.css';
 import pg from '../../ProfilePage/sections/pg.jpg';
 function WTF() {
   return (

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AutoComplete, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import './sections/search.css';
 import axios from 'axios';
 import Follower from '../FollowerBtn/Follower';
 import { useSelector } from 'react-redux';

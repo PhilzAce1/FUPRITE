@@ -1,8 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import { Col, Row } from 'antd';
-import './sections/profile.css';
-import '../LandingPage/landing.css';
 import img from './sections/pg.jpg';
 import DetailSection from './sections/detailSection';
 import Tab from './sections/TabSection';

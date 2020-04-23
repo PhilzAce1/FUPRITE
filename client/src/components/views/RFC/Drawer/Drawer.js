@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import NavBar from '../../NavBar/NavBar';
 import { Drawer, Button, Icon } from 'antd';
 function Drawers(props) {
+  console.log(props);
   const [visible, setVisible] = useState(false);
 
   const showDrawer = () => {
@@ -16,6 +17,13 @@ function Drawers(props) {
     <div
       style={{
         alignSelf: 'flex-end',
+        opacity: ` ${
+          window.location.pathname === '/' ||
+          window.location.pathname === '/login' ||
+          window.location.pathname === '/register'
+            ? 0
+            : 1
+        }`,
       }}
     >
       <Button

@@ -16,6 +16,12 @@ router.post('/saveComment', (req, res) => {
       .populate('writer')
       .exec((err, result) => {
         if (err) return res.json({ success: false, err });
+        pushNotification(
+          comment.writer._id,
+          'created a commented on a post',
+          result.respondTo
+        );
+
         return res.status(200).json({ success: true, result });
       });
   });

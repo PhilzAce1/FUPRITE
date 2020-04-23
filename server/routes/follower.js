@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const pushFollow = require('../util/pushFollow');
 const { Follower } = require('../models/Follower');
 router.get('/', (req, res) => {
   res.send('I am working');
@@ -17,13 +18,11 @@ router.post('/followersNumber', async (req, res) => {
     const followingsNumber = await Follower.find({
       userFrom: req.body.userTo,
     }).count();
-    res
-      .status(200)
-      .json({
-        success: true,
-        followNumber: followersNumber,
-        followingsNumber: followingsNumber,
-      });
+    res.status(200).json({
+      success: true,
+      followNumber: followersNumber,
+      followingsNumber: followingsNumber,
+    });
   } catch (error) {
     res.status(400).send(error);
   }
@@ -49,6 +48,8 @@ router.post('/follow', (req, res) => {
 
   follow.save((err, doc) => {
     if (err) return res.json({ success: false, err });
+    // pushNotification(req.body.userID, 'created a new post', blog._id);
+    pushFollow(req.body.userFrom, req.body.userTo);
     return res.status(200).json({ success: true });
   });
 });

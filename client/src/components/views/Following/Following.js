@@ -2,21 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import initialContent, { renderCards } from '../RFC/Content/initialContent';
 import axios from 'axios';
-import '../LandingPage/landing.css';
 function FollowingPage(props) {
-  const user = useSelector(state => state.user.userData);
+  const user = useSelector((state) => state.user.userData);
   const [content, setContent] = useState(initialContent);
   //   alert({ ...user }._id);'abnf
   let variable = {
     userFrom:
       localStorage.getItem('userid') ||
       localStorage.getItem('userId') ||
-      { ...user }._id
+      { ...user }._id,
   };
   useEffect(() => {
     axios
       .post('/api/blog/getFollowingPosts', variable)
-      .then(response => {
+      .then((response) => {
         if (response.data.success) {
           console.log(variable);
           setContent(renderCards(response.data.blogs));
@@ -24,7 +23,7 @@ function FollowingPage(props) {
           alert('Couldnt get blog`s lists');
         }
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(e);
         alert('there was an error | please reload this page');
         // return window.location.reload();

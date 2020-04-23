@@ -40,6 +40,26 @@ const userSchema = mongoose.Schema({
     type: String,
     default: 'null',
   },
+  notification: [
+    {
+      content: { type: String },
+      contentType: {
+        blog: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Blog',
+          // type: String,
+        },
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+        },
+      },
+      seen: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  ],
   backgroundimage: String,
   other: {
     type: Array,

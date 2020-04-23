@@ -169,6 +169,7 @@ router.patch('/updateprofile', async (req, res) => {
       },
     });
     console.log(updated);
+    res.status(200).json({ success: true, msg: ' successful Update' });
   } catch (error) {
     res.status(402).json({ success: false, msg: error });
   }
