@@ -18,8 +18,9 @@ import FollowingPage from './views/Following/Following';
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import EditProfile from './views/ProfilePage/sections/EditProfile';
 import Welcome from './views/Welcome/index';
-import Left from './views/Welcome/left';
-
+import Notification from './views/Notification/Notification';
+import ErroPage from './views/Welcome/404';
+import ErrorPage from './views/Welcome/404';
 function App() {
   // const { toggleTheme, themeName } = React.useContext(ThemeSelectorContext);
   // React.useEffect(() => toggleTheme('white'));
@@ -56,6 +57,8 @@ function App() {
               component={Auth(NavBar, null)}
             />
             <Route exact path="/searchpage" component={Auth(NavBar, null)} />
+            <Route exact path="/notification" component={Auth(NavBar, null)} />
+            {/* <Route exact path="*" component={Auth(NavBar, null)} /> */}
           </Switch>
         </Col>
         <Col
@@ -68,8 +71,6 @@ function App() {
             maxHeight: '100vh',
             overflow: 'auto',
             position: 'static',
-            // display: 'flex',
-            // flexDirection: 'row',
           }}
         >
           <Drawer
@@ -116,7 +117,13 @@ function App() {
               path="/searchpage"
               component={Auth(SearchPage, null)}
             />
-            <Route exact path="/epage" component={Auth(EditProfile, null)} />
+            <Route
+              exact
+              path="/notification"
+              component={Auth(Notification, null)}
+            />
+
+            <Route exact path="*" component={Auth(ErrorPage, null)} />
           </Switch>
           {/* <Footer /> */}
         </Col>
@@ -138,8 +145,14 @@ function App() {
             path="/profilepage/:userId"
             component={Auth(SearchPage, null)}
           />
+          <Route
+            exact
+            path="/notification"
+            component={Auth(SearchPage, null)}
+          />
         </Col>
       </Row>
+      <Footer />
     </Suspense>
   );
 }

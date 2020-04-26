@@ -30,7 +30,8 @@ function CreatePage(props) {
     event.preventDefault();
 
     if (user.userData && !user.userData.isAuth) {
-      return alert('Please Log in first');
+      message.error('Please Log in first');
+      props.history.push('/login');
     }
 
     const variables = {
@@ -38,6 +39,9 @@ function CreatePage(props) {
       userID: user.userData._id,
       title: title,
     };
+    if (variables.title.length < 5) {
+      return message.error('Please Write a Title ');
+    }
 
     axios.post('/api/blog/createPost', variables).then((response) => {
       if (response) {

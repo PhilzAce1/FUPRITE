@@ -60,7 +60,6 @@ function Search(props) {
       <Follower userTo={user._id} userFrom={{ ...userx }._id} />
     </div>
   ));
-  console.log(searchResult);
   return (
     <div className="header">
       <input

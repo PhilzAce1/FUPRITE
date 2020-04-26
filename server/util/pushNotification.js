@@ -2,10 +2,6 @@ const { User } = require('../models/User');
 const { Follower } = require('../models/Follower');
 
 const pushNotification = (userFrom, contentType, blogid) => {
-  if (!blogid) {
-    blogid = userFrom;
-  }
-  console.log(userFrom, contentType);
   Follower.find({ userFrom: userFrom }).exec((err, followers) => {
     if (err) return 'unable to push notification';
     let followedUser = [];
@@ -14,15 +10,10 @@ const pushNotification = (userFrom, contentType, blogid) => {
     });
     followedUser.map(async (x, i) => {
       const user = await User.findById(x);
-      user.notification.push({
+      user.notification.blog({
         content: `${user.name} ${contentType}`,
+        blog: blogid,
       });
-      if (contentType === 'followed you') {
-        user.notification[0].contentType.blog = userFrom;
-      } else {
-        user.notification[0].contentType.blog = blogid;
-      }
-      console.log(user.notification);
     });
   });
 };

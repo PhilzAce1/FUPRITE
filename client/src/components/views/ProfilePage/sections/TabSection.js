@@ -38,18 +38,14 @@ function Tab(props) {
   }, []);
   return (
     <div>
-      <Tabs
-        defaultActiveKey="1"
-        // tabBarStyle={{ widthdhjh: '100%', fontSize: '3rem' }}
-        size={'large'}
-      >
-        <TabPane tab="Posts" key="1">
+      <Tabs defaultActiveKey="1" size={'large'} animated={true}>
+        <TabPane tab={<span className="tabpane">POSTS</span>} key="1">
           {content}
         </TabPane>
-        <TabPane tab="Liked Post" key="2">
+        <TabPane tab={<span className="tabpane">Liked Post</span>} key="2">
           {secondTab}
         </TabPane>
-        <TabPane tab="Commented on" key="3">
+        <TabPane tab={<span className="tabpane">Comment on</span>} key="3">
           {thirdTab}
         </TabPane>
       </Tabs>

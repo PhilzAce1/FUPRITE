@@ -50,7 +50,6 @@ class Clipboard extends QuillClipboard {
           .catch((error) => console.error(error));
       });
     } else {
-      //console.log('when to use this') 보통 다른 곳에서  paste 한다음에  copy하면 이쪽 걸로 한다.
       super.onPaste(e);
     }
   }
@@ -208,7 +207,6 @@ class QuillEditor extends React.Component {
   }
 
   handleChange = (html) => {
-    // console.log('html', html);
     // https://youtu.be/BbR-QCoKngE
     // https://www.youtube.com/embed/ZwKhufmMxko
     // https://tv.naver.com/v/9176888
@@ -344,7 +342,6 @@ class QuillEditor extends React.Component {
       e.currentTarget.files.length > 0
     ) {
       const file = e.currentTarget.files[0];
-      console.log(file);
 
       let formData = new FormData();
       const config = {

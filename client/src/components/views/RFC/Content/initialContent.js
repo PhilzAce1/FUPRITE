@@ -7,7 +7,7 @@ const { Meta } = Card;
 
 const initialContent = (
   <Col lg={24}>
-    <Card>
+    <Card style={{ background: 'var(--bgcolor)', border: 'none' }}>
       <Skeleton loading={true} avatar active>
         <Meta
           avatar={<Avatar loading={true} />}
@@ -15,7 +15,10 @@ const initialContent = (
           description="This is the description"
         />
       </Skeleton>
-      <Skeleton loading={true}></Skeleton>
+      <Skeleton
+        style={{ background: 'green', color: 'black' }}
+        loading={true}
+      ></Skeleton>
     </Card>
   </Col>
 );
@@ -32,9 +35,8 @@ export function renderCards(blogs) {
           <Meta
             style={{
               padding: ' 0 20px 0 0 ',
-              color: 'red !important',
             }}
-            avatar={<Avatar src={blog.writer.image} size={64} />}
+            avatar={<Avatar src={blog.writer.image} className="avatar" />}
             title={<span className="card_name">{blog.writer.name}</span>}
             description={
               <span className="card_username">
@@ -43,27 +45,21 @@ export function renderCards(blogs) {
             }
           />
 
-          {/* {blog.writer.title && */}
-          <div className="title" style={{ fontSize: '1.2rem' }}>
-            {blog.title}
-          </div>
-          {/* // } */}
-          <Link to={`/blog/post/${blog._id}`}>
+          {blog.title ? (
+            <div className="title" style={{ fontSize: '1.2rem' }}>
+              {blog.title}
+            </div>
+          ) : (
             <div
-              style={{
-                maxHeight: '43vh',
-                maxWidth: '80%',
-                marginLeft: '10%',
-                marginRight: '1vw',
-                overflowY: 'hidden',
-                marginTop: 10,
-                borderRadius: '20px',
-                padding: '0px',
-              }}
-              className="cards"
-            >
+              className="showtitle title"
+              dangerouslySetInnerHTML={{ __html: blog.content }}
+            />
+          )}
+
+          <Link to={`/blog/post/${blog._id}`}>
+            <div className="cards card_inner">
               <div
-                className="showimg"
+                className="showimg "
                 dangerouslySetInnerHTML={{ __html: blog.content }}
               />
             </div>

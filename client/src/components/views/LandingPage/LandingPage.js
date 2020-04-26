@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import initialContent, { renderCards } from '../RFC/Content/initialContent';
 import axios from 'axios';
+import { message } from 'antd';
 
-function LandingPage() {
+function LandingPage(props) {
   const user = useSelector((state) => state.user.userData);
   localStorage.setItem('userid', { ...user }._id);
   const userId = { ...user }._id;
@@ -15,12 +16,13 @@ function LandingPage() {
         if (response.data.success) {
           setContent(renderCards(response.data.blogs, userId));
         } else {
-          alert('Couldnt get blog`s lists');
+          message.error('Couldnt get blog`s lists');
+          props.history.push('/');
         }
       })
       .catch((e) => {
         console.error(e);
-        alert('there was an error | please reload this page');
+        message.error('there was an error | please reload this page');
         return window.location.reload;
       });
   }, []);

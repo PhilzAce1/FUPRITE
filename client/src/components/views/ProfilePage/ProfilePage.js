@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import { Col, Row } from 'antd';
+import { Col, Row, message } from 'antd';
 import img from './sections/pg.jpg';
 import DetailSection from './sections/detailSection';
 import Tab from './sections/TabSection';
@@ -15,14 +15,13 @@ function ProfilePage(props) {
   const variables = {
     userId,
   };
-  console.log(userId);
   useEffect(() => {
     axios.post('/api/users/userdetails', variables).then((response) => {
       if (response.data.success) {
         setUploadedFile(`${response.data.user[0].image}`);
         setUserDetail(response.data.user);
       } else {
-        alert('Couldnt get blog`s lists');
+        message.error('user Not found ');
       }
     });
   }, []);
@@ -30,7 +29,6 @@ function ProfilePage(props) {
     const formData = new FormData();
     formData.append('file', e.target.files[0]);
     formData.append('userId', props.userId);
-    console.log(formData);
     try {
       const res = await axios.post('/api/users/uploadProfilePic', formData, {
         headers: {

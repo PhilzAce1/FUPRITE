@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Typography } from 'antd';
+import { message } from 'antd';
 import { useSelector } from 'react-redux';
 import initialContent, { renderCards } from '../RFC/Content/initialContent';
 
@@ -15,7 +15,7 @@ function BlogPage() {
       if (response.data.success) {
         setContent(renderCards(response.data.blogs, { ...user }._id));
       } else {
-        alert('Couldnt get blog`s lists');
+        message.error('Couldnt get blog`s lists');
       }
     });
   }, []);

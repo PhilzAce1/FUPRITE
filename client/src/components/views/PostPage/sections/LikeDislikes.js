@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Tooltip, Icon } from 'antd';
+import { Tooltip, Icon, message } from 'antd';
 import Axios from 'axios';
 
 function LikeDislikes(props) {
@@ -28,7 +28,7 @@ function LikeDislikes(props) {
           }
         });
       } else {
-        alert('Failed to get likes');
+        message.error('Failed to Like ');
       }
     });
 
@@ -44,7 +44,7 @@ function LikeDislikes(props) {
           }
         });
       } else {
-        alert('Failed to get dislikes');
+        message.error('Failed to DisLike ');
       }
     });
   }, []);
@@ -56,14 +56,12 @@ function LikeDislikes(props) {
           setLikes(Likes + 1);
           setLikeAction('liked');
 
-          //If dislike button is already clicked
-
           if (DislikeAction !== null) {
             setDislikeAction(null);
             setDislikes(Dislikes - 1);
           }
         } else {
-          alert('Failed to increase the like');
+          message.error('Failed to like');
         }
       });
     } else {
@@ -72,7 +70,7 @@ function LikeDislikes(props) {
           setLikes(Likes - 1);
           setLikeAction(null);
         } else {
-          alert('Failed to decrease the like');
+          message.error('Failed to dislike');
         }
       });
     }

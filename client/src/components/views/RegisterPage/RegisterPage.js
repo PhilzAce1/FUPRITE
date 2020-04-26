@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import il from '../Theme/il.png';
 import logo from '../NavBar/Sections/Logo.png';
 
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 
 const formItemLayout = {
   labelCol: {
@@ -93,13 +93,16 @@ function RegisterPage(props) {
                   image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
                 };
 
-                dispatch(registerUser(dataToSubmit)).then((response) => {
-                  if (response.payload.success) {
-                    props.history.push('/login');
-                  } else {
-                    alert(response.payload.err.errmsg);
-                  }
-                });
+                dispatch(registerUser(dataToSubmit))
+                  .then((response) => {
+                    if (response.payload.success) {
+                      props.history.push('/login');
+                    } else {
+                      message.error(response.payload.msg);
+                      // alert(response.payload.msg);
+                    }
+                  })
+                  .catch((e) => console.log(e));
 
                 setSubmitting(false);
               }, 500);

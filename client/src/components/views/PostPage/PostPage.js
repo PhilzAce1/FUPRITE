@@ -4,7 +4,7 @@ import Comments from './sections/Comments';
 import { Typography } from 'antd';
 import initialContent from '../RFC/Content/initialContent';
 import moment from 'moment';
-import { Avatar } from 'antd';
+import { Avatar, message } from 'antd';
 
 const { Title } = Typography;
 
@@ -22,17 +22,17 @@ function PostPage(props) {
     axios.post('/api/blog/getPost', variable).then((response) => {
       if (response.data.success) {
         setPost(response.data.post);
-        // moment("2010-10-20 4:30",       "YYYY-MM-DD HH:mm")
-        // setTime(moment(`${response.data.createdAt}`).format('Do MMM YYYY  LT'));
       } else {
-        alert('Couldnt get post');
+        message.error('Couldnt get post');
+        props.history.push('/home');
+        message.success('You have been redirected to home');
       }
     });
     axios.post('/api/comment/getComments', videoVariable).then((response) => {
       if (response.data.success) {
         setCommentLists(response.data.comments);
       } else {
-        alert('Failed to get video Info');
+        message.error('Failed to get post Info');
       }
     });
   }, []);
@@ -56,16 +56,7 @@ function PostPage(props) {
             {moment(post.createdAt).format('Do MMM YYYY  LT')}
           </div>
           <br />
-          {/* <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              fontSize: '0,5rem',
-            }}
-          >
-            <Title level={6}>
-            </Title>
-          </div> */}
+
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
           <Comments
             CommentLists={CommentLists}

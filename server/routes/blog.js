@@ -59,6 +59,7 @@ router.post('/createPost', (req, res) => {
 });
 
 router.get('/getBlogs', (req, res) => {
+  console.log(req.headers);
   Blog.find()
     .populate('writer')
     .exec((err, blogs) => {
@@ -159,5 +160,20 @@ router.post('/getusercomments', async (req, res) => {
     console.log(error);
     res.status(400).send(err);
   }
+});
+router.delete('/deletepost', async (req, res) => {
+  try {
+    const { userId, blogId } = req.body;
+    const blog = await Blog.findById(blogId).populate('writer');
+    if (blog.writer._id !== userId) {
+      return res.status(401).json({
+        success: false,
+        msg: 'User are not authorized to make this action',
+      });
+    } else {
+      await Blog.findByIdAndDelete(blogId);
+      res.status(200).json({ success: true, msg: 'deleted' });
+    }
+  } catch (error) {}
 });
 module.exports = router;

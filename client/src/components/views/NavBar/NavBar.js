@@ -30,7 +30,7 @@ function CreatePost(props) {
     event.preventDefault();
 
     if (user.userData && !user.userData.isAuth) {
-      return alert('Please Log in first');
+      return message.error('Please Log in first');
     }
 
     const variables = {
@@ -89,7 +89,7 @@ function NavBar(props) {
         window.location.pathname = '/login';
         // window.location.reload();
       } else {
-        alert('Log Out Failed');
+        message.error('Log Out Failed');
       }
     });
   };
@@ -188,7 +188,7 @@ function NavBar(props) {
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
-              className="link"
+              className="link hideinfull"
               to="/notification"
             >
               <BellOutlined className="icon" />
@@ -216,7 +216,7 @@ function NavBar(props) {
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}
-              className="link"
+              className="link hideinfull"
               to="/followingsblog"
             >
               {' '}

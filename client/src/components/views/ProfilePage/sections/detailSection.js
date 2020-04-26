@@ -83,13 +83,19 @@ function DetailSection(props) {
         </div>
         <div className="following_info">
           <div className="following" style={{ marginRight: 30 }}>
-            <span style={{ color: 'black', fontWeight: 'bolder' }}>
+            <span
+              style={{ color: 'var(--bodyfontcolor)', fontWeight: 'bolder' }}
+            >
               {followings}{' '}
             </span>{' '}
             Following
           </div>
           <span
-            style={{ color: 'black', fontWeight: 'bolder', marginRight: 2 }}
+            style={{
+              color: 'var(--bodyfontcolor)',
+              fontWeight: 'bolder',
+              marginRight: 2,
+            }}
           >
             {followerNumber}
           </span>{' '}

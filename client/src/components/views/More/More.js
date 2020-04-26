@@ -21,6 +21,7 @@ function More(props) {
       <div
         style={{
           fontSize: '1.2rem',
+          fontWeight: 'bold',
         }}
       >
         Change Your Theme :{' '}

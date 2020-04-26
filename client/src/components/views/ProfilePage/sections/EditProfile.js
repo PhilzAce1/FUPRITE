@@ -15,7 +15,6 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 const EditProfile = (props) => {
-  console.log(props.user[0]);
   const { userData } = useSelector((state) => state.user);
   const userId = { ...userData }._id;
   const newUser = props.user[0];

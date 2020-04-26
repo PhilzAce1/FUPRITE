@@ -24,7 +24,7 @@ const themes = {
     bgcolor: '#15202B',
     bgsecondarycolor: '#f5f8fa',
     bodyfontcolor: 'white',
-    primarytextcolor: 'black',
+    primarytextcolor: 'gray',
     primarybordercolor: 'rgba(0, 0, 0, 0.164)',
     lastbordercolor: '#e8e8e8',
     primaryshadowcolor: 'none',
@@ -65,23 +65,7 @@ export const ThemeSelectorContext = React.createContext({
 
 export default ({ children }) => {
   const [themeName, setThemeName] = useState('dark');
-  //   const [theme, setTheme] = useState(themes[themeName]);
 
-  //   const toggleTheme = () => {
-  //     if (theme === themes.dark) {
-  //       setTheme(themes.light);
-  //       setThemeName('light');
-  //       setCSSVariables(theme);
-  //     } else {
-  //       setTheme(themes.dark);
-  //       setThemeName('dark');
-  //       setCSSVariables(theme);
-  //     }
-  //   };
-  //   React.useEffect(() => {
-  //     alert('I am working');
-  //   });
-  //   toggleTheme,
   return (
     <ThemeSelectorContext.Provider value={{ themeName }}>
       {children}

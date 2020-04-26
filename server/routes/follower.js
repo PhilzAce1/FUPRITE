@@ -55,7 +55,6 @@ router.post('/follow', (req, res) => {
 });
 
 router.post('/unFollow', (req, res) => {
-  console.log(req.body);
   Follower.findOneAndDelete({
     userTo: req.body.userTo,
     userFrom: req.body.userFrom,

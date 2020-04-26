@@ -9,7 +9,6 @@ const { Option } = Select;
 function Welcome(props) {
   const { toggleTheme, themeName } = React.useContext(ThemeSelectorContext);
   const [theme, setTheme] = React.useState('dark');
-  console.log(themeName);
   return (
     <div className="welcome_container">
       <nav>
