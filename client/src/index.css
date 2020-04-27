@@ -79,7 +79,7 @@ input.error {
 }
 
 .menu__mobile-button {
-  z-index: 1000;
+  z-index: 9;
   position: absolute;
   float: right;
   height: 32px;
@@ -224,16 +224,15 @@ input.error {
   float: right;
 }
 
-.menu__mobile-button {
+/* .menu__mobile-button {
   float: right !important;
   height: 32px;
   padding: 6px;
   margin-top: 8px;
   display: none !important; /* use of important to overwrite ant-btn */
-  background: #3e91f7;
-}
-
-.menu_drawer .ant-drawer-body {
+/* background: #3e91f7; */
+/* } */
+*/ .menu_drawer .ant-drawer-body {
   padding: 0 !important;
 }
 
@@ -253,7 +252,7 @@ input.error {
     display: none;
   }
   .footer {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 8vh;
     background-color: var(--bgcolor);
@@ -268,7 +267,7 @@ input.error {
   .footer .icons {
     color: var(--bodyfontcolor);
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.3rem;
   }
   .menu_left,
   .menu_rigth {
@@ -755,12 +754,19 @@ input[type='file'] {
 .card .title {
   font-size: 1.1rem;
   color: var(--bodyfontcolor);
+  max-width: 90%;
+  max-height: 300px;
+  overflow: auto;
+  margin-left: 60px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  /* background: red !important; */
 }
 .card .card_inner {
   max-height: 43vh;
   max-width: 80%;
-  margin-left: 6%;
-  margin-right: 60px;
+  margin-left: 60px;
+  margin-right: 6%;
   overflow-y: hidden;
   margin-top: 10;
   border-radius: 20px;

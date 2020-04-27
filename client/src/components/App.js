@@ -123,7 +123,7 @@ function App() {
               component={Auth(Notification, null)}
             />
 
-            <Route exact path="*" component={Auth(ErrorPage, null)} />
+            <Route exact path="*" component={Auth(ErrorPage, false)} />
           </Switch>
           {/* <Footer /> */}
         </Col>

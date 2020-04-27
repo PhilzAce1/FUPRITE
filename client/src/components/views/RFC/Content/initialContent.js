@@ -32,18 +32,21 @@ export function renderCards(blogs) {
     return (
       <Col key={index} lg={24} md={24} xs={24} className="cards">
         <Card className="card" hoverable={true}>
-          <Meta
-            style={{
-              padding: ' 0 20px 0 0 ',
-            }}
-            avatar={<Avatar src={blog.writer.image} className="avatar" />}
-            title={<span className="card_name">{blog.writer.name}</span>}
-            description={
-              <span className="card_username">
-                {blog.writer.username ? `@ ${blog.writer.username}` : ''}
-              </span>
-            }
-          />
+          <Link to={`profilepage/${blog.writer._id}`}>
+            {' '}
+            <Meta
+              style={{
+                padding: ' 0 20px 0 0 ',
+              }}
+              avatar={<Avatar src={blog.writer.image} className="avatar" />}
+              title={<span className="card_name">{blog.writer.name}</span>}
+              description={
+                <span className="card_username">
+                  {blog.writer.username ? `@ ${blog.writer.username}` : ''}
+                </span>
+              }
+            />
+          </Link>
 
           {blog.title ? (
             <div className="title" style={{ fontSize: '1.2rem' }}>

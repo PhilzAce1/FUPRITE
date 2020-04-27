@@ -26,9 +26,9 @@ function Footer() {
           borderRadius: '30px',
         }}
         // className="link"
-        to="/followingsblog"
+        to="/searchpage"
       >
-        <SearchOutlined />
+        <SearchOutlined className="icons" />
       </NavLink>
 
       <NavLink

@@ -15,7 +15,7 @@ function WTF() {
         }
       })
       .catch((e) => {
-        message.error(e.message);
+        console.log(e.message);
       });
   }, []);
   // const f = (arr) => {

@@ -44,13 +44,18 @@ router.post('/uploadfiles', (req, res) => {
   });
 });
 
-router.post('/createPost', (req, res) => {
+router.post('/createPost', async (req, res) => {
   let blog = new Blog({
     content: req.body.content,
     writer: req.body.userID,
     title: req.body.title,
   });
-
+  const blogExist = await Blog.find({ title: req.body.title });
+  if (blogExist.length > 0) {
+    return res
+      .status(200)
+      .json({ success: false, msg: 'article with this title exist ' });
+  }
   blog.save((err, postInfo) => {
     if (err) return res.json({ success: false, err });
     pushNotification(req.body.userID, 'created a new post', blog._id);

@@ -26,7 +26,6 @@ router.post('/register', async (req, res) => {
     const userExist = await User.find({
       $or: [{ email: req.body.email }, { username: req.body.username }],
     });
-    console.log(req.body, userExist);
     if (userExist.length > 0)
       return res.status(200).json({
         success: false,

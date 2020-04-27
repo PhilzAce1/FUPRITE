@@ -17,7 +17,6 @@ function Drawers(props) {
     <div
       style={{
         alignSelf: 'flex-end',
-        opacity: ` ${window.location.pathname == '/' ? 0 : 1}`,
       }}
     >
       <Button
