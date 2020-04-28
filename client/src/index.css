@@ -198,7 +198,9 @@ input.error {
   font-size: 10px;
   margin-left: -5vw;
 }
-
+.ant-drawer-bod {
+  padding: 0 !important;
+}
 .menu__container .ant-menu-item {
   padding: 0px 5px;
 }
@@ -307,10 +309,9 @@ input.error {
   padding-bottom: 20vh;
   justify-items: center;
   align-items: center;
-
+  /* width: 100%; */
   box-shadow: 0 0 30px var(--primaryshadowcolor);
 
-  /* color: black !important; */
   background: var(--bgcolor);
 }
 .image {
@@ -354,7 +355,8 @@ a {
   font-size: 20px;
 }
 .menu_items {
-  height: 60vh;
+  height: 70vh;
+  margin: 10px 0;
   display: flex;
   flex-flow: column;
   justify-content: space-around;
@@ -372,8 +374,10 @@ a {
   position: relative;
   top: 0;
   margin-left: 3vw !important;
+
   /* margin-top: -10px !important; */
-  /* margin-top: 20px; */
+  margin-top: 20px !important
+  ;
 }
 
 /* SEARCH  */

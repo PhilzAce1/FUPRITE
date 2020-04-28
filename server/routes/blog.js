@@ -7,7 +7,6 @@ const { User } = require('../models/User');
 const { Comment } = require('../models/Comment');
 const { auth } = require('../middleware/auth');
 const pushNotification = require('../util/pushNotification');
-// const Like = require('../models/')
 const multer = require('multer');
 
 // STORAGE MULTER CONFIG
@@ -64,7 +63,6 @@ router.post('/createPost', async (req, res) => {
 });
 
 router.get('/getBlogs', (req, res) => {
-  console.log(req.headers);
   Blog.find()
     .populate('writer')
     .exec((err, blogs) => {

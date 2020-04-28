@@ -109,7 +109,7 @@ function NavBar(props) {
   };
   if (!{ ...user }._id) {
     return (
-      <nav className="menu" style={{ zIndex: 1 }}>
+      <nav className="menu" style={{ zIndex: 5 }}>
         <div className="menu__logo">
           <NavLink to="/">
             <img src={Logo} className="image" />
