@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -35,6 +35,7 @@ const tailFormItemLayout = {
 };
 
 function RegisterPage(props) {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   return (
     <div className="welcome_container">
@@ -85,6 +86,7 @@ function RegisterPage(props) {
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
+                setLoading(true);
                 let dataToSubmit = {
                   email: values.email,
                   password: values.password,
@@ -95,6 +97,7 @@ function RegisterPage(props) {
 
                 dispatch(registerUser(dataToSubmit))
                   .then((response) => {
+                    setLoading(false);
                     if (response.payload.success) {
                       props.history.push('/login');
                     } else {
@@ -250,6 +253,8 @@ function RegisterPage(props) {
                         onClick={handleSubmit}
                         type="primary"
                         disabled={isSubmitting}
+                        loading={loading}
+                        disabled={loading}
                       >
                         Submit
                       </Button>

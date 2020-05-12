@@ -18,6 +18,8 @@ function LoginPage(props) {
   const rememberMeChecked = localStorage.getItem('rememberMe') ? true : false;
 
   const [formErrorMessage, setFormErrorMessage] = useState('');
+  const [loading, setLoading] = useState('');
+
   const [rememberMe, setRememberMe] = useState(rememberMeChecked);
 
   const handleRememberMe = () => {
@@ -66,6 +68,7 @@ function LoginPage(props) {
                 .required('Password is required'),
             })}
             onSubmit={(values, { setSubmitting }) => {
+              setLoading(true);
               setTimeout(() => {
                 let dataToSubmit = {
                   email: values.email,
@@ -74,6 +77,8 @@ function LoginPage(props) {
 
                 dispatch(loginUser(dataToSubmit))
                   .then((response) => {
+                    setLoading(false);
+
                     if (response.payload.loginSuccess) {
                       if (rememberMe === true) {
                         window.localStorage.setItem('rememberMe', values.id);
@@ -210,7 +215,8 @@ function LoginPage(props) {
                           htmlType="submit"
                           className="login-form-button"
                           style={{ minWidth: '100%' }}
-                          disabled={isSubmitting}
+                          disabled={loading}
+                          loading={loading}
                           onSubmit={handleSubmit}
                         >
                           Log in
