@@ -3,14 +3,16 @@ import axios from 'axios';
 import Comments from './sections/Comments';
 import { Typography } from 'antd';
 import initialContent from '../RFC/Content/initialContent';
+import moment from 'moment';
+import { Avatar, message } from 'antd';
+
 const { Title } = Typography;
 
 function PostPage(props) {
   const [post, setPost] = useState([]);
   const postId = props.match.params.postId;
-  const [Video, setVideo] = useState([]);
   const [CommentLists, setCommentLists] = useState([]);
-
+  const [time, setTime] = useState('');
   const videoVariable = {
     videoId: postId,
   };
@@ -21,15 +23,16 @@ function PostPage(props) {
       if (response.data.success) {
         setPost(response.data.post);
       } else {
-        alert('Couldnt get post');
+        message.error('Couldnt get post');
+        props.history.push('/home');
+        message.success('You have been redirected to home');
       }
     });
     axios.post('/api/comment/getComments', videoVariable).then((response) => {
       if (response.data.success) {
-        console.log('response.data.comments', response.data.comments);
         setCommentLists(response.data.comments);
       } else {
-        alert('Failed to get video Info');
+        message.error('Failed to get post Info');
       }
     });
   }, []);
@@ -39,28 +42,32 @@ function PostPage(props) {
 
   if (post.writer) {
     return (
-      <div className="postPage" style={{ width: '80%', margin: '3rem auto' }}>
-        <Title level={2}>{post.writer.name}`s Post</Title>
-        <br />
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Title level={4}>{post.createdAt}</Title>
+      <div>
+        <div className="component_header">PostPage</div>
+        <div
+          style={{
+            padding: '40px',
+          }}
+          className="post_content"
+        >
+          <div>
+            <Avatar src={post.writer.image} size={50} />
+            <Title level={3}> {post.writer.name}`s Post</Title>
+            {moment(post.createdAt).format('Do MMM YYYY  LT')}
+          </div>
+          <br />
+
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <Comments
+            CommentLists={CommentLists}
+            postId={post._id}
+            refreshFunction={updateComment}
+          />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        <Comments
-          CommentLists={CommentLists}
-          postId={post._id}
-          refreshFunction={updateComment}
-        />
       </div>
     );
   } else {
-    return (
-      <div
-      // style={{ width: '80%', margin: '3rem auto' }}
-      >
-        {initialContent}
-      </div>
-    );
+    return <div>{initialContent}</div>;
   }
 }
 

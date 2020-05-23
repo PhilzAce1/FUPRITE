@@ -36,6 +36,46 @@ const userSchema = mongoose.Schema({
     type: String,
     default: 'http://gravatar.com/avatar/1585222530?d=identicon',
   },
+  imagename: {
+    type: String,
+    default: 'null',
+  },
+  notification: {
+    user: [
+      {
+        content: { type: String },
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+        },
+        seen: {
+          type: Boolean,
+          default: false,
+        },
+        time: {
+          type: String,
+          default: Date.now,
+        },
+      },
+    ],
+    blog: [
+      {
+        content: { type: String },
+        blog: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Blog',
+        },
+        seen: {
+          type: Boolean,
+          default: false,
+        },
+        time: {
+          type: String,
+          default: Date.now,
+        },
+      },
+    ],
+  },
   backgroundimage: String,
   other: {
     type: Array,
@@ -45,6 +85,9 @@ const userSchema = mongoose.Schema({
   },
   tokenExp: {
     type: Number,
+  },
+  date: {
+    type: String,
   },
 });
 

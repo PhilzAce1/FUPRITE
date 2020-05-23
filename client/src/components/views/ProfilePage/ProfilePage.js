@@ -1,46 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import { Col, Row } from 'antd';
-import './sections/profile.css';
-import '../LandingPage/landing.css';
+import { Col, Row, message } from 'antd';
 import img from './sections/pg.jpg';
 import DetailSection from './sections/detailSection';
 import Tab from './sections/TabSection';
 function ProfilePage(props) {
-  const [blog, setBlog] = useState([]);
   const [userDetail, setUserDetail] = useState([]);
-
-  // console.clear();
-  console.log(props.match.params);
+  const [message, setMessage] = useState(img);
+  const [uploadedFile, setUploadedFile] = useState({});
   let { userId } = props.match.params;
-  if (userId == ':user') {
+  if (userId === ':user') {
     userId = localStorage.getItem('userid');
   }
   const variables = {
     userId,
   };
-  console.log(userId);
   useEffect(() => {
-    axios.post('/api/blog/userpost', variables).then((response) => {
-      if (response.data.success) {
-        setBlog(response.data.blogs);
-      } else {
-        alert('Couldnt get blog`s lists');
-      }
-    });
-
     axios.post('/api/users/userdetails', variables).then((response) => {
       if (response.data.success) {
-        console.clear();
-        console.log(response.data.user);
+        setUploadedFile(`${response.data.user[0].image}`);
         setUserDetail(response.data.user);
       } else {
-        alert('Couldnt get blog`s lists');
+        message.error('user Not found ');
       }
     });
   }, []);
-  const user = { ...userDetail[0] };
+  const onSubmit = async (e) => {
+    const formData = new FormData();
+    formData.append('file', e.target.files[0]);
+    formData.append('userId', props.userId);
+    try {
+      const res = await axios.post('/api/users/uploadProfilePic', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      const { filePath } = res.data;
+      setUploadedFile(filePath);
+    } catch (error) {
+      if (error.response.status === 500) {
+        setMessage('Internal server error');
+      }
+      setMessage('Unable to Upload please try again');
+    }
+  };
 
+  const user = { ...userDetail[0] };
   return (
     <div className="body">
       <div
@@ -63,11 +68,26 @@ function ProfilePage(props) {
             }}
             className="background_image"
           >
-            <img
-              src={user.image || img}
+            <div
+              style={{
+                backgroundImage:
+                  'url("http://gravatar.com/avatar/1585222530?d=identicon")',
+                // 'url(`localhost:5000/uploads/240aec3b877796ac4705c842b9ce5de1_FacebookSDG_Develop your dev skills___Twitter (1).png`)',
+                //  `url(${uploadedFile})`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyItems: 'center',
+              }}
               alt="Image here"
               className="profile_picture"
-            />
+            >
+              <Fragment>
+                <label class="custom-file-upload">
+                  <input type="file" accept="image/*" onChange={onSubmit} />
+                  Upload
+                </label>
+              </Fragment>
+            </div>
           </Col>
           <Col xs={24} lg={24} md={24} sm={24}>
             <DetailSection userId={userId} user={userDetail} />

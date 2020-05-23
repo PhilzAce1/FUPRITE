@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import NavBar from '../../NavBar/NavBar';
 import { Drawer, Button, Icon } from 'antd';
 function Drawers(props) {
@@ -13,7 +12,11 @@ function Drawers(props) {
     setVisible(false);
   };
   return (
-    <div>
+    <div
+      style={{
+        alignSelf: 'flex-end',
+      }}
+    >
       <Button
         className="menu__mobile-button"
         type="primary"
@@ -22,10 +25,9 @@ function Drawers(props) {
         <Icon type="align-right" />
       </Button>
       <Drawer
-        // title="Basic Drawer"
         placement="left"
         className="menu_drawer"
-        closable={false}
+        closable={true}
         onClose={onClose}
         visible={visible}
       >

@@ -5,20 +5,20 @@ const likeSchema = mongoose.Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
     },
     commentId: {
       type: Schema.Types.ObjectId,
-      ref: 'Comment'
+      ref: 'Comment',
     },
     videoId: {
       type: Schema.Types.ObjectId,
-      ref: 'Blog'
-    }
+      ref: 'Blog',
+    },
   },
   { timestamps: true }
 );
 
 const Like = mongoose.model('Like', likeSchema);
-
+//soething
 module.exports = { Like };

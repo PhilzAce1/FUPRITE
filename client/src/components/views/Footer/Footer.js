@@ -1,37 +1,56 @@
 import React from 'react';
 import { Icon } from 'antd';
-
+import {
+  BellOutlined,
+  SearchOutlined,
+  HomeOutlined,
+  TeamOutlined,
+} from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
 function Footer() {
   return (
-    <div
-      style={{
-        height: '80px',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        fontSize: '1rem'
-        // backgroundColor: 'green'
-      }}
-    >
-      <p>
-        {''}
-        Happy Coding <Icon type="facebook" />
-      </p>
-      <span
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          // backgroundColor: 'red',
-          width: '10vw'
+    <div className="footer">
+      <NavLink
+        activeStyle={{
+          // backgroundColor: '#2ba6f32d',
+          color: '#2ba7f3',
+          borderRadius: '30px',
         }}
+        to="/home"
       >
-        <Icon type="facebook" />
-        <Icon type="twitter" />
-        <Icon type="instagram" />
-        <Icon type="facebook" />
-      </span>
+        <HomeOutlined className="icons" />
+      </NavLink>
+      <NavLink
+        activeStyle={{
+          color: '#2ba7f3',
+          borderRadius: '30px',
+        }}
+        // className="link"
+        to="/searchpage"
+      >
+        <SearchOutlined className="icons" />
+      </NavLink>
+
+      <NavLink
+        activeStyle={{
+          color: '#2ba7f3',
+          borderRadius: '30px',
+        }}
+        // className="link"
+        to="/followingsblog"
+      >
+        <TeamOutlined className="icons" />
+      </NavLink>
+      <NavLink
+        activeStyle={{
+          color: '#2ba7f3',
+          borderRadius: '30px',
+        }}
+        className="link"
+        to="/notification"
+      >
+        <BellOutlined className="icons" />
+      </NavLink>
     </div>
   );
 }

@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 const { Follower } = require('../models/Follower');
+const path = require('path');
 //=================================
 //             User
 //=================================
@@ -20,16 +21,28 @@ router.get('/auth', auth, (req, res) => {
   });
 });
 
-router.post('/register', (req, res) => {
-  const user = new User(req.body);
-
-  user.save((err, doc) => {
-    if (err) return res.json({ success: false, err });
-    // sendEmail(doc.email, doc.name, null, "welcome");
-    return res.status(200).json({
-      success: true,
+router.post('/register', async (req, res) => {
+  try {
+    const userExist = await User.find({
+      $or: [{ email: req.body.email }, { username: req.body.username }],
     });
-  });
+    if (userExist.length > 0)
+      return res.status(200).json({
+        success: false,
+        msg: 'User already Exist try another Username and email',
+      });
+    const user = new User(req.body);
+
+    user.save((err, doc) => {
+      if (err) return res.json({ success: false, err });
+      // sendEmail(doc.email, doc.name, null, "welcome");
+      return res.status(200).json({
+        success: true,
+      });
+    });
+  } catch (e) {
+    console.log(e.message);
+  }
 });
 
 router.post('/login', (req, res) => {
@@ -120,5 +133,123 @@ router.post('/userdetails', async (req, res) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, user: userDetails });
     });
+});
+router.post('/uploadProfilePic', (req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({
+      success: false,
+      msg: 'no file was submitted please check again',
+    });
+  }
+  const { userId } = req.files;
+  const file = req.files.file;
+  file.mv(
+    `${path.resolve(__dirname, '../..')}/uploads/${file.md5}_${file.name}`,
+    (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+      }
+      User.updateOne(
+        { _id: userId },
+        {
+          $set: {
+            image: `/uploads/${file.md5}_${file.name}`,
+          },
+        }
+      ).exec((err, data) => {
+        if (err)
+          return res
+            .status(500)
+            .json({ success: false, msg: 'something went wrong' });
+      });
+      res.json({ filePath: `/uploads/${file.md5}_${file.name}` });
+    }
+  );
+});
+router.patch('/updateprofile', async (req, res) => {
+  const { name, description, level, department, date } = req.body.dataToSubmit;
+  try {
+    const updated = await User.findByIdAndUpdate(req.body.userId, {
+      $set: {
+        name,
+        description,
+        level,
+        department,
+        date,
+      },
+    });
+    res.status(200).json({ success: true, msg: ' successful Update' });
+  } catch (error) {
+    res.status(402).json({ success: false, msg: error });
+  }
+});
+router.post('/followupdate', async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    // pushFollow
+    if (user.notification) {
+      return res
+        .status(200)
+        .json({ success: true, notifications: user.notification });
+    } else {
+      return res
+        .status(200)
+        .json({ success: true, notifications: 'no notifications' });
+    }
+  } catch (e) {
+    console.log(e.message);
+    res.status(400).json({ success: false, msg: e.message });
+  }
+});
+router.post('/createupdate', async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    if (user.notification.blog) {
+      return res
+        .status(200)
+        .json({ success: true, notifications: user.notification.blog });
+    } else {
+      return res
+        .status(200)
+        .json({ success: true, notifications: 'no notifications' });
+    }
+  } catch (e) {
+    res.status(400).json({ success: false, msg: e.message });
+  }
+});
+router.post('/whotofollow', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    const { level, department } = user;
+    if (!level || !department)
+      return res.status(200).json({
+        success: false,
+        msg: 'Please Complete You registeration to Use this feature',
+      });
+    const usersToFollow = await User.find({
+      $or: [{ level }, { department }],
+    }).select({
+      name: 1,
+      username: 1,
+      image: 1,
+      email: 1,
+    });
+    const mainUsers = [];
+    for (const user of usersToFollow) {
+      if (user._id != userId) {
+        mainUsers.push({ user });
+      }
+    }
+    res.json({ success: true, users: mainUsers });
+  } catch (ex) {
+    console.log(ex.message);
+    res.status(500).json({
+      success: false,
+      msg: 'Internal Server error',
+    });
+  }
 });
 module.exports = router;

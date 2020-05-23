@@ -2,8 +2,8 @@
 /build
 
 dev.js
-
-
+prod.js
+/inserver\config\prod.js
 
 .DS_Store
 

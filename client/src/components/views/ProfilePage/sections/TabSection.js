@@ -7,7 +7,7 @@ const { TabPane } = Tabs;
 function Tab(props) {
   const [content, setContent] = useState(initialContent);
   const [secondTab, setSecondTab] = useState(initialContent);
-
+  const [thirdTab, setThirdTab] = useState(initialContent);
   const userId = props.userId;
   // const { userId } = props.match.params;
   const variables = {
@@ -21,9 +21,16 @@ function Tab(props) {
         alert('Couldnt get blog`s lists');
       }
     });
-    axios.post('/api/blog/getlikesandcomment', variables).then((response) => {
+    axios.post('/api/blog/getlikedpost', variables).then((response) => {
       if (response.data.success) {
         setSecondTab(renderCards(response.data.blogs));
+      } else {
+        alert('Couldnt get blog`s lists');
+      }
+    });
+    axios.post('/api/blog/getusercomments', variables).then((response) => {
+      if (response.data.success) {
+        setThirdTab(renderCards(response.data.blogs));
       } else {
         alert('Couldnt get blog`s lists');
       }
@@ -31,19 +38,15 @@ function Tab(props) {
   }, []);
   return (
     <div>
-      <Tabs
-        defaultActiveKey="1"
-        // tabBarStyle={{ width: '100%', fontSize: '3rem' }}
-        size={'large'}
-      >
-        <TabPane tab="Posts" key="1">
+      <Tabs defaultActiveKey="1" size={'large'} animated={true}>
+        <TabPane tab={<span className="tabpane">POSTS</span>} key="1">
           {content}
         </TabPane>
-        <TabPane tab="Likes & comments" key="2">
+        <TabPane tab={<span className="tabpane">Liked Post</span>} key="2">
           {secondTab}
         </TabPane>
-        <TabPane tab="Contact Me" key="3">
-          Content of tab 3
+        <TabPane tab={<span className="tabpane">Comment on</span>} key="3">
+          {thirdTab}
         </TabPane>
       </Tabs>
     </div>

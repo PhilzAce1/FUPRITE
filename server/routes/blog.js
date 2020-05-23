@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { Blog } = require('../models/Blog');
 const { Follower } = require('../models/Follower');
-const { Like } = require('../models/Like');
+const { Like } = require('../models/Likes');
+const { User } = require('../models/User');
 const { Comment } = require('../models/Comment');
-
 const { auth } = require('../middleware/auth');
+const pushNotification = require('../util/pushNotification');
 const multer = require('multer');
 
 // STORAGE MULTER CONFIG
@@ -41,25 +42,24 @@ router.post('/uploadfiles', (req, res) => {
     });
   });
 });
-router.post('/createPost', (req, res) => {
-  let blog = new Blog({ content: req.body.content, writer: req.body.userID });
 
+router.post('/createPost', async (req, res) => {
+  let blog = new Blog({
+    content: req.body.content,
+    writer: req.body.userID,
+    title: req.body.title,
+  });
+  const blogExist = await Blog.find({ title: req.body.title });
+  if (blogExist.length > 0) {
+    return res
+      .status(200)
+      .json({ success: false, msg: 'article with this title exist ' });
+  }
   blog.save((err, postInfo) => {
     if (err) return res.json({ success: false, err });
-    return res.status(200).json({ success: true, postInfo });
+    pushNotification(req.body.userID, 'created a new post', blog._id);
+    res.status(200).json({ success: true, postInfo });
   });
-
-  //생각 해보니  세이브 할떄 populate 할필요가 없다.   가져올떄 하면 되니깐...
-  // blog.save((err, response) => {
-  //     if (err) return res.json({ success: false, err });
-  //     Blog.find({ _id: response._id })
-  //         .populate('writer')
-  //         .exec((err, result) => {
-  //             let postInfo = result[0]
-  //             if (err) return res.json({ success: false, err });
-  //             return res.status(200).json({ success: true,  postInfo });
-  //         })
-  // });
 });
 
 router.get('/getBlogs', (req, res) => {
@@ -92,7 +92,6 @@ router.post('/getFollowingPosts', (req, res) => {
         if (err) return res.status(400).send(err);
         res.status(200).json({ success: true, blogs });
       });
-    // res.send(followedUser);
   });
 });
 router.post('/userpost', (req, res) => {
@@ -120,7 +119,7 @@ router.post('delete', async (req, res) => {
     }
   );
 });
-router.post('/getlikesandcomment', async (req, res) => {
+router.post('/getlikedpost', async (req, res) => {
   try {
     const post = [];
 
@@ -130,29 +129,54 @@ router.post('/getlikesandcomment', async (req, res) => {
     });
     let LC = [...likedComment].filter((x) => JSON.stringify(x) !== '{}');
     LC.map((x) => post.push(x.videoId));
-    const commentedPost = await Comment.find({
-      writer: req.body.userId,
-    }).select({ postId: 1, _id: 0 });
-    const blogIdArray = [];
 
-    const posts = [...commentedPost].filter((x) => JSON.stringify(x) !== '{}');
-    posts.map((x) => post.push(x.videoId));
-    console.log(post);
+    // const posts = [...commentedPost].filter((x) => JSON.stringify(x) !== '{}');
+    // posts.map((x) => post.push(x.videoId));
     Blog.find({ _id: { $in: post } })
       .populate('writer')
       .exec((err, blogs) => {
         if (err) return res.status(400).send(err);
-        // console.log(blogs);
-        // res.send(blogs);
         res.status(200).json({ success: true, blogs });
       });
-    // res.send(post);
-    // res.status(200).json({ success: true, blogs: posts });
   } catch (error) {
     console.log(error);
     res.status(400).send(err);
-    // json({ success: false, err: error });
   }
 });
+router.post('/getusercomments', async (req, res) => {
+  try {
+    const post = [];
 
+    const commentedPost = await Comment.find({
+      writer: req.body.userId,
+    }).select({ postId: 1, _id: 0 });
+
+    const posts = [...commentedPost].filter((x) => JSON.stringify(x) !== '{}');
+    posts.map((x) => post.push(x.videoId));
+    Blog.find({ _id: { $in: post } })
+      .populate('writer')
+      .exec((err, blogs) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).json({ success: true, blogs });
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(err);
+  }
+});
+router.delete('/deletepost', async (req, res) => {
+  try {
+    const { userId, blogId } = req.body;
+    const blog = await Blog.findById(blogId).populate('writer');
+    if (blog.writer._id !== userId) {
+      return res.status(401).json({
+        success: false,
+        msg: 'User are not authorized to make this action',
+      });
+    } else {
+      await Blog.findByIdAndDelete(blogId);
+      res.status(200).json({ success: true, msg: 'deleted' });
+    }
+  } catch (error) {}
+});
 module.exports = router;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Input } from 'antd';
+import { Button, Input, message } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import SingleComment from './SingleComment';
@@ -7,28 +7,28 @@ import ReplyComment from './ReplyComment';
 const { TextArea } = Input;
 
 function Comments(props) {
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const [Comment, setComment] = useState('');
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setComment(e.currentTarget.value);
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const variables = {
       content: Comment,
       writer: user.userData._id,
-      postId: props.postId
+      postId: props.postId,
     };
 
-    axios.post('/api/comment/saveComment', variables).then(response => {
+    axios.post('/api/comment/saveComment', variables).then((response) => {
       if (response.data.success) {
         setComment('');
         props.refreshFunction(response.data.result);
       } else {
-        alert('Failed to save Comment');
+        message.error('Failed to save Comment');
       }
     });
   };

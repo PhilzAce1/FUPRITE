@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AutoComplete, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import './sections/search.css';
 import axios from 'axios';
 import Follower from '../FollowerBtn/Follower';
 import { useSelector } from 'react-redux';
@@ -36,12 +35,10 @@ function Search(props) {
         alert('could not search for a user');
       }
     });
-    console.log(value);
   };
 
   const handleBlur = (e) => {
-    setModal(false);
-    return console.log('i am working');
+    return setModal(false);
   };
   const complete = searchResult.map((user) => (
     <div className="user" key={user._id}>
@@ -63,7 +60,6 @@ function Search(props) {
       <Follower userTo={user._id} userFrom={{ ...userx }._id} />
     </div>
   ));
-  console.log(searchResult);
   return (
     <div className="header">
       <input
