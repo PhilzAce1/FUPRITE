@@ -1,6 +1,14 @@
 # FUPRITE APP 
 
 A Simple communication system that simplifies the tranmission of information, announcement and advertisement with a university (FUPRE)
+## Getting Started as a User
+visit https://fupre.herokuapp.com/
+create an Account and Login 
+or simply login in with 
+username _ tester@gmail.com
+password _ testing123
+
+
 ## Getting Started For developer/api users
 
 ## Getting Started For contributors/testers
