@@ -12,7 +12,7 @@ const { Title } = Typography;
 
 function LoginPage(props) {
   if (localStorage.getItem('userId')) {
-    props.history.push('/');
+    props.history.push('/home');
   }
   const dispatch = useDispatch();
   const rememberMeChecked = localStorage.getItem('rememberMe') ? true : false;
