@@ -1,5 +1,7 @@
 const { Follower } = require('../models/Follower');
 const { User } = require('../models/User');
+const path = require('path');
+
 exports.authCtrl = (req, res) => {
   res.status(200).json({
     _id: req.user._id,

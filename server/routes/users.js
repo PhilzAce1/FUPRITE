@@ -13,10 +13,7 @@ const {
   createUpdate,
   whoToFollow,
 } = require('../controllers/users');
-const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
-const { Follower } = require('../models/Follower');
-const path = require('path');
 //=================================
 //             User
 //=================================
