@@ -78,14 +78,30 @@ function LoginPage(props) {
                 dispatch(loginUser(dataToSubmit))
                   .then((response) => {
                     setLoading(false);
-
+                    console.log(response);
                     if (response.payload.loginSuccess) {
                       if (rememberMe === true) {
-                        window.localStorage.setItem('rememberMe', values.id);
+                        window.localStorage.setItem(
+                          'rememberMe',
+                          response.payload.user._id
+                        );
+                        window.localStorage.setItem(
+                          'userid',
+                          response.payload.user._id
+                        );
                       } else {
                         localStorage.removeItem('rememberMe');
                       }
-                      props.history.push('/');
+                      window.localStorage.setItem(
+                        'rememberMe',
+                        response.payload.user._id
+                      );
+                      window.localStorage.setItem(
+                        'userid',
+                        response.payload.user._id
+                      );
+
+                      props.history.push('/home');
                     } else {
                       setFormErrorMessage(
                         'Check out your Account or Password again'

@@ -1,0 +1,9 @@
+exports.createPost = async (req, res, next) => {};
+exports.getBlogs = async (req, res, next) => {};
+exports.getPost = async (req, res, next) => {};
+exports.getFollowingPosts = async (req, res, next) => {};
+exports.userPost = async (req, res, next) => {};
+exports.delete = async (req, res, next) => {};
+exports.getLikePost = async (req, res, next) => {};
+exports.getUserComments = async (req, res, next) => {};
+exports.deletePost = async (req, res, next) => {};
