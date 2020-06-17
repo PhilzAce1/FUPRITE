@@ -1,0 +1,30 @@
+.twosplit_container .first,
+.twosplit_container .second {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 85vh;
+  /* width: 100%; */
+}
+
+.twosplit_container .first {
+  justify-content: center;
+}
+.twosplit_container .second {
+  justify-content: flex-start;
+}
+
+@media (max-width: 1000px) {
+  .second {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .twosplit_container .first,
+  .twosplit_container .second {
+  }
+  .second {
+    display: none;
+  }
+}

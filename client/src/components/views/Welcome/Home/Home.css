@@ -1,0 +1,50 @@
+.home {
+  height: 100vh;
+  width: 100vw;
+  background: transparent;
+  color: white;
+}
+.home .content > * {
+  height: 85vh;
+  width: 50vw;
+}
+.home .content {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.home .content .welcome_text {
+  color: white;
+}
+.home .content .welcome_text {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.home .content .welcome_text .heading {
+  color: white;
+  max-width: 50%;
+  font-size: 2rem;
+}
+.home .content .welcome_text .welcome_text_content {
+  color: white;
+  max-width: 50%;
+}
+@media (max-width: 1000px) {
+  .home .content > .welcome_text {
+    height: 85vh;
+    width: 100vw;
+  }
+  .home .content .welcome_text .heading {
+    color: white;
+    max-width: 80%;
+    font-size: 2rem;
+  }
+  .home .content .welcome_text .welcome_text_content {
+    color: white;
+    max-width: 80%;
+  }
+  .sliders {
+    display: none;
+  }
+}

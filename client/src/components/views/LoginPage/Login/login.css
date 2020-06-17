@@ -1,0 +1,29 @@
+.welcome_container .login_page_container {
+  max-height: 100vh;
+  max-width: 100vw;
+  display: flex;
+  flex-flow: row nowrap;
+  background-image: url('../../../../assets/images/celebration.png');
+}
+.welcome_container .login_page_container > * {
+  height: 100vh;
+  width: 50vw;
+}
+.welcome_container .login_page_container .slider {
+  padding: 20px;
+  padding-top: 100px;
+}
+.welcome_container .login_page_container .form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 1000px) {
+  .welcome_container .login_page_container .form {
+    width: 100vw;
+  }
+  .welcome_container .login_page_container .slider {
+    display: none;
+  }
+}

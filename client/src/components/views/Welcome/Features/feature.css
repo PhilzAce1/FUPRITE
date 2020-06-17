@@ -1,0 +1,33 @@
+.feature {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 20px;
+  background: url('../../../../assets/images/1.gif');
+}
+.feature .feature_heading {
+  text-align: center;
+  width: 100vw;
+  height: 10vh;
+}
+.feature .feature_content {
+  display: flex;
+  height: 90vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 1000px) {
+  .feature {
+    height: auto;
+  }
+  .feature .feature_content {
+    padding: 30px;
+    height: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+}

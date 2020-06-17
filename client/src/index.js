@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Link } from 'react-router-dom';
 
@@ -12,8 +12,6 @@ import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 
-//testing sectioon during developmen
-import ProfilePage from './components/views/ProfilePage/ProfilePage';
 const history = createBrowserHistory();
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,

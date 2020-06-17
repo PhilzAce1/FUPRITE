@@ -1,26 +1,26 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Auth from '../hoc/auth';
+import Auth from './hoc/auth';
 import { Col, Row } from 'antd';
 
 // pages for this product
-import SearchPage from './views/SearchPage/SearchPage';
-import LandingPage from './views/LandingPage/LandingPage.js';
-import LoginPage from './views/LoginPage/LoginPage.js';
-import RegisterPage from './views/RegisterPage/RegisterPage.js';
-import NavBar from './views/NavBar/NavBar';
-import Footer from './views/Footer/Footer';
-import PostPage from './views/PostPage/PostPage';
-import BlogPage from './views/BlogPage/BlogPage';
-import CreateBlogPage from './views/BlogPage/Section.js/CreatePage';
-import Drawer from './views/RFC/Drawer/Drawer';
-import FollowingPage from './views/Following/Following';
-import ProfilePage from './views/ProfilePage/ProfilePage';
-import EditProfile from './views/ProfilePage/sections/EditProfile';
-import Welcome from './views/Welcome/index';
-import Notification from './views/Notification/Notification';
-import ErroPage from './views/Welcome/404';
-import ErrorPage from './views/Welcome/404';
+import SearchPage from './components/views/SearchPage/SearchPage';
+import LandingPage from './components/views/LandingPage/LandingPage.js';
+import LoginPage from './components/views/LoginPage/LoginPage.js';
+import RegisterPage from './components/views/RegisterPage/RegisterPage.js';
+import NavBar from './components/views/NavBar/NavBar';
+import Footer from './components/views/Footer/Footer';
+import PostPage from './components/views/PostPage/PostPage';
+import BlogPage from './components/views/BlogPage/BlogPage';
+import CreateBlogPage from './components/views/BlogPage/Section.js/CreatePage';
+import Drawer from './components/views/RFC/Drawer/Drawer';
+import FollowingPage from './components/views/Following/Following';
+import ProfilePage from './components/views/ProfilePage/ProfilePage';
+import EditProfile from './components/views/ProfilePage/sections/EditProfile';
+import Welcome from './components/views/Welcome/index';
+import Notification from './components/views/Notification/Notification';
+import ErroPage from './components/views/Welcome/404';
+import ErrorPage from './components/views/Welcome/404';
 function App() {
   // const { toggleTheme, themeName } = React.useContext(ThemeSelectorContext);
   // React.useEffect(() => toggleTheme('white'));
