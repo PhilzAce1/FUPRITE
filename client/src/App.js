@@ -16,10 +16,8 @@ import CreateBlogPage from './components/views/BlogPage/Section.js/CreatePage';
 import Drawer from './components/views/RFC/Drawer/Drawer';
 import FollowingPage from './components/views/Following/Following';
 import ProfilePage from './components/views/ProfilePage/ProfilePage';
-import EditProfile from './components/views/ProfilePage/sections/EditProfile';
 import Welcome from './components/views/Welcome/index';
 import Notification from './components/views/Notification/Notification';
-import ErroPage from './components/views/Welcome/404';
 import ErrorPage from './components/views/Welcome/404';
 function App() {
   // const { toggleTheme, themeName } = React.useContext(ThemeSelectorContext);

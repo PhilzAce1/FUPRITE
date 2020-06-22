@@ -35,7 +35,7 @@ function Tab(props) {
         alert('Couldnt get blog`s lists');
       }
     });
-  }, []);
+  }, [userId, variables]);
   return (
     <div>
       <Tabs defaultActiveKey="1" size={'large'} animated={true}>

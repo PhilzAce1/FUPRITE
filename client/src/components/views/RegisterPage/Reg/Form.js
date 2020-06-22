@@ -6,30 +6,30 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Form, Button, message } from 'antd';
+import { Button, message } from 'antd';
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
+// const ItemLayout = {
+//   labelCol: {
+//     xs: { span: 24 },
+//     sm: { span: 8 },
+//   },
+//   wrapperCol: {
+//     xs: { span: 24 },
+//     sm: { span: 16 },
+//   },
+// };
+// const tailFormItemLayout = {
+//   wrapperCol: {
+//     xs: {
+//       span: 24,
+//       offset: 0,
+//     },
+//     sm: {
+//       span: 16,
+//       offset: 8,
+//     },
+//   },
+// };
 
 function Forme(props) {
   const history = useHistory();
@@ -91,7 +91,7 @@ function Forme(props) {
             values,
             touched,
             errors,
-            isSubmitting,
+            // isSubmitting,
             handleChange,
             handleBlur,
             handleSubmit,
@@ -185,9 +185,9 @@ function Forme(props) {
                 <Button
                   onClick={handleSubmit}
                   type="primary"
-                  disabled={isSubmitting}
+                  // disabled={isSubmitting}
                   loading={loading}
-                  disabled={loading}
+                  // disabled={loading}
                   size="large"
                   style={{
                     fontSize: '1.5rem',

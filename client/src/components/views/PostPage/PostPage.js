@@ -12,7 +12,7 @@ function PostPage(props) {
   const [post, setPost] = useState([]);
   const postId = props.match.params.postId;
   const [CommentLists, setCommentLists] = useState([]);
-  const [time, setTime] = useState('');
+  // const [time, setTime] = useState('');
   const videoVariable = {
     videoId: postId,
   };
@@ -35,7 +35,7 @@ function PostPage(props) {
         message.error('Failed to get post Info');
       }
     });
-  }, []);
+  }, [postId, props.history, videoVariable]);
   const updateComment = (newComment) => {
     setCommentLists(CommentLists.concat(newComment));
   };

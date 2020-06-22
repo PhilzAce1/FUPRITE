@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import { Col, Row, message } from 'antd';
+import { Col, Row } from 'antd';
 import img from './sections/pg.jpg';
 import DetailSection from './sections/detailSection';
 import Tab from './sections/TabSection';
@@ -15,6 +15,7 @@ function ProfilePage(props) {
   const variables = {
     userId,
   };
+  console.log(uploadedFile);
   useEffect(() => {
     axios.post('/api/users/userdetails', variables).then((response) => {
       if (response.data.success) {
@@ -24,7 +25,7 @@ function ProfilePage(props) {
         message.error('user Not found ');
       }
     });
-  }, []);
+  }, [message, variables]);
   const onSubmit = async (e) => {
     const formData = new FormData();
     formData.append('file', e.target.files[0]);

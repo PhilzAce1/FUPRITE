@@ -58,9 +58,9 @@ function FollowBtn(props) {
           alert('Failed to get followd Information');
         }
       });
-  }, []);
+  }, [userFrom, userTo]);
 
-  return userTo == userFrom ? (
+  return userTo === userFrom ? (
     <span>{''}</span>
   ) : (
     <div>

@@ -99,5 +99,5 @@ router.post('/createupdate', createUpdate);
     @desc 
     @access public
 */
-router.post('/whotofollow', whoToFollow);
+// router.post('/whotofollow', whoToFollow);
 module.exports = router;

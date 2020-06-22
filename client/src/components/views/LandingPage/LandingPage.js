@@ -25,7 +25,7 @@ function LandingPage(props) {
         message.error('there was an error | please reload this page');
         return window.location.reload;
       });
-  }, []);
+  }, [props.history, userId]);
   return (
     <div className="app">
       <div className="component_header">Home</div>

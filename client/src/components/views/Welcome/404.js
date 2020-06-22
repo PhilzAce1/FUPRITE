@@ -13,7 +13,7 @@ function ErrorPage(props) {
       }}
       className="welcome_container errorpg"
     >
-      <img className="errorimg" src={img} />
+      <img className="errorimg" src={img} alt="404" />
       <div
         style={{
           color: 'var(--bodyfontcolor)',

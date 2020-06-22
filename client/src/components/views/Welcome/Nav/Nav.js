@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { Select } from 'antd';
-import { ThemeSelectorContext } from '../../Theme/theme';
+import React from 'react';
+// import { Select } from 'antd';
+// import { ThemeSelectorContext } from '../../Theme/theme';
 import logo from '../../NavBar/Sections/Logo.png';
 import { Link } from 'react-router-dom';
-const { Option } = Select;
+// const { Option } = Select;
 
 export default function Nav() {
-  const { toggleTheme, themeName } = React.useContext(ThemeSelectorContext);
-  const [theme, setTheme] = React.useState('dark');
+  // const { toggleTheme, themeName } = React.useContext(ThemeSelectorContext);
+  // const [theme, setTheme] = React.useState('dark');
   return (
     <nav
       style={{
@@ -15,7 +15,7 @@ export default function Nav() {
       }}
     >
       <div id="logo" style={{ fontSize: 'large' }}>
-        <img src={logo} className="image" />
+        <img src={logo} className="image" alt="logo" />
         <span
           className="logo_text"
           style={{

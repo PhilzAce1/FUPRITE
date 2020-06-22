@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Skeleton, Avatar, Icon } from 'antd';
+import { Card, Col, Skeleton, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import LikeDislikes from '../../PostPage/sections/LikeDislikes';
 import { CommentOutlined, ShareAltOutlined } from '@ant-design/icons';

@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import { AutoComplete, Input } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+// import ReactDOM from 'react-dom';
+// import { AutoComplete, Input } from 'antd';
+// import { UserOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import Follower from '../FollowerBtn/Follower';
 import { useSelector } from 'react-redux';
 import { Avatar } from 'antd';
-import { Link } from 'react-router-dom';
-const { TextArea } = Input;
+// import { Link } from 'react-router-dom';
+// const { TextArea } = Input;
 function Search(props) {
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [modal, setModal] = useState(false);
   const userx = useSelector((state) => state.user.userData);
 
   const handleChange = (e) => {
-    setValue(e.currentTarget.value);
+    // setValue(e.currentTarget.value);
     axios({
       method: 'GET',
       url: `/api/users/search`,
@@ -37,9 +37,9 @@ function Search(props) {
     });
   };
 
-  const handleBlur = (e) => {
-    return setModal(false);
-  };
+  // const handleBlur = (e) => {
+  //   return setModal(false);
+  // };
   const complete = searchResult.map((user) => (
     <div className="user" key={user._id}>
       <Avatar src={user.image} size={50} />

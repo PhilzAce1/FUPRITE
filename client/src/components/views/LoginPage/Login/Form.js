@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { loginUser } from '../../../../_actions/user_actions';
-const { Title } = Typography;
+// const { Title } = Typography;
 
 function Forme(props) {
   const history = useHistory();
@@ -99,7 +99,7 @@ function Forme(props) {
             values,
             touched,
             errors,
-            isSubmitting,
+            // isSubmitting,
             handleChange,
             handleBlur,
             handleSubmit,

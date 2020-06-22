@@ -8,12 +8,10 @@ const themes = {
     primarybordercolor: 'rgba(0, 0, 0, 0.164)',
     primaryshadowcolor: '#f3f1f1',
     lastbordercolor: 'black',
-    primaryshadowcolor: 'black',
   },
   light: {
     bgcolor: 'white',
     bgsecondarycolor: '#f5f8fa',
-    bodyfontcolor: 'black',
     bodyfontcolor: '#24292e',
     primarytextcolor: 'black',
     primarybordercolor: 'rgba(0, 0, 0, 0.164)',
@@ -65,7 +63,7 @@ export const ThemeSelectorContext = React.createContext({
 
 export default ({ children }) => {
   const [themeName, setThemeName] = useState('dark');
-
+  setThemeName('dark');
   return (
     <ThemeSelectorContext.Provider value={{ themeName }}>
       {children}

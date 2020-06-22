@@ -1,6 +1,6 @@
 import React from 'react';
 import './feature.css';
-import { Col, Row, Card, Avatar } from 'antd';
+import { Col, Row, Card } from 'antd';
 
 export default function Feature() {
   const cardList = [

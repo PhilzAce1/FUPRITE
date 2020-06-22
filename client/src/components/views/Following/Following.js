@@ -27,7 +27,7 @@ function FollowingPage(props) {
         message.error('there was an error | please reload this page');
         // return window.location.reload();
       });
-  }, []);
+  }, [variable]);
   return (
     <div className="app">
       <div className="component_header">From People you follow</div>

@@ -1,6 +1,6 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 import 'antd/dist/antd.css';
 import {
   Form,
@@ -60,14 +60,14 @@ const EditProfile = (props) => {
         {(props) => {
           const {
             values,
-            touched,
-            errors,
-            isSubmitting,
+            // touched,
+            // errors,
+            // isSubmitting,
             handleChange,
             handleBlur,
             handleSubmit,
             setFieldValue,
-            setFieldTouched,
+            // setFieldTouched,
           } = props;
           return (
             <div style={{ padding: '0' }}>

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import pg from '../../ProfilePage/sections/pg.jpg';
-import { message } from 'antd';
+import React, { useEffect } from 'react';
+// import axios from 'axios';
+// import pg from '../../ProfilePage/sections/pg.jpg';
+// import { message } from 'antd';
 function WTF() {
-  const [users, setUsers] = useState('');
+  // const [users, setUsers] = useState('');
   useEffect(() => {}, []);
   return (
     <div className="search_content">

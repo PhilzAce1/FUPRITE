@@ -112,7 +112,7 @@ function NavBar(props) {
       <nav className="menu" style={{ zIndex: 5 }}>
         <div className="menu__logo">
           <NavLink to="/">
-            <img src={Logo} className="image" />
+            <img src={Logo} className="image" alt="logo" />
           </NavLink>
         </div>
         <div className="menu_items">
@@ -163,7 +163,7 @@ function NavBar(props) {
       <nav className="menu" style={{ zIndex: 1 }}>
         <div className="menu__logo">
           <NavLink to="/">
-            <img src={Logo} className="image" />
+            <img src={Logo} className="image" alt="logo" />
           </NavLink>
         </div>
         <div className="menu_items">
@@ -252,6 +252,7 @@ function NavBar(props) {
           </div>
           <div className="menu__content">
             <a
+              href="/"
               activeStyle={{
                 // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',

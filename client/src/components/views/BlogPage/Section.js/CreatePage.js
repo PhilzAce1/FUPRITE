@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import QuillEditor from '../../../editor/QuillEditor';
 import { Typography, Button, Form, message, Input } from 'antd';
@@ -21,6 +21,7 @@ function CreatePage(props) {
   const onEditorChange = (value) => {
     setContent(value);
   };
+  console.log(files);
 
   const onFilesChange = (files) => {
     setFiles(files);

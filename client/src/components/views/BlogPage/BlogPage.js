@@ -18,7 +18,7 @@ function BlogPage() {
         message.error('Couldnt get blog`s lists');
       }
     });
-  }, []);
+  }, [user, variables]);
 
   return (
     <div className="app">

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Follower from '../../RFC/FollowerBtn/Follower';
 import EditProfile from '../sections/EditProfile';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import moment from 'moment';
 
 function DetailSection(props) {
@@ -36,7 +36,7 @@ function DetailSection(props) {
         alert('Couldnt get blog`s lists');
       }
     });
-  }, []);
+  }, [props.userId]);
   const showModal = () => {
     setVisible(true);
   };
@@ -56,7 +56,7 @@ function DetailSection(props) {
         <EditProfile user={userInfo} handleCancel={handleCancel} />
       </Modal>
       <div className="button_section">
-        {props.userId == { ...rUser }._id ? (
+        {props.userId === { ...rUser }._id ? (
           <button onClick={showModal} className="edit_profile">
             Edit Profile
           </button>

@@ -16,6 +16,8 @@ function LikeDislikes(props) {
   }
 
   useEffect(() => {
+    console.log('I am working');
+
     Axios.post('/api/like/getLikes', variable).then((response) => {
       if (response.data.success) {
         //How many likes does this video or comment have
@@ -24,8 +26,9 @@ function LikeDislikes(props) {
         //if I already click this like button or not
         response.data.likes.map((like) => {
           if (like.userId === props.userId) {
-            setLikeAction('liked');
+            return setLikeAction('liked');
           }
+          return setLikeAction(null);
         });
       } else {
         message.error('Failed to Like ');
@@ -42,11 +45,14 @@ function LikeDislikes(props) {
           if (dislike.userId === props.userId) {
             setDislikeAction('disliked');
           }
+          return setDislikeAction(null);
         });
       } else {
         message.error('Failed to DisLike ');
       }
     });
+    // return () => {};
+    // eslint-disable-next-line
   }, []);
 
   const onLike = () => {
@@ -77,6 +83,7 @@ function LikeDislikes(props) {
   };
 
   const onDisLike = () => {
+    console.log('You are disliking ');
     if (DislikeAction !== null) {
       Axios.post('/api/like/unDisLike', variable).then((response) => {
         if (response.data.success) {

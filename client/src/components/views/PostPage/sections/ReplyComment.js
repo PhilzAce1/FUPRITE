@@ -6,15 +6,16 @@ function ReplyComment(props) {
   const [OpenReplyComments, setOpenReplyComments] = useState(false);
   useEffect(() => {
     let commentNumber = 0;
-    props.CommentLists.map(comment => {
+    props.CommentLists.map((comment) => {
       if (comment.responseTo === props.parentCommentId) {
         commentNumber++;
       }
+      return commentNumber;
     });
     setChildCommentNumber(commentNumber);
   }, [props.CommentLists, props.parentCommentId]);
 
-  let renderReplyComment = parentCommentId =>
+  let renderReplyComment = (parentCommentId) =>
     props.CommentLists.map((comment, index) => (
       <React.Fragment>
         {comment.responseTo === parentCommentId && (
