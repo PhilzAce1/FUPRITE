@@ -10,7 +10,7 @@ export default function (ComposedClass, reload, adminRoute = null) {
 
     useEffect(() => {
       dispatch(auth()).then(async (response) => {
-        console.log(response);
+        console.log(response.payload);
 
         if (await !response.payload.isAuth) {
           if (reload) {
