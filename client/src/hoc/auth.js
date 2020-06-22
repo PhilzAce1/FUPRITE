@@ -11,10 +11,13 @@ export default function (ComposedClass, reload, adminRoute = null) {
     useEffect(() => {
       dispatch(auth()).then(async (response) => {
         if (await !response.payload.isAuth) {
+          console.log('user has been auth');
           if (reload) {
             props.history.push('/register');
           }
         } else {
+          console.log('user has not auth');
+
           if (adminRoute && !response.payload.isAdmin) {
             props.history.push('/home');
           } else {
@@ -23,6 +26,7 @@ export default function (ComposedClass, reload, adminRoute = null) {
             }
           }
         }
+        console.log('user has should be auth');
       });
     }, [dispatch, props.history, user.googleAuth]);
 
