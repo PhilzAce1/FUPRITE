@@ -10,7 +10,7 @@ import { loginUser } from '../../../../_actions/user_actions';
 
 function Forme(props) {
   const history = useHistory();
-  if (localStorage.getItem('userId') !== undefined) {
+  if (localStorage.getItem('userId')) {
     history.push('/home');
   }
   const dispatch = useDispatch();
