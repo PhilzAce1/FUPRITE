@@ -18,7 +18,7 @@ function LandingPage(props) {
         } else {
           message.error('Couldnt get blog`s lists');
           console.log(response);
-          props.history.push('/');
+          // props.history.push('/');
         }
       })
       .catch((e) => {

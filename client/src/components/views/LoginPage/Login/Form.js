@@ -10,7 +10,7 @@ import { loginUser } from '../../../../_actions/user_actions';
 
 function Forme(props) {
   const history = useHistory();
-  if (localStorage.getItem('userId')) {
+  if (localStorage.getItem('userId') !== undefined) {
     history.push('/home');
   }
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ function Forme(props) {
                       response.payload.user._id
                     );
                     window.localStorage.setItem(
-                      'userid',
+                      'userId',
                       response.payload.user._id
                     );
                   } else {
