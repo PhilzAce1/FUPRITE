@@ -16,6 +16,7 @@ function BlogPage() {
         setContent(renderCards(response.data.blogs, { ...user }._id));
       } else {
         message.error('Couldnt get blog`s lists');
+        console.log(response);
       }
     });
   }, [user, variables]);

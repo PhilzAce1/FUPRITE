@@ -20,6 +20,7 @@ function FollowingPage(props) {
           setContent(renderCards(response.data.blogs));
         } else {
           message.error('Couldnt get blog`s lists');
+          console.log(response);
         }
       })
       .catch((e) => {

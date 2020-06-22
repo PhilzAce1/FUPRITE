@@ -34,6 +34,7 @@ function DetailSection(props) {
         setUserInfo(response.data.user);
       } else {
         alert('Couldnt get blog`s lists');
+        console.log(response);
       }
     });
   }, [props.userId]);

@@ -17,6 +17,7 @@ function LandingPage(props) {
           setContent(renderCards(response.data.blogs, userId));
         } else {
           message.error('Couldnt get blog`s lists');
+          console.log(response);
           props.history.push('/');
         }
       })
