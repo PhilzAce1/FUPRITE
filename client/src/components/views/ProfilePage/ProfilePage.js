@@ -19,8 +19,6 @@ function ProfilePage(props) {
     userId,
   };
   useEffect(() => {
-    console.log('I am reloading');
-    console.log(userId);
     if (userId) {
       axios
         .post('/api/users/userdetails', variables)

@@ -19,7 +19,7 @@ export default function (ComposedClass, isAuth = false, adminRoute = null) {
           dispatch(auth({ userId: userId }));
         }
       } else if (!isAuth) {
-        if (user.user.loginSuccess) {
+        if (user.user.loginSuccess && !adminRoute) {
           history.push('/home');
         } else if (!user.user.loginSuccess && userId) {
           dispatch(auth({ userId: userId }));

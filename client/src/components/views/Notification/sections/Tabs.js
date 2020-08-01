@@ -9,18 +9,15 @@ function TabSec(props) {
   const userId = { ...props }.userId;
   console.log(userId);
   useEffect(() => {
-    axios
-      .post('/api/users/followupdate', { userId })
-
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.success === true) {
-          message.success('Notifications');
-          setSection(response.data.notifications);
-        } else {
-          message.error('Something went wrong');
-        }
-      });
+    axios.post('/api/users/followupdate', { userId }).then((response) => {
+      console.log(response.data);
+      if (response.data.success === true) {
+        message.success('Notifications');
+        setSection(response.data.notifications);
+      } else {
+        message.error('Something went wrong');
+      }
+    });
   }, [userId]);
   const render = (noti, type) => {
     if (!noti) {

@@ -26,7 +26,18 @@ export function renderCards(blogs) {
   const userId = localStorage.getItem('userid');
   if (!Array.isArray(blogs)) return alert(typeof blogs);
   if (blogs.length <= 0) {
-    return <div>No blog to display</div>;
+    return (
+      <div
+        style={{
+          width: '100%',
+          textAlign: 'center',
+          fontSize: '2em',
+          color: 'var(--bodyfontcolor)',
+        }}
+      >
+        No blog to display
+      </div>
+    );
   }
   return blogs.map((blog, index) => {
     return (

@@ -1,15 +1,15 @@
 @import '~antd/dist/antd.css';
 
 :root {
-  --bgcolor: hsl(238, 36%, 27%);
+  /* --bgcolor: hsl(238, 36%, 27%); */
   /* --bgcolor: linear-gradient(#2c2e5e to #131444); */
-  --bgsecondarycolor: #f5f8fa;
+  /* --bgsecondarycolor: #f5f8fa;
   --bodyfontcolor: white;
   --primarytextcolor: black;
   --primarybordercolor: rgba(0, 0, 0, 0.164);
   --primaryshadowcolor: #0a06069a;
-  --lastbordercolor: black;
-  /* 
+  --lastbordercolor: black; */
+
   --bgcolor: white;
   --bgsecondarycolor: #f5f8fa;
   --bodyfontcolor: black;
@@ -17,7 +17,7 @@
   --primarytextcolor: black;
   --primarybordercolor: rgba(0, 0, 0, 0.164);
   --lastbordercolor: #e8e8e8;
-  --primaryshadowcolor: #f3f1f1; */
+  --primaryshadowcolor: #f3f1f1;
 }
 body {
   margin: 0;
@@ -720,7 +720,7 @@ input[type='file'] {
 }
 .tabpane {
   font-size: 1.4rem;
-  /* color: var(--bodyfontcolor ); */
+  color: var(--bodyfontcolor);
   margin: '10px 50px';
   font-weight: bolder;
 }

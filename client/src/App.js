@@ -45,7 +45,7 @@ function App() {
             <Route
               exact
               path="/blog/post/:postId"
-              component={Auth(NavBar, false)}
+              component={Auth(NavBar, false, true)}
             />
             <Route
               exact
@@ -101,7 +101,7 @@ function App() {
             <Route
               exact
               path="/blog/post/:postId"
-              component={Auth(PostPage, false)}
+              component={Auth(PostPage, false, true)}
             />
             <Route
               exact
@@ -134,7 +134,7 @@ function App() {
           <Route
             exact
             path="/blog/post/:postId"
-            component={Auth(SearchPage, false)}
+            component={Auth(SearchPage, false, true)}
           />
           <Route
             exact
