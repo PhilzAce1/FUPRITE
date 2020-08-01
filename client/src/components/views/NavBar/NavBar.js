@@ -81,17 +81,12 @@ function NavBar(props) {
   const [moreVisible, setMoreVisible] = useState(false);
 
   const logoutHandler = () => {
-    axios.get(`${USER_SERVER}/logout`).then((response) => {
-      if (response.status === 200) {
-        dispatch(logoutUser());
-        // props.history.push('/');
-        localStorage.clear();
-        window.location.pathname = '/login';
-        // window.location.reload();
-      } else {
-        message.error('Log Out Failed');
-      }
-    });
+    try {
+      dispatch(logoutUser());
+      localStorage.clear();
+    } catch (e) {
+      console.log(e);
+    }
   };
   const showModal = () => {
     setVisible(true);

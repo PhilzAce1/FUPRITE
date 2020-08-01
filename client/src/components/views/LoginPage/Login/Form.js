@@ -17,7 +17,7 @@ function Forme(props) {
   const rememberMeChecked = localStorage.getItem('rememberMe') ? true : false;
 
   const [formErrorMessage, setFormErrorMessage] = useState('');
-  const [loading, setLoading] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [rememberMe, setRememberMe] = useState(rememberMeChecked);
 
@@ -25,9 +25,6 @@ function Forme(props) {
     setRememberMe(!rememberMe);
   };
 
-  // const initialEmail = localStorage.getItem('rememberMe')
-  //   ? localStorage.getItem('rememberMe')
-  //   : '';
   return (
     <div>
       <Formik

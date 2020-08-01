@@ -16,8 +16,6 @@ function LikeDislikes(props) {
   }
 
   useEffect(() => {
-    console.log('I am working');
-
     Axios.post('/api/like/getLikes', variable).then((response) => {
       if (response.data.success) {
         //How many likes does this video or comment have

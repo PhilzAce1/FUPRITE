@@ -12,25 +12,29 @@ function ProfilePage(props) {
   const [uploadedFile, setUploadedFile] = useState({});
   let { userId } = props.match.params;
   if (userId === ':user') {
+    // console.log(newUser);
     userId = newUser.userID;
   }
   const variables = {
     userId,
   };
   useEffect(() => {
-    axios
-      .post('/api/users/userdetails', variables)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.success) {
-          setUploadedFile(`${response.data.user[0].image}`);
-          setUserDetail(response.data.user);
-        } else {
-          message.error('user Not found ');
-        }
-      })
-      .catch((e) => console.log(e));
-  }, []);
+    console.log('I am reloading');
+    console.log(userId);
+    if (userId) {
+      axios
+        .post('/api/users/userdetails', variables)
+        .then((response) => {
+          if (response.data.success) {
+            setUploadedFile(`${response.data.user[0].image}`);
+            setUserDetail(response.data.user);
+          } else {
+            message.error('user Not found ');
+          }
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [userId]);
   const onSubmit = async (e) => {
     const formData = new FormData();
     formData.append('file', e.target.files[0]);
@@ -52,7 +56,6 @@ function ProfilePage(props) {
   };
 
   const user = { ...userDetail[0] };
-  return <div>Hello world</div>;
   return (
     <div className="body">
       <div
@@ -88,7 +91,7 @@ function ProfilePage(props) {
               className="profile_picture"
             >
               <Fragment>
-                <label class="custom-file-upload">
+                <label className="custom-file-upload">
                   <input type="file" accept="image/*" onChange={onSubmit} />
                   Upload
                 </label>

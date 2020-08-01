@@ -122,16 +122,15 @@ exports.search = async (req, res) => {
 };
 
 exports.userDetails = async (req, res) => {
-  User.find({ _id: req.body.userId })
-    .select({
+  try {
+    const userData = await User.find({ _id: req.body.userId }).select({
       password: 0,
-    })
-    .exec((err, user) => {
-      if (err) return res.status(400).send(err);
-      console.clear();
-      console.log('user', user);
-      res.status(200).json({ success: true, user: user });
     });
+    console.log(userData);
+    res.status(200).json({ success: true, user: userData });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 exports.uploadProfilePic = (req, res) => {

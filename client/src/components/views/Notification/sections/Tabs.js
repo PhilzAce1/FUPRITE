@@ -13,6 +13,7 @@ function TabSec(props) {
       .post('/api/users/followupdate', { userId })
 
       .then((response) => {
+        console.log(response.data);
         if (response.data.success === true) {
           message.success('Notifications');
           setSection(response.data.notifications);
