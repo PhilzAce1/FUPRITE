@@ -21,6 +21,9 @@
 @media (max-width: 1000px) {
   .feature {
     height: auto;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
   }
   .feature .feature_content {
     padding: 30px;

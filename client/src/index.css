@@ -828,6 +828,12 @@ input[type='file'] {
   margin-bottom: 20px;
   /* background: red !important; */
 }
+@media (mix-width: 450px) {
+  .card .title {
+    max-width: 80%;
+    max-width: 200px;
+  }
+}
 .card .card_inner {
   max-height: 43vh;
   max-width: 80%;
