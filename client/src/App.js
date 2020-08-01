@@ -34,28 +34,26 @@ function App() {
           style={{ maxHeight: '100vh', overflow: 'auto' }}
         >
           <Switch>
-            {/* <Route exact path="/" component={Auth(Left, null)} /> */}
-
-            <Route exact path="/home" component={Auth(NavBar, null)} />
+            <Route exact path="/home" component={Auth(NavBar, true)} />
             <Route
               exact
               path="/followingsBlog"
-              component={Auth(NavBar, null)}
+              component={Auth(NavBar, true)}
             />
-            <Route exact path="/blog" component={Auth(NavBar, null)} />
-            <Route exact path="/blog/create" component={Auth(NavBar, null)} />
+            <Route exact path="/blog" component={Auth(NavBar, true)} />
+            <Route exact path="/blog/create" component={Auth(NavBar, true)} />
             <Route
               exact
               path="/blog/post/:postId"
-              component={Auth(NavBar, null)}
+              component={Auth(NavBar, false)}
             />
             <Route
               exact
               path="/profilepage/:userId"
-              component={Auth(NavBar, null)}
+              component={Auth(NavBar, true)}
             />
             <Route exact path="/searchpage" component={Auth(NavBar, null)} />
-            <Route exact path="/notification" component={Auth(NavBar, null)} />
+            <Route exact path="/notification" component={Auth(NavBar, true)} />
             {/* <Route exact path="*" component={Auth(NavBar, null)} /> */}
           </Switch>
         </Col>
@@ -81,11 +79,11 @@ function App() {
           <Switch>
             <Route exact path="/" component={Auth(Welcome, false)} />
 
-            <Route exact path="/home" component={Auth(LandingPage, null)} />
+            <Route exact path="/home" component={Auth(LandingPage, true)} />
             <Route
               exact
               path="/followingsBlog"
-              component={Auth(FollowingPage, null)}
+              component={Auth(FollowingPage, true)}
             />
 
             <Route exact path="/login" component={Auth(LoginPage, false)} />
@@ -94,21 +92,21 @@ function App() {
               path="/register"
               component={Auth(RegisterPage, false)}
             />
-            <Route exact path="/blog" component={Auth(BlogPage, null)} />
+            <Route exact path="/blog" component={Auth(BlogPage, true)} />
             <Route
               exact
               path="/blog/create"
-              component={Auth(CreateBlogPage, null)}
+              component={Auth(CreateBlogPage, true)}
             />
             <Route
               exact
               path="/blog/post/:postId"
-              component={Auth(PostPage, null)}
+              component={Auth(PostPage, false)}
             />
             <Route
               exact
               path="/profilepage/:userId"
-              component={Auth(ProfilePage, null)}
+              component={Auth(ProfilePage, true)}
             />
             <Route
               exact
@@ -118,7 +116,7 @@ function App() {
             <Route
               exact
               path="/notification"
-              component={Auth(Notification, null)}
+              component={Auth(Notification, true)}
             />
 
             <Route exact path="*" component={Auth(ErrorPage, false)} />
@@ -126,27 +124,27 @@ function App() {
           {/* <Footer /> */}
         </Col>
         <Col xs={0} md={0} sm={0} className="col" lg={8}>
-          <Route exact path="/home" component={Auth(SearchPage, null)} />
+          <Route exact path="/home" component={Auth(SearchPage, true)} />
           <Route
             exact
             path="/followingsBlog"
-            component={Auth(SearchPage, null)}
+            component={Auth(SearchPage, true)}
           />
-          <Route exact path="/blog/create" component={Auth(SearchPage, null)} />
+          <Route exact path="/blog/create" component={Auth(SearchPage, true)} />
           <Route
             exact
             path="/blog/post/:postId"
-            component={Auth(SearchPage, null)}
+            component={Auth(SearchPage, false)}
           />
           <Route
             exact
             path="/profilepage/:userId"
-            component={Auth(SearchPage, null)}
+            component={Auth(SearchPage, true)}
           />
           <Route
             exact
             path="/notification"
-            component={Auth(SearchPage, null)}
+            component={Auth(SearchPage, true)}
           />
         </Col>
       </Row>

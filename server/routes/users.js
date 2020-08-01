@@ -22,7 +22,8 @@ const { auth } = require('../middleware/auth');
     @desc get User's details
     @access auth
 */
-router.get('/auth', auth, authCtrl);
+//  auth,
+router.get('/auth', authCtrl);
 
 /*
     @route  api/users/register

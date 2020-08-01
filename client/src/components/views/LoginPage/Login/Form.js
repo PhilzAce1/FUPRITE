@@ -10,9 +10,9 @@ import { loginUser } from '../../../../_actions/user_actions';
 
 function Forme(props) {
   const history = useHistory();
-  if (localStorage.getItem('userId')) {
-    history.push('/home');
-  }
+  // if (localStorage.getItem('userId')) {
+  //   history.push('/home');
+  // }
   const dispatch = useDispatch();
   const rememberMeChecked = localStorage.getItem('rememberMe') ? true : false;
 
@@ -25,14 +25,14 @@ function Forme(props) {
     setRememberMe(!rememberMe);
   };
 
-  const initialEmail = localStorage.getItem('rememberMe')
-    ? localStorage.getItem('rememberMe')
-    : '';
+  // const initialEmail = localStorage.getItem('rememberMe')
+  //   ? localStorage.getItem('rememberMe')
+  //   : '';
   return (
     <div>
       <Formik
         initialValues={{
-          email: initialEmail,
+          email: '',
           password: '',
         }}
         validationSchema={Yup.object().shape({
@@ -54,29 +54,16 @@ function Forme(props) {
             dispatch(loginUser(dataToSubmit))
               .then((response) => {
                 setLoading(false);
-                console.log(response);
+
                 if (response.payload.loginSuccess) {
                   if (rememberMe === true) {
                     window.localStorage.setItem(
                       'rememberMe',
                       response.payload.user._id
                     );
-                    window.localStorage.setItem(
-                      'userId',
-                      response.payload.user._id
-                    );
                   } else {
                     localStorage.removeItem('rememberMe');
                   }
-                  window.localStorage.setItem(
-                    'rememberMe',
-                    response.payload.user._id
-                  );
-                  window.localStorage.setItem(
-                    'userid',
-                    response.payload.user._id
-                  );
-
                   history.push('/home');
                 } else {
                   setFormErrorMessage(

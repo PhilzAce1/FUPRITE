@@ -26,7 +26,7 @@ export default function Feature() {
         ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur consectetur vel ut corrupti, cumque minus consequuntur dolore, recusandae illum sint sequi magni molestiae ullam quasi possimus repellat adipisci placeat eius?',
     },
   ].map((x, i) => (
-    <Col xs={24} sm={24} md={8} lg={8} hoverable={true}>
+    <Col xs={24} sm={24} md={8} lg={8} hoverable="true" key={i}>
       <Card style={{ width: 300 }} cover={<img alt="example" src={x.src} />}>
         <Card.Meta title={x.title} description={x.description} />
       </Card>

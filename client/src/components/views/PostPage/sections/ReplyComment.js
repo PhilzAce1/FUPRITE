@@ -17,7 +17,7 @@ function ReplyComment(props) {
 
   let renderReplyComment = (parentCommentId) =>
     props.CommentLists.map((comment, index) => (
-      <React.Fragment>
+      <React.Fragment key={index}>
         {comment.responseTo === parentCommentId && (
           <div style={{ width: '80%', marginLeft: '40px' }}>
             <SingleComment

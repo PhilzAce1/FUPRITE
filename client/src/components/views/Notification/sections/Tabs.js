@@ -7,6 +7,7 @@ const { TabPane } = Tabs;
 function TabSec(props) {
   const [section, setSection] = useState('');
   const userId = { ...props }.userId;
+  console.log(userId);
   useEffect(() => {
     axios
       .post('/api/users/followupdate', { userId })
@@ -26,6 +27,7 @@ function TabSec(props) {
     } else {
       return noti.map((x, i) => (
         <Link
+          key={i}
           to={
             type === 'user' ? `profilepage/${x.user}` : `/blog/post/${x.blog}`
           }

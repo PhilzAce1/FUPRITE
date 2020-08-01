@@ -73,7 +73,7 @@ function CreatePost(props) {
 }
 
 function NavBar(props) {
-  const user = useSelector((state) => state.user.userData);
+  const user = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [visible, setVisible] = useState(false);
@@ -107,7 +107,7 @@ function NavBar(props) {
   const handlePostVisible = () => {
     setPostVisible(true);
   };
-  if (!{ ...user }._id) {
+  if (!user.user.loginSuccess) {
     return (
       <nav className="menu" style={{ zIndex: 5 }}>
         <div className="menu__logo">
@@ -119,7 +119,6 @@ function NavBar(props) {
           <div className="menu__content">
             <NavLink
               activeStyle={{
-                // backgroundColor: '#2ba6f32d',
                 color: '#2ba7f3',
                 borderRadius: '30px',
               }}

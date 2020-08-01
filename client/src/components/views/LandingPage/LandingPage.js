@@ -5,9 +5,8 @@ import axios from 'axios';
 import { message } from 'antd';
 
 function LandingPage(props) {
-  const user = useSelector((state) => state.user.userData);
-  localStorage.setItem('userid', { ...user }._id);
-  const userId = { ...user }._id;
+  const user = useSelector((state) => state.user);
+  const userId = user.userId;
   const [content, setContent] = useState(initialContent);
   useEffect(() => {
     axios

@@ -26,6 +26,7 @@ function More(props) {
       >
         Change Your Theme :{' '}
         <Select
+          defaultValue="Dark Theme"
           name="Theme Selector"
           style={{ width: '100px' }}
           onChange={(e) => {

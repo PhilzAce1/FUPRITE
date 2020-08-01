@@ -9,9 +9,8 @@ const { Title } = Typography;
 
 function CreatePage(props) {
   const user = useSelector((state) => state.user);
-
   const [content, setContent] = useState('');
-  const [files, setFiles] = useState([]);
+  // const [files, setFiles] = useState([]);
   const [title, setTitle] = useState('');
 
   const onTitleChange = (value) => {
@@ -21,23 +20,22 @@ function CreatePage(props) {
   const onEditorChange = (value) => {
     setContent(value);
   };
-  console.log(files);
 
   const onFilesChange = (files) => {
-    setFiles(files);
+    // setFiles(files);
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
 
-    if (user.userData && !user.userData.isAuth) {
+    if (!user.loginSuccess) {
       message.error('Please Log in first');
       props.history.push('/login');
     }
 
     const variables = {
       content: content,
-      userID: user.userData._id,
+      userID: user.userID,
       title: title,
     };
     if (variables.title.length < 5) {

@@ -1,31 +1,36 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { Col, Row } from 'antd';
 import img from './sections/pg.jpg';
 import DetailSection from './sections/detailSection';
 import Tab from './sections/TabSection';
 function ProfilePage(props) {
+  const newUser = useSelector((state) => state.user);
   const [userDetail, setUserDetail] = useState([]);
   const [message, setMessage] = useState(img);
   const [uploadedFile, setUploadedFile] = useState({});
   let { userId } = props.match.params;
   if (userId === ':user') {
-    userId = localStorage.getItem('userid');
+    userId = newUser.userID;
   }
   const variables = {
     userId,
   };
-  console.log(uploadedFile);
   useEffect(() => {
-    axios.post('/api/users/userdetails', variables).then((response) => {
-      if (response.data.success) {
-        setUploadedFile(`${response.data.user[0].image}`);
-        setUserDetail(response.data.user);
-      } else {
-        message.error('user Not found ');
-      }
-    });
-  }, [message, variables]);
+    axios
+      .post('/api/users/userdetails', variables)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.success) {
+          setUploadedFile(`${response.data.user[0].image}`);
+          setUserDetail(response.data.user);
+        } else {
+          message.error('user Not found ');
+        }
+      })
+      .catch((e) => console.log(e));
+  }, []);
   const onSubmit = async (e) => {
     const formData = new FormData();
     formData.append('file', e.target.files[0]);
@@ -47,6 +52,7 @@ function ProfilePage(props) {
   };
 
   const user = { ...userDetail[0] };
+  return <div>Hello world</div>;
   return (
     <div className="body">
       <div
@@ -73,8 +79,7 @@ function ProfilePage(props) {
               style={{
                 backgroundImage:
                   'url("http://gravatar.com/avatar/1585222530?d=identicon")',
-                // 'url(`localhost:5000/uploads/240aec3b877796ac4705c842b9ce5de1_FacebookSDG_Develop your dev skills___Twitter (1).png`)',
-                //  `url(${uploadedFile})`,
+
                 display: 'flex',
                 alignItems: 'center',
                 justifyItems: 'center',

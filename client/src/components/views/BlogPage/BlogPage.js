@@ -6,20 +6,19 @@ import initialContent, { renderCards } from '../RFC/Content/initialContent';
 
 function BlogPage() {
   const [content, setContent] = useState(initialContent);
-  const user = useSelector((state) => state.user.userData);
+  const user = useSelector((state) => state.user);
   const variables = {
-    userId: { ...user }._id,
+    userId: user.userID,
   };
   useEffect(() => {
     axios.post('/api/blog/userpost', variables).then((response) => {
       if (response.data.success) {
-        setContent(renderCards(response.data.blogs, { ...user }._id));
+        setContent(renderCards(response.data.blogs, user.userID));
       } else {
         message.error('Couldnt get blog`s lists');
-        console.log(response);
       }
     });
-  }, [user, variables]);
+  }, [variables, user.userID]);
 
   return (
     <div className="app">

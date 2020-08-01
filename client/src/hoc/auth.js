@@ -1,35 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { auth } from '../_actions/user_actions';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-export default function (ComposedClass, reload, adminRoute = null) {
+export default function (ComposedClass, isAuth = false, adminRoute = null) {
   function AuthenticationCheck(props) {
-    let user = useSelector((state) => state.user);
-    localStorage.setItem('user', user);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(auth()).then(async (response) => {
-        console.log(response.payload);
-
-        if (await !response.payload.isAuth) {
-          if (reload) {
-            props.history.push('/register');
-          }
-        } else {
-          console.log('user has not auth');
-
-          if (adminRoute && !response.payload.isAdmin) {
-            props.history.push('/home');
-          } else {
-            if (reload === false) {
-              props.history.push('/home');
-            }
-          }
-        }
-        console.log('user has should be auth');
-      });
-    }, [dispatch, props.history, user.googleAuth]);
+    const history = useHistory();
+    let user = useSelector((state) => state);
+    const userId = localStorage.getItem('rememberMe');
+    if (isAuth) {
+      if (!user.user.loginSucess && !userId) {
+        history.push('/');
+      }
+      if (!user.user.loginSuccess && userId) {
+        dispatch(auth({ userId: userId }));
+      }
+    } else {
+      if (user.user.loginSuccess) {
+        history.push('/home');
+      }
+      if (!user.user.loginSuccess && userId) {
+        dispatch(auth({ userId: userId }));
+      }
+    }
 
     return <ComposedClass {...props} user={user} />;
   }

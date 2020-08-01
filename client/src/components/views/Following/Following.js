@@ -4,13 +4,10 @@ import initialContent, { renderCards } from '../RFC/Content/initialContent';
 import axios from 'axios';
 import { message } from 'antd';
 function FollowingPage(props) {
-  const user = useSelector((state) => state.user.userData);
+  const user = useSelector((state) => state.user);
   const [content, setContent] = useState(initialContent);
   let variable = {
-    userFrom:
-      localStorage.getItem('userid') ||
-      localStorage.getItem('userId') ||
-      { ...user }._id,
+    userFrom: user.userID,
   };
   useEffect(() => {
     axios
@@ -26,7 +23,6 @@ function FollowingPage(props) {
       .catch((e) => {
         console.error(e);
         message.error('there was an error | please reload this page');
-        // return window.location.reload();
       });
   }, [variable]);
   return (

@@ -30,6 +30,7 @@ exports.register = async (req, res) => {
       if (err) return res.json({ success: false, err });
       return res.status(200).json({
         success: true,
+        user,
       });
     });
   } catch (e) {
@@ -51,6 +52,7 @@ exports.login = (req, res) => {
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         res.cookie('w_authExp', user.tokenExp);
+        console.log(user);
         res.cookie('w_auth', user.token).status(200).json({
           loginSuccess: true,
           user,
@@ -124,9 +126,11 @@ exports.userDetails = async (req, res) => {
     .select({
       password: 0,
     })
-    .exec((err, userDetails) => {
+    .exec((err, user) => {
       if (err) return res.status(400).send(err);
-      res.status(200).json({ success: true, user: userDetails });
+      console.clear();
+      console.log('user', user);
+      res.status(200).json({ success: true, user: user });
     });
 };
 

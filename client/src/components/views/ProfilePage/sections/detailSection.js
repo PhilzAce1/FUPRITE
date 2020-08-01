@@ -7,7 +7,7 @@ import { Modal } from 'antd';
 import moment from 'moment';
 
 function DetailSection(props) {
-  const rUser = useSelector((state) => state.user.userData);
+  const userId = useSelector((state) => state.user);
   const [followerNumber, setFollowerNumber] = useState(0);
   const [followings, setFollowings] = useState(0);
   const [userInfo, setUserInfo] = useState('');
@@ -57,12 +57,12 @@ function DetailSection(props) {
         <EditProfile user={userInfo} handleCancel={handleCancel} />
       </Modal>
       <div className="button_section">
-        {props.userId === { ...rUser }._id ? (
+        {props.userId === userId.userID ? (
           <button onClick={showModal} className="edit_profile">
             Edit Profile
           </button>
         ) : (
-          <Follower userTo={props.userId} userFrom={{ ...rUser }._id} />
+          <Follower userTo={props.userId} userFrom={userId.userID} />
         )}
       </div>
       <div className="more_content">
