@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 module.exports = () => {
   mongoose
     .connect(
-      'mongodb://localhost/Fblog',
+      'mongodb+srv://philzace:0sSiByLfbRuXW2Kv@cluster0-ojdiw.mongodb.net/test?retryWrites=true&w=majority',
 
+      // 'mongodb://localhost/Fblog',
       // process.env.MONGO_URI ||
-      // 'mongodb+srv://philzace:0sSiByLfbRuXW2Kv@cluster0-ojdiw.mongodb.net/test?retryWrites=true&w=majority',
       //  ||
 
       {

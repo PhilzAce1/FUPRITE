@@ -1,7 +1,7 @@
 const { Follower } = require('../models/Follower');
 const { User } = require('../models/User');
 const path = require('path');
-
+const { ranString } = require('../util/helpers');
 exports.authCtrl = (req, res) => {
   res.status(200).json({
     _id: req.user._id,
@@ -252,4 +252,19 @@ exports.whoToFollow = async (req, res) => {
       msg: 'Internal Server error',
     });
   }
+};
+
+exports.forgotPassword = async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return res.status(400).json({
+      success: false,
+      message: 'User Does Not Exist',
+    });
+  }
+  const newPwd = ranString(7);
+  res.status(200).json({
+    success:true, 
+    message:"Check Email for New Password"
+  })
 };

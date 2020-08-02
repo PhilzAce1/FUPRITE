@@ -11,6 +11,7 @@ const {
   updateProfile,
   followUpdate,
   createUpdate,
+  forgotPassword,
   whoToFollow,
 } = require('../controllers/users');
 const { auth } = require('../middleware/auth');
@@ -101,4 +102,11 @@ router.post('/createupdate', createUpdate);
     @access public
 */
 // router.post('/whotofollow', whoToFollow);
+
+/*
+    @route  api/users/
+    @desc 
+    @access public
+*/
+router.post('/forgotpassword', forgotPassword);
 module.exports = router;
