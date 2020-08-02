@@ -81,7 +81,6 @@ function LikeDislikes(props) {
   };
 
   const onDisLike = () => {
-    console.log('You are disliking ');
     if (DislikeAction !== null) {
       Axios.post('/api/like/unDisLike', variable).then((response) => {
         if (response.data.success) {

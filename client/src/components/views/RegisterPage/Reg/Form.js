@@ -35,7 +35,6 @@ function Forme(props) {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  console.log(props);
   return (
     <div>
       <Formik

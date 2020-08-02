@@ -13,10 +13,8 @@ function Tab(props) {
   const variables = {
     userId,
   };
-  console.log('am i changein');
   useEffect(() => {
     axios.post('/api/blog/userpost', variables).then((response) => {
-      console.log(response.data);
       if (response.data.success) {
         setContent(renderCards(response.data.blogs, userId));
       } else {

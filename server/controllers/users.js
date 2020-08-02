@@ -52,7 +52,6 @@ exports.login = (req, res) => {
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         res.cookie('w_authExp', user.tokenExp);
-        console.log(user);
         res.cookie('w_auth', user.token).status(200).json({
           loginSuccess: true,
           user,
@@ -126,7 +125,6 @@ exports.userDetails = async (req, res) => {
     const userData = await User.find({ _id: req.body.userId }).select({
       password: 0,
     });
-    console.log(userData);
     res.status(200).json({ success: true, user: userData });
   } catch (e) {
     console.log(e);
@@ -198,7 +196,6 @@ exports.followUpdate = async (req, res) => {
         .json({ success: true, notifications: 'no notifications' });
     }
   } catch (e) {
-    console.log(e.message);
     res.status(400).json({ success: false, msg: e.message });
   }
 };
@@ -246,7 +243,6 @@ exports.whoToFollow = async (req, res) => {
     }
     res.json({ success: true, users: mainUsers });
   } catch (ex) {
-    console.log(ex.message);
     res.status(500).json({
       success: false,
       msg: 'Internal Server error',
@@ -264,7 +260,7 @@ exports.forgotPassword = async (req, res) => {
   }
   const newPwd = ranString(7);
   res.status(200).json({
-    success:true, 
-    message:"Check Email for New Password"
-  })
+    success: true,
+    message: 'Check Email for New Password',
+  });
 };
