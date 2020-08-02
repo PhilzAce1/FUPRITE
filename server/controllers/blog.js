@@ -31,7 +31,11 @@ exports.getBlogs = async (req, res) => {
     res.status(200).json({ success: true, blogs });
   } catch (e) {
     //   if (err) return
-    res.status(400).send(err);
+    res.status(400).json({
+      success: false,
+
+      message: e,
+    });
   }
 };
 
