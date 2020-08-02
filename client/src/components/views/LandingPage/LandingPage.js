@@ -12,11 +12,11 @@ function LandingPage(props) {
     axios
       .get('/api/blog/getBlogs')
       .then((response) => {
+        console.log(response.data);
         if (response.data.success) {
           setContent(renderCards(response.data.blogs, userId));
         } else {
           message.error('Couldnt get blog`s lists');
-          console.log(response);
           // props.history.push('/');
         }
       })
