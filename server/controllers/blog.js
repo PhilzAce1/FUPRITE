@@ -25,13 +25,14 @@ exports.createPost = async (req, res) => {
   });
 };
 
-exports.getBlogs = (req, res) => {
-  Blog.find()
-    .populate('writer')
-    .exec((err, blogs) => {
-      if (err) return res.status(400).send(err);
-      res.status(200).json({ success: true, blogs });
-    });
+exports.getBlogs = async (req, res) => {
+  try {
+    const blogs = await Blog.find().populate('writer');
+    res.status(200).json({ success: true, blogs });
+  } catch (e) {
+    //   if (err) return
+    res.status(400).send(err);
+  }
 };
 
 exports.getPost = (req, res) => {
