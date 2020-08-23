@@ -28,7 +28,6 @@ ReactDOM.render(
   >
     <BrowserRouter history={history}>
       <App />
-      {/* <ProfilePage /> */}
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

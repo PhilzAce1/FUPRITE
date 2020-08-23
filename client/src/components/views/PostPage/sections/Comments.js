@@ -19,7 +19,7 @@ function Comments(props) {
 
     const variables = {
       content: Comment,
-      writer: user.userData._id,
+      writer: user.userID,
       postId: props.postId,
     };
 

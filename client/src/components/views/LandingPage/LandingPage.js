@@ -16,7 +16,7 @@ function LandingPage(props) {
           setContent(renderCards(response.data.blogs, userId));
         } else {
           message.error('unable to get BLog');
-          console.log(response.data.message);
+          console.log(response.data);
         }
       })
       .catch((e) => {

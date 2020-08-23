@@ -28,12 +28,11 @@ exports.createPost = async (req, res) => {
 exports.getBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find().populate('writer');
+    console.log(blogs)
     res.status(200).json({ success: true, blogs });
   } catch (e) {
-    //   if (err) return
     res.status(400).json({
       success: false,
-
       message: e,
     });
   }
