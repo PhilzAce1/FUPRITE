@@ -26,16 +26,22 @@ exports.createPost = async (req, res) => {
 };
 
 exports.getBlogs = async (req, res) => {
-  try {
-    const blogs = await Blog.find().populate('writer');
-    console.log(blogs)
-    res.status(200).json({ success: true, blogs });
-  } catch (e) {
-    res.status(400).json({
-      success: false,
-      message: e,
+  Blog.find()
+    .populate('writer')
+    .exec((err, post) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, blog: post });
     });
-  }
+  // try {
+  //   const blogs = await Blog.find().populate('writer');
+  //   console.log(blogs)
+  //   res.status(200).json({ success: true, blogs });
+  // } catch (e) {
+  //   res.status(400).json({
+  //     success: false,
+  //     message: e,
+  //   });
+  // }
 };
 
 exports.getPost = (req, res) => {

@@ -12,6 +12,7 @@ function LandingPage(props) {
     axios
       .get('/api/blog/getBlogs')
       .then((response) => {
+        console.log(response);
         if (response.data.success) {
           setContent(renderCards(response.data.blogs, userId));
         } else {
